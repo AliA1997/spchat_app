@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://localhost:3000/must-login -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>SPChat</title>
+  <style type="text/css">body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+</style><style type="text/css">.search-div {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+}</style><style type="text/css">.main-nav {
+    background: #020;
+    height: 10vh;
+}
+.main-nav > ul {
+    height: 100%;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-align: center;
+        align-items: center;
+    z-index: 1;
+}
+
+
+.main-nav > ul > li {
+    height: 100%;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+.search-bar {
+    min-width: 25%; 
+    border: solid 1px white;
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+
+.submenu-nav {
+    position: absolute;
+    background: #113;
+    /* border-left: solid 1px white;
+    border-right: solid 1px white; 
+    border-bottom: solid 1px white;            */
+    left: 0;
+    right: 0;
+    padding: 20px;
+    top: 100%;
+    z-index: 5
+}
+.submenu-nav > li {
+    padding: 10px;
+    z-index: inherit;
+}
+.nav-submenu-item {
+    position: relative;
+}</style><style type="text/css">.title.chat {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+.chat-users-messages {
+    height: 80vh;
+    width: 80vw;
+    border: solid 3px #fff;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+
+.chat-users-list {
+    margin: 50px;
+    height: 40vh;
+    width: 80vw;
+    border: solid 3px #fff;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.chat-users-header {
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.chat.user {
+    text-align: left;
+}
+.chat.message-div-user-info {
+    height: 10%;
+    width: 10%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    margin-right: 1em;
+}
+.chat-message-img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    margin-right: 1em;
+}
+.chat.message-div {
+    color: #fff;
+    font-weight: 800;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: baseline;
+        align-items: baseline;
+}</style><style type="text/css">.post-main-div {
+    display: -ms-flexbox;
+    display: flex;
+    height: 30vh; 
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;    
+    color: #fff;
+    border: 4px solid #fff;
+    margin-top: 50px;
+}
+.post-main-div:hover {
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2);
+    -webkit-transition: ease-in-out;
+    -o-transition: ease-in-out;
+    transition: ease-in-out;
+}
+.post-main-div:active {
+    background: #fff;
+    color: #020;
+    /* transform: scale(1.2);
+    transition: ease-in-out; */
+}
+.post-user-info-div {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: center;
+        align-items: center;
+    height: 30%;
+}
+.empty-div-1 {
+    width: 70%;
+}
+.post-username-image {
+    height: 75%;
+    width: 10%;
+    border-radius: 100%;
+}
+
+.post-image  {
+    padding: 1%;
+    width: 50%;
+}
+.post-image > img {
+    height: 100%;
+    width: 90%;
+    -ms-interpolation-mode: nearest-neighbor;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -o-pixelated;
+        image-rendering: pixelated;
+}
+.post-description-div {
+    padding: 1%;
+    width: 50%;
+}
+.post-tags-div {
+    height: 30%;
+    width: 100%;
+    border: solid 2px #fff;
+    overflow: auto;
+}
+.post-title {
+    font-weight: 700;
+}</style><style type="text/css">
+  .slideshow {
+    width: 100vw;
+    height: 50vh;
+    background: #000;
+    position: relative;
+  }
+  .slideshow-slides {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .slideshow-slides li {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
+    opacity: 0;
+  }
+  .slideshow-slides li.active {
+    opacity: 1;
+  }
+  .slide-figure {
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+  }
+  .slide-image {
+      width: 60%;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  figure {
+    margin: 0;
+    padding: 0;
+  }
+  figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  .slideshow-dots {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    list-style: none;
+  }
+  .slideshow-dots li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+  .slideshow-dots a {
+    cursor: pointer;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background: #fff;
+    border-radius: 10px;
+    text-indent: -9990px;
+    opacity: .5;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+  }
+  .slideshow-dots li.active a {
+    opacity: 1;
+  }</style><style type="text/css">
+.answer-div {
+    color: #fff;
+    grid: none;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    text-align: left;
+    border: 2px solid #fff;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.answer-circle-div {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    border-radius: 100%;
+    border: 2px solid #fff;
+    height: 1em;
+    width: 1em;
+    margin: 10px;
+    background: transparent;
+}
+.answer-text-div {
+    text-align: left;
+}</style><style type="text/css">.survey-div {
+    display: grid;
+}
+.question-text {
+    font-size: 20px;
+    margin: 5%;
+}</style><style type="text/css">
+  .loading-background {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    height: 100%;
+    width: 100%;
+  }</style><style type="text/css">.home-subdiv {
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40vh;
+    width: 80vw;
+    -ms-flex-pack: space-evenly;
+        justify-content: space-evenly;
+    -ms-flex-align: center;
+        align-items: center;
+    padding: 5%;
+}
+.home-subdiv > * {
+    border: solid 1px #fff;
+    height: 100%;
+    width: 100%;
+    margin: 2%;
+}</style><style type="text/css">.form.register {
+    font-weight: 700;
+    color: #fff;
+    width: 80vw;
+    height: 80vh;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;    
+    text-align: center;
+}
+.img.register {
+    height: 4em;
+    border-radius: 100%;
+    width: 4em;
+}
+.input.register {
+    height: 4%;
+    width: 60%;
+    border: 2px solid #fff;
+    font-size: 1.1em;
+}
+.label.register {
+    font-size: 1.05em;
+}
+.label.register.select {
+    margin-bottom: 10px;
+}
+.select.register {
+    width: 60%;
+    font-size: 1em;
+    color: #fff;
+}
+.select.register:last-child {
+    margin-right: 50px;
+}
+.btn.register {
+    color: #fff;
+    font-weight: 700;
+    width: 60%;
+    height: 4.5%;
+    border: 2px solid #fff;
+    background: transparent;
+    margin-top: 20px;
+}
+
+@media (min-width: 690px) {
+    .form.register {
+        width: 60vw;
+        height: 95vh;
+    }
+    .input.register {
+        height: 2.5%;
+        font-size: 1.1em;
+    }
+    .label.register {
+        font-size: 1.15em;
+        margin: -10px;
+    }
+    .label.register.select {
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+    .select.register {
+        font-size: 1.2em;
+        background: transparent;
+    }
+    .img.register {
+        height: 5.5em;
+        border-radius: 100%;
+        width: 5.5em;
+        margin-bottom: 10px;
+    }
+    .select.register:last-child {
+        margin-right: 50px;
+    }
+    .btn.register {
+        font-weight: 700;        
+        width: 60%;
+        height: 5%;
+        margin-top: 20px;
+        color: #fff;
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .form.register {
+        width: 60vw;
+        height: 90vh;
+    }
+    .input.register {
+        height: 2.5%;
+        font-size: 1.1em;
+    }
+    .label.register {
+        margin: 0;
+        font-size: 1.15em;
+    }
+
+    .select.register {
+        font-size: 1.2em;
+        background: transparent;
+    }
+    .select.register:last-child {
+        margin-right: 50px;
+    }
+    .img.register {
+        height: 13em;
+        border-radius: 100%;
+        width: 13em;
+    }
+    .btn.register {
+        font-weight: 700;        
+        width: 60%;
+        height: 5.5%;
+        margin-top: 20px;
+        color: #fff;
+        font-size: 1.5em;
+        margin-bottom: 50px;
+        padding: 5px;
+    }
+}</style><style type="text/css">.container-div.register {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.title.register {
+    color: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    margin-bottom: -20px;
+}</style><style type="text/css">.form.login {
+    color: #fff;
+    height: 60vh;
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+.login-div {
+    margin-top: 50%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+.login-label {
+    font-size: 1.1em;
+}
+.btn.login {
+    background: transparent;
+    border: solid 3px #fff;
+    color: #fff;
+    font-weight: 700;
+    width: 60%;
+    height: 7.5%;
+}
+input {
+    position: relative;
+    height: 5%;
+    width: 80%;
+    margin: 5%;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+}
+@media (min-width: 760px) {
+    .form.login {
+        height: 40vh;
+        width: 40vw;
+    }
+    .login-label {
+        font-size: 1.4em;
+        margin-bottom: -5px;
+    }
+    .login-label:first-child {
+        margin-top: 50px;
+    }
+    .login-div {
+        margin-top: 33%;
+    }
+    input {
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .form.login {
+        height: 60vh;
+        width: 40vw;
+    }
+    .login-label {
+        font-size: 1.60em;
+    }
+    input {
+        height: 6%;
+        margin: 50px;
+        font-size: 1.4em;
+    }
+    .login-div {
+        margin-top: 25%;
+    }
+    .btn.login {
+        width: 60%;
+        height: 7.5%;
+    }
+}</style><style type="text/css">.page-container-div.login {
+    height: 80vh;
+    width: 80vw;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 3px #fff;
+    vertical-align: middle;
+}
+.page-div.login {
+    margin-top: 30%;
+}
+.title.login {
+    color: white;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    margin-bottom: -30px;
+}
+@media (min-width: 760px) {
+    .title.login {
+        margin-bottom: -40px;
+    }
+    .page-container-div.login {
+        height: 60vh;
+        width: 60vw;
+        vertical-align: middle;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .title.login {
+        margin-bottom: -50px;
+    }
+    .page-container-div.login {
+        height: 60vh;
+        width: 40vw;
+        vertical-align: middle;
+    }
+    .page-div.login {
+        margin-top: 0;
+    }
+}</style><style type="text/css"></style><style type="text/css">.tag {
+    width: 15%;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    color: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: left;
+    -ms-flex-align: center;
+        align-items: center;
+    margin: 20px;
+    padding: 20px;
+    font-size: 1.1em;
+}
+.tag-remove-icon {
+    font-size: 2em;
+    margin: 5px;
+}
+</style><style type="text/css">.create-post.form {
+    color: #fff;
+    height: 80vh;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;    
+    border: solid 3px #fff;
+}
+.create-post-image {
+    height: 10vw;
+    width: 80vh;
+}</style><style type="text/css">.sports-subdiv {
+    border: 2px solid #fff;
+    height: 40vh;
+    width: 33vw;
+    margin: 20px;
+}
+.sports-logo {
+    height: 15em;
+    width: 20vw;
+    background: transparent;
+}
+.sports-page-last-div {
+    display: -ms-flexbox;
+    display: flex;
+    height: 25vh;
+    width: 100vw;
+}
+</style><style type="text/css">* {
+  margin: 0;
+}
+
+html, body {
+    /* background: rgb(100, 100, 100);
+    animation-name: change-color;
+    animation-iteration-count: infinite;
+    animation-duration: 50s;
+    transition-duration: 5s; */
+    background: black;
+    color: #fff;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  padding-left: 10%;
+  padding-right: 15%;  
+}
+ul {
+  list-style: none;
+  margin: 0;
+  color: #fff;
+}
+
+
+/* @keyframes change-color {
+  0% {background: rgb(100, 100, 100)}
+  10% {background: rgb(58, 58, 61)}
+  20% {background: rgb(150, 75, 200)}
+  60% {background: rgb(180, 250, 180)}
+  70% {background: rgb(0, 250, 220)}
+  80% {background: rgb(25, 25, 120)}
+  90% {background: rgb(11, 21, 165)}
+  100% {background: rgb(100, 100, 100)}
+} */</style></head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"><div><nav class="main-nav"><ul><div class="search-bar"><div class="search-div"><div class="search-input"><input type="text"></div><div class="search-icon"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align: middle;"><g><path d="m27.2 18.6q0-4.2-2.9-7.1t-7.1-2.9-7 2.9-3 7.1 2.9 7 7.1 3 7.1-3 2.9-7z m11.4 18.5q0 1.2-0.8 2.1t-2 0.8q-1.2 0-2-0.8l-7.7-7.7q-4 2.8-8.9 2.8-3.2 0-6.1-1.3t-5-3.3-3.4-5-1.2-6.1 1.2-6.1 3.4-5.1 5-3.3 6.1-1.2 6.1 1.2 5 3.3 3.4 5.1 1.2 6.1q0 4.9-2.7 8.9l7.6 7.6q0.8 0.9 0.8 2z"></path></g></svg></div></div></div><li class="nav-submenu-item"><a class="active" aria-current="true" href="http://localhost:3000/">Home</a><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align: middle;"><g><path d="m31 26.4q0 0.3-0.2 0.5l-1.1 1.2q-0.3 0.2-0.6 0.2t-0.5-0.2l-8.7-8.8-8.8 8.8q-0.2 0.2-0.5 0.2t-0.5-0.2l-1.2-1.2q-0.2-0.2-0.2-0.5t0.2-0.5l10.4-10.4q0.3-0.2 0.6-0.2t0.5 0.2l10.4 10.4q0.2 0.2 0.2 0.5z"></path></g></svg><ul class="submenu-nav" style="display: none;"><li class="submenu-nav-item"><a aria-current="false" href="http://localhost:3000/dashboard/account">Account</a></li><li class="submenu-nav-item"><a class="active" aria-current="true" href="http://localhost:3000/dashboard/create-post">Create Post</a></li><li class="submenu-nav-item"><a class="active" aria-current="true" href="http://localhost:3000/dashboard">My Dashboard</a></li></ul></li><li class="nav-item"><a aria-current="false" href="http://localhost:3000/sports/mlb">MLB<svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align: middle;"><g><path d="m35.9 21.8v0.1c-0.8 7.6-7 13.6-14.6 14.3h-0.1c-0.2 0-0.3 0.1-0.4 0.1h-1c-9 0-16.3-7.3-16.3-16.3v-1c0-0.2 0.1-0.2 0.1-0.4v-0.2c0.7-7.5 6.7-13.7 14.3-14.6 0.6 0 1.2 0 1.9 0 8.9 0 16.2 7.2 16.2 16.2 0 0.5 0 1.1-0.1 1.6v0.2z m-1.2-1.8c0-8.2-6.7-14.9-15-14.9-0.2 0-0.3 0.1-0.6 0.1 0 0.8 0.2 1.6 0.3 2.4l1.6-0.5 0.4 1.2-1.6 0.5c0.1 0.6 0.3 1.1 0.5 1.7 0.2 0.4 0.4 0.8 0.6 1.2l1.4-0.9 0.7 1-1.5 1c0.5 1 1.2 1.8 2 2.6l1.1-1.2 0.9 1-1.1 1.1c0.8 0.8 1.7 1.4 2.6 2l1-1.4 1.1 0.7-1 1.3c0.4 0.2 0.8 0.4 1.2 0.6 0.5 0.2 1.1 0.3 1.7 0.5l0.6-1.6 1.1 0.4-0.4 1.5c0.7 0.2 1.5 0.3 2.3 0.3 0-0.2 0.1-0.4 0.1-0.6z m-29.9 0c0 8.2 6.7 14.9 15 14.9h0.3c-0.1-0.7-0.1-1.3-0.3-2l-1.7 0.5-0.4-1.2 1.8-0.6c-0.1-0.6-0.4-1.2-0.6-1.8-0.2-0.4-0.3-0.7-0.5-1.1l-1.5 1-0.7-1 1.6-1.1c-0.6-1-1.3-1.9-2-2.8l-1.4 1.4-0.8-0.9 1.3-1.3c-0.8-0.8-1.7-1.4-2.6-2l-1.1 1.7-1.1-0.7 1.1-1.6c-0.4-0.1-0.8-0.4-1.2-0.5-0.6-0.3-1.2-0.5-1.8-0.7l-0.6 1.9-1.2-0.4 0.5-1.8c-0.7-0.1-1.4-0.1-2.1-0.2v0.3z m16.5 14.8c6.9-0.7 12.4-6 13.2-12.9-0.8-0.1-1.8-0.3-2.6-0.4l-0.7 2.1-1.2-0.4 0.6-2c-1.1-0.3-2.2-0.7-3.2-1.3l-1.2 1.8-1-0.7 1.1-1.6c-1-0.7-2-1.4-2.9-2.2l-1.5 1.5-0.8-0.9 1.5-1.5c-0.8-0.8-1.5-1.8-2.1-2.8l-1.7 1.1-0.7-1 1.7-1.2c-0.5-1-0.9-2.1-1.2-3.2l-2 0.6-0.4-1.2 2.1-0.6c-0.2-1-0.3-1.8-0.4-2.8-6.9 0.9-12.3 6.4-13 13.2 0.8 0.1 1.6 0.2 2.4 0.3l0.7-1.7 1.1 0.3-0.5 1.8c1.1 0.3 2.2 0.7 3.3 1.2l1-1.5 1.1 0.7-1 1.4c1 0.7 1.9 1.4 2.8 2.2l1.3-1.3 0.9 0.9-1.4 1.3c0.9 0.9 1.6 1.9 2.2 2.9l1.5-1 0.7 1.1-1.6 1c0.6 1.1 1 2.2 1.3 3.2l1.8-0.5 0.4 1.2-1.9 0.6c0.2 0.8 0.2 1.6 0.3 2.3z"></path></g></svg></a></li><li class="nav-item"><a aria-current="false" href="http://localhost:3000/sports/nba">NBA<svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align: middle;"><g><path d="m19.8 3.8c8.9 0 16.2 7.2 16.2 16.2s-7.3 16.3-16.2 16.3-16.3-7.3-16.3-16.3 7.3-16.2 16.3-16.2z m14.9 16.2c0-4.3-1.9-8.2-4.9-10.9-1.1 2.6-2.4 5-4 7.4 1.1 0.9 2.4 1.6 3.8 2.3 1.6 0.7 3.4 1 5.1 1.2z m-5.8-11.8c-2.5-2-5.7-3.1-9.2-3.1 0.2 1.7 0.5 3.4 1.2 5.1 0.8 1.9 2.1 3.6 3.5 5.1 0.2 0.1 0.2 0.2 0.4 0.3 1.5-2.2 2.9-4.7 4-7.2 0-0.1 0.1-0.1 0.1-0.2z m-10.4-3c-4 0.3-7.5 2.2-10 5 5 2.2 9.5 5.4 13.2 9.3 0.9-0.9 1.6-1.8 2.3-2.9-3.1-2.8-5.2-6.9-5.5-11.4z m3.2 16.2c-1.2 1.3-2.4 2.4-3.7 3.4 2.1 2.8 3.5 6.2 3.6 10 2.6-0.3 4.9-1.4 6.9-2.8-1.7-3.9-4-7.4-6.8-10.6z m-1.5-0.3l0.6-0.6-0.7-0.8c-3.6-3.6-7.8-6.4-12.4-8.5-1.4 2-2.4 4.3-2.7 6.9 4.8 0.3 9 2.4 12.1 5.8 1.1-0.9 2.1-1.8 3.1-2.8z m-15.3-1.7c0 0.2-0.1 0.4-0.1 0.6 0 3.5 1.3 6.8 3.4 9.4 2.8-1.3 5.5-2.8 8-4.7l-0.6-0.6c-1.5-1.4-3.2-2.7-5.1-3.5-1.8-0.7-3.6-1.1-5.6-1.2z m4.1 11c2.8 2.8 6.5 4.5 10.7 4.5 0.3 0 0.4-0.1 0.7-0.1-0.1-1.9-0.5-3.7-1.3-5.5-0.5-1.3-1.3-2.6-2.2-3.7-2.4 1.9-5 3.5-7.9 4.8z m20.5 0.9c2.9-2.5 4.8-6.1 5.1-10-3.6-0.3-7-1.7-9.6-3.8-0.8 1-1.6 2-2.4 3 2.8 3.2 5.2 6.8 6.9 10.8z"></path></g></svg></a></li><li class="nav-item"><a aria-current="false" href="http://localhost:3000/sports/nfl">NFL<div class="icon-football"></div></a></li><li class="nav-item"><a aria-current="false" href="http://localhost:3000/sports/nhl">NHL</a></li><li class="nav-submenu-item">Futbol<svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align: middle;"><g><path d="m31 26.4q0 0.3-0.2 0.5l-1.1 1.2q-0.3 0.2-0.6 0.2t-0.5-0.2l-8.7-8.8-8.8 8.8q-0.2 0.2-0.5 0.2t-0.5-0.2l-1.2-1.2q-0.2-0.2-0.2-0.5t0.2-0.5l10.4-10.4q0.3-0.2 0.6-0.2t0.5 0.2l10.4 10.4q0.2 0.2 0.2 0.5z"></path></g></svg><ul class="submenu-nav" style="display: none;"><li class="submenu-nav-item"><a aria-current="false" href="http://localhost:3000/sports/premier-league">Premier League</a></li><li class="submenu-nav-item"><a aria-current="false" href="http://localhost:3000/sports/fifa">FIFA</a></li><li class="submenu-nav-item"><a aria-current="false" href="http://localhost:3000/sports/la-liga">La Liga</a></li></ul></li><li class="nav-submenu-item">Other<svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align: middle;"><g><path d="m31 26.4q0 0.3-0.2 0.5l-1.1 1.2q-0.3 0.2-0.6 0.2t-0.5-0.2l-8.7-8.8-8.8 8.8q-0.2 0.2-0.5 0.2t-0.5-0.2l-1.2-1.2q-0.2-0.2-0.2-0.5t0.2-0.5l10.4-10.4q0.3-0.2 0.6-0.2t0.5 0.2l10.4 10.4q0.2 0.2 0.2 0.5z"></path></g></svg><ul class="submenu-nav" style="display: none;"><li class="submenu-nav-item"><a aria-current="false" href="http://localhost:3000/sports/bmx">BMX</a></li><li class="submenu-nav-item"><a aria-current="false" href="http://localhost:3000/sports/skateboarding">Skateboarding</a></li><li class="submenu-nav-item"><a aria-current="false" href="http://localhost:3000/sports/snowboarding">Snowboarding</a></li><li class="submenu-nav-item"><a aria-current="false" href="http://localhost:3000/sports/skiing">Skiing</a></li></ul></li></ul></nav><div class="error-not-found-page-div"><div class="error-not-found-page-header">404 Not Found</div><div class="error-not-found-page-icon"></div></div></div></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  <script type="text/javascript" src="./SPChat_files/bundle.js"></script>
+
+</body></html>

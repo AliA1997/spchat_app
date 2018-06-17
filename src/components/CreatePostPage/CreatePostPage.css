@@ -1,0 +1,9 @@
+.create-post-page-div > .title.create-post-form {
+    width: 75vw;
+    text-align: center;
+    margin: 50px;
+}
+.create-post-page-div {
+    display: grid;
+    grid-template-columns: 10% 30% 20% 30% 10%;
+}

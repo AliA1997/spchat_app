@@ -1,0 +1,41 @@
+.comments-container-div {
+    display: grid;
+    grid-row-start: 9;
+    grid-row-end: 10;
+    background: transparent;
+    color: white;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 25% 25% 25% 25%;
+}
+.comments-container-div > h1 {
+    text-align: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.comments-container-div > .create-comment-textarea {
+    background: transparent;
+    color: #fff;
+    margin: 25px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.comments-container-div > .create-comment-button {
+    background: transparent;
+    color: #fff;
+    margin: 25px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 3;
+}
+.comments-div {
+    /* border: solid 3px #fff; */
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 4;
+}

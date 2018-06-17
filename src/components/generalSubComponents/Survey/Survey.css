@@ -1,0 +1,7 @@
+.survey-div {
+    display: grid;
+}
+.question-text {
+    font-size: 20px;
+    margin: 5%;
+}

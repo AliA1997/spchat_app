@@ -1,0 +1,40 @@
+@media (min-width: 960px) {
+    .tag {
+        border: 2px solid #fff;
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        color: #fff;
+        display: flex;
+        text-align: left;
+        align-items: center;
+        margin: 20px;
+        padding: 20px;
+        font-size: 0.5em;
+    }
+    .tag-remove-icon {
+        font-size: 1em;
+        margin: 5px;
+    }
+}
+@media (min-width: 1200px) {
+        .tag {
+        border: 3px solid #fff;
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        color: #fff;
+        display: flex;
+        text-align: left;
+        align-items: center;
+        margin: 20px;
+        padding: 20px;
+        font-size: 1.1em;
+    }
+    .tag-remove-icon {
+        font-size: 2em;
+        margin: 5px;
+    }
+}

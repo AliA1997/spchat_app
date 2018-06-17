@@ -1,0 +1,14 @@
+.container-div.register {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100vh;
+}
+
+.title.register {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -20px;
+}

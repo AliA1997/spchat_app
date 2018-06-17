@@ -1,0 +1,51 @@
+.title.chat {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+.chat-users-messages {
+    height: 80vh;
+    width: 80vw;
+    border: solid 3px #fff;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+
+.chat-users-list {
+    margin: 50px;
+    height: 40vh;
+    width: 80vw;
+    border: solid 3px #fff;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.chat-users-header {
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.chat.user {
+    text-align: left;
+}
+.chat.message-div-user-info {
+    height: 10%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+}
+.chat-message-img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    margin-right: 1em;
+}
+.chat.message-div {
+    color: #fff;
+    font-weight: 800;
+    display: flex;
+    align-items: baseline;
+}

@@ -1,0 +1,77 @@
+@media (min-width: 960px) {
+    .create-post.form > .selected-tags-div {
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+        border: 2px solid #fff;
+    }
+}
+.create-post.form {
+    color: #fff;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;    
+    border: solid 3px #fff;
+    display: grid;
+    grid-template-columns: 10% 20% 15% 15% 20% 10% 10%;
+}
+.create-post.form > input {
+    color: #fff;
+    grid-column-start: 3;
+    grid-column-end: 6;
+    height: 50%;
+    font-size: 0.75em;
+}
+.create-post.form > textarea {
+    color: #fff;
+    background: transparent;
+    grid-column: 2/7;
+}
+.create-post.form > p {
+    grid-column: 2/7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid #fff; */
+}
+.create-post.form > select {
+    grid-column: 2/7;
+    height: 50%;
+    background: transparent;
+    color: #fff;
+}
+.create-post.form > .selected-tags-div {
+    border: 2px solid #fff; 
+    grid-column: 2/7;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    
+}
+.create-form-button {
+    margin: 20px;
+    height: 75%;
+    grid-column-start: 2;
+    grid-column-end: 7;
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25em;
+}
+.create-form-button:active {
+    background: #fff;
+    color:  black;
+}
+.create-form-button:hover {
+    background: #fff;
+    color: black;
+}
+.create-post-image {
+    height: 20%;
+    border-radius: 100%;
+}
+.post-form-select {
+    background: transparent;
+    color: #fff;
+}

@@ -1,0 +1,122 @@
+.form.register {
+    font-weight: 700;
+    color: #fff;
+    width: 80vw;
+    height: 80vh;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;    
+    text-align: center;
+}
+.img.register {
+    height: 4em;
+    border-radius: 100%;
+    width: 4em;
+}
+.input.register {
+    height: 4%;
+    width: 60%;
+    border: 2px solid #fff;
+    font-size: 1.1em;
+}
+.label.register {
+    font-size: 1.05em;
+}
+.label.register.select {
+    margin-bottom: 10px;
+}
+.select.register {
+    width: 60%;
+    font-size: 1em;
+    color: #fff;
+}
+.select.register:last-child {
+    margin-right: 50px;
+}
+.btn.register {
+    color: #fff;
+    font-weight: 700;
+    width: 60%;
+    height: 4.5%;
+    border: 2px solid #fff;
+    background: transparent;
+    margin-top: 20px;
+}
+
+@media (min-width: 690px) {
+    .form.register {
+        width: 60vw;
+        height: 95vh;
+    }
+    .input.register {
+        height: 2.5%;
+        font-size: 1.1em;
+    }
+    .label.register {
+        font-size: 1.15em;
+        margin: -10px;
+    }
+    .label.register.select {
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+    .select.register {
+        font-size: 1.2em;
+        background: transparent;
+    }
+    .img.register {
+        height: 5.5em;
+        border-radius: 100%;
+        width: 5.5em;
+        margin-bottom: 10px;
+    }
+    .select.register:last-child {
+        margin-right: 50px;
+    }
+    .btn.register {
+        font-weight: 700;        
+        width: 60%;
+        height: 5%;
+        margin-top: 20px;
+        color: #fff;
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .form.register {
+        width: 60vw;
+        height: 90vh;
+    }
+    .input.register {
+        height: 2.5%;
+        font-size: 1.1em;
+    }
+    .label.register {
+        margin: 0;
+        font-size: 1.15em;
+    }
+
+    .select.register {
+        font-size: 1.2em;
+        background: transparent;
+    }
+    .select.register:last-child {
+        margin-right: 50px;
+    }
+    .img.register {
+        height: 13em;
+        border-radius: 100%;
+        width: 13em;
+    }
+    .btn.register {
+        font-weight: 700;        
+        width: 60%;
+        height: 5.5%;
+        margin-top: 20px;
+        color: #fff;
+        font-size: 1.5em;
+        margin-bottom: 50px;
+        padding: 5px;
+    }
+}

@@ -1,0 +1,16 @@
+.sports-subdiv {
+    border: 2px solid #fff;
+    height: 40vh;
+    width: 33vw;
+    margin: 20px;
+}
+.sports-logo {
+    height: 15em;
+    width: 20vw;
+    background: transparent;
+}
+.sports-page-last-div {
+    display: flex;
+    height: 25vh;
+    width: 100vw;
+}

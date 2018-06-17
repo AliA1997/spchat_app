@@ -1,0 +1,1 @@
+DELETE FROM sp_comments WHERE id = ${comment_id} AND post_id = ${post_id};

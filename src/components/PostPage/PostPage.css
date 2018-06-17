@@ -1,0 +1,50 @@
+.post-page-container {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    /* border: 3px solid #fff; */
+    grid-template-columns: 10% 20% 20% 20% 20% 10%;
+    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+}
+.post-page-wrapper {
+    /* border: 3px solid #fff; */
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-start: 3;
+    grid-template-columns: 10% 20% 20% 20% 20%  10%;
+    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+}
+.post-page-title-div {
+    font-size: 3em;
+    font-weight: 800;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.post-page-image-div {
+    display: flex;
+    justify-content: center;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+.post-page-user-info-wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+.post-page-description-div {
+    /* border-top: 1px solid #fff; */
+    grid-column: 1/6;
+    text-align: center;
+    grid-row-start: 5;
+    grid-row-end: 7;
+}

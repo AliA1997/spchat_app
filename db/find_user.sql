@@ -1,0 +1,1 @@
+SELECT * FROM spchat_users WHERE username = $1;
