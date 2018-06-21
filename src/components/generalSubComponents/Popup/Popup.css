@@ -1,0 +1,43 @@
+/* .login-container-div {
+    height: 50%;
+} */
+.login-popup-container-div {
+    margin: 0;
+}
+
+.login-popup-container-div > .form.login > .login-div {
+    margin-top: 0;
+}
+.register-popup-link-div {
+    margin: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    border: 2px solid #fff;
+    font-size: 0.75em;
+    font-weight: 800;
+    text-align: center;
+}
+
+.popup-header {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 800;
+    margin-left: auto;
+    margin-right: auto;
+}
+.popup-container-div {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-open-modal {
+    background: transparent;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 800;
+    height: 10%;
+    width: 10%;
+}

@@ -5,15 +5,20 @@ CREATE TABLE spchat_users (
     image VARCHAR(120),
     age VARCHAR(5),
     date_registered VARCHAR(50),
-    favorite_teams VARCHAR(50)[],
-    favorite_players VARCHAR(60)[],
+    favorite_teams JSONB[],
+    favorite_players JSONB)[],
     favorite_sport VARCHAR(25)
     verified BOOLEAN,
     verification_link VARCHAR(50),
     chat_id INTEGER REFERENCES sp_chats(id),
     survey_id INTEGER REFERENCES sp_surveys(id),
     survey_answer VARCHAR(60)[] REFERENCES sp_surveys(answers)
+    isAdmin BOOLEAN
 );
+-- HOW TO ALTER A TABLE TO JSON OR JSONB
+-- ALTER TABLE spchat_users ALTER COLUMN favorite_teams TYPE JSONB[] USING favorite_players::JSONB[];
+--- USE ::JSON OR ::JSONB CONVERTER
+
 
 CREATE TABLE sp_posts (
     id SERIAL PRIMARY KEY,    
@@ -40,9 +45,9 @@ CREATE TABLE sp_comments (
 );
 
 CREATE TABLE sp_chats (
- id SERIAL PRIMARY KEY,
- post_id INTEGER REFERENCES sp_posts(id),
- messages VARCHAR(50)[]
+    id SERIAL PRIMARY KEY,
+    post_id INTEGER REFERENCES sp_posts(id),
+    messages VARCHAR(50)[]
 );
 
 CREATE TABLE sp_surveys (
@@ -52,9 +57,26 @@ CREATE TABLE sp_surveys (
  answers VARCHAR(50)[] UNIQUE
 );
 
-----For storing the session
-CREATE TABLE session (
-    expire TIMESTAMP,
-    sess BOOLEAN,
-    sid TEXT
+--social media table 
+CREATE TABLE sp_social_media (
+    id SERIAL PRIMARY KEY,
+    twitter TEXT DEFAULT NULL,
+    facebook TEXT DEFAULT NULL,
+    instagram TEXT DEFAULT NULL,
+    snapchat TEXT DEFAULT NULL,
+    reddit TEXT DEFAULT NULL,
+    twitchtv TEXT DEFAULT NULL,
+    playstation TEXT DEFAULT NULL,
+    xbox TEXT DEFAULT NULL,
+    user_id INTEGER REFERENCES spchat_users(id)
 );
+
+----For storing the session
+
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+	"sess" json NOT NULL,
+	"expire" timestamp(6) NOT NULL
+)
+-- WITH (OIDS=FALSE);
+-- ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;

@@ -1,0 +1,32 @@
+@media(min-width: 1200px) {
+    .team-card-div {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        display: flex;
+        height: 5em;
+        width: 20em;
+        border: 3px solid white;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border-bottom-left-radius: 50px;
+        margin: 1em;
+    }
+    .team-card-img-div {
+        height: 100%;
+        width: 40%;
+        border-radius: 100%;
+    }
+    .team-card-img {
+        height: 100%;
+        width: 80%;
+        border-radius: inherit;
+    }
+    .team-card-div > p {
+        height: 100%;
+        width: 60%;
+        display: flex;
+        align-items: center; 
+        justify-content: space-around;
+    }
+}

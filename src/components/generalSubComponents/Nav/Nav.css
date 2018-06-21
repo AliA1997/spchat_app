@@ -1,3 +1,71 @@
+/* .main-nav {
+  display: none;
+}
+.mobile.mobile-main-nav {
+  display: inline-block;
+  grid-template-rows: 15% 15% 15% 15% 15% 15% 10%;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  list-style: none;
+}
+.mobile-nav-item {
+  cursor: grab;
+  height: 3em;
+  width: 100%;
+  background: red;
+}
+.mobile-submenu-nav {
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+  grid-template-columns: 10% 20% 20% 20% 20% 10%;
+  background: #ffff00;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 30%;
+}
+.mobile-submenu-nav-item {
+  width: 80%;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  grid-row: 1/4;
+  grid-column: 2/6;
+  background: green;
+  border: 1px solid white;
+}
+.mobile-submenu-nav-item > div {
+  background: purple;
+  display: flex;
+  justify-content: center;
+}
+.mobile-nav-item.home {
+  grid-row: 1/7;
+}
+.mobile-nav-item.mlb {
+  grid-row: 2/7;
+}
+.mobile-nav-item.nba {
+  grid-row: 3/7;
+}
+.mobile-nav-item.nfl {
+  grid-row: 4/7;
+}
+.mobile-nav-item.nhl {
+  grid-row: 5/7;
+}
+.mobile-nav-item.futbol {
+  grid-row: 6/7;
+}
+.mobile-nav-item.other {
+  grid-row: 7/7;
+}
+.mobile-nav-icon {
+  width: 100%;
+  background: blue;
+  height: 3em;
+} */
 @media (min-width: 960px) {
   /* .main-nav {
     display: none;
@@ -13,7 +81,7 @@
   .main-nav {
       background: #020;
       height: 10vh;
-      width: 100vw;
+      width: 100%;
   }
   .main-nav > ul {
       height: 100%;

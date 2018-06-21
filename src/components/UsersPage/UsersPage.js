@@ -16,7 +16,7 @@ class UsersPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        searchItems: state.searchItems
+        searchItems: state.search.searchItems
     };
 }
 

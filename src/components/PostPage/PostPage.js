@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Comments from '../Comments/Comments';
 import Chat from '../chatSubComponents/Chat/Chat';
 import Loader from '../generalSubComponents/Loader/Loader';
+import FaTrophy from "react-icons/lib/fa/trophy";
 import { connect } from 'react-redux';
-import { getPost } from '../../redux/reducer';
+import { getPost } from '../../redux/reducers/postReducer';
 import axios from 'axios';
 import './PostPage.css';
 
@@ -11,7 +12,7 @@ class PostPage extends Component {
     constructor() {
         super();
         this.state = {
-            loading: true
+            loading: true,
         }
     }
     componentDidMount() {
@@ -21,6 +22,37 @@ class PostPage extends Component {
             dispatch(getPost(res.data.post[0]));
             this.setState({loading: false});
         }).catch(err => console.log('Axios All Error!!!---------', err));
+    }
+    reRender = () => {
+        const { dispatch } = this.props;
+        axios.get(`/api/posts/${this.props.match.params.post}`).then(res => {
+            dispatch(getPost(res.data.post[0]));
+            this.setState({loading: false});
+        }).catch(err => console.log('Axios All Error!!!---------', err));
+    }
+    addGold(points) {
+        console.log('-----------id', this.props.match.params.post);
+        console.log('-------------currentPoint', points);
+        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post})
+        .then(res => {
+            console.log('-----------currentPoint', points);
+            this.reRender();
+            alert(res.data.message);
+        }).catch(err => console.log('Axios Patch Error---------', err));
+    }
+    addSilver(points) {
+        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post})
+        .then(res => {
+            this.reRender();
+            alert(res.data.message);
+        }).catch(err => console.log('Axios Patch Error---------', err));
+    }
+    addBronze(points) {
+        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post})
+        .then(res => {
+            this.reRender();
+            alert(res.data.message);
+        }).catch(err => console.log('Axios Patch Error---------', err));
     }
     render() {
         const { currentPost, currentUser } = this.props;
@@ -36,10 +68,27 @@ class PostPage extends Component {
                             {currentPost && currentPost.title}
                         </div>
                         <div className='post-page-image-div'>
-                            <img className='post-page-image' src={currentPost && currentPost.image} />
+                            <img className='post-page-image' src={currentPost && currentPost.image} 
+                            alt={currentPost && currentPost.title}/>
+                        </div>
+                        <div className='post-page-points-div'>
+                                <p>Bronze: {currentPost.bronze} 
+                                    <FaTrophy className='bronze-trophy-icon trophy' onClick={() => this.addBronze(1)} />
+                                </p>
+                                <p>Silver: {currentPost.silver}
+                                    <FaTrophy className='silver-trophy-icon trophy' onClick={() => this.addSilver(2)} />
+                                </p>
+                                <p>Gold: {currentPost.gold}
+                                    <FaTrophy className='gold-trophy-icon trophy' onClick={() => this.addGold(3)} />
+                                </p>
+                                <p>Total Points: {currentPost.total_points}</p>
                         </div>
                         <div className='post-page-user-info-wrapper'>
                             <div className='post-page-user-info-social-icons'>
+                                <p className='post-page-twitter-icon'></p>
+                                <p className='post-page-facebook-icon'></p>
+                                <p className='post-page-linkedin-icon'></p>
+                                <p className='post-page-twitter-icon'></p>
                             </div>
                             <div className='post-page-user-info'>
                                 <p>
@@ -53,8 +102,9 @@ class PostPage extends Component {
                         <div className='post-page-description-div'>
                             {currentPost && currentPost.description}
                         </div>
-                        <div>
-                            {/* <Chat namespace={this.props.match.params.sport} topic={currentPost}/> */}
+                        <div className='post-page-chat-container-div'>
+                            <Chat topic={currentPost && currentPost.title} 
+                            postId={currentPost && currentPost.id}/>
                         </div>
                         <Comments postId={this.props.match.params.post}/>
                     </div>
@@ -68,8 +118,8 @@ class PostPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentPost: state.currentPost,
-        currentUser: state.currentUser
+        currentPost: state.post.currentPost,
+        currentUser: state.user.currentUser
     }
 }
 

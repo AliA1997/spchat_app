@@ -1,0 +1,37 @@
+.social-media-form {
+    height: 100%;
+    width: 80%;
+    text-align: center;
+    z-index: 400;
+}
+.social-icon-div {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+.social-icon-div > input {
+    width: 100%;
+}
+.social-icon {
+    font-size: 2em;
+}
+.social-media-form-button {
+    width: 50%;
+    height: 20%;
+    font-size: 1.25em;
+    font-weight: 800;
+    /* padding: 10px; */
+    margin: 30px;
+    background: transparent;
+    color: #fff;
+}
+.social-media-form-button:hover {
+    background: #fff;
+    color: black;
+}
+.social-media-form-button:active {
+    background: #fff;
+    color: black;
+}

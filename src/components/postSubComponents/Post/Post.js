@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import PostPage from '../../PostPage/PostPage';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import './Post.css';
@@ -22,13 +21,17 @@ class Post extends Component {
     componentDidMount() {
         this.setState({isInDashboard: window.location.href === `http://localhost:${window.location.port}/dashboard` ? true : false})               
     }
-    deletePost() {
+    deletePost(e) {
+        e.preventDefault();
         const { user_id, id } = this.props; 
+        // console.log('user_id------------', user_id);
+        // console.log('post_id------------', id);
         if(window.confirm('You are sure you want to delete this post?')) {
             axios.delete(`/api/posts`, {
                 data: {id, user_id}
             })
             .then(res => {
+                this.props.reRender();
                 console.log(res.data.message);
             }).catch(err => console.log('Axios Delete Error----------', err));
         } else {
@@ -44,6 +47,7 @@ class Post extends Component {
         // console.log('-----------location', window.location.href)
         // console.log('--------desired location', `http://lalhost:${window.location.port}/dashboard`);
         return (
+            <div className='post-container-div'>
                 <div className='post-main-div' onClick={() => this.linkTo(`/posts/${this.props.sport}/${this.props.id}`)}>
                     <div className='post-image'>
                         <img src={this.props.image} alt={this.props.title}/>
@@ -65,9 +69,10 @@ class Post extends Component {
                         </div>
                         <p className='post-description'>{displayDescription}</p>       
                     </div>
-                    <button style={{display: this.state.isInDashboard ? 'inline-block' : 'none'}}
-                     onClick={() => this.delete()}>Delete</button>
                 </div>
+                <button style={{display: this.state.isInDashboard ? 'inline-block' : 'none'}}
+                    onClick={(e) => this.deletePost(e)}>Delete</button>
+            </div>
         );
     }
 }

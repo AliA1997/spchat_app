@@ -1,0 +1,49 @@
+.admin-post-container-div {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    border: 3px solid #fff;
+    width: 80%;
+    margin-top: 40px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.admin-post-img-div {
+    grid-column: 1/1;
+    height: 60%;
+    margin-top: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.admin-post-wrapper {
+    grid-column: 2/2;
+    /* border: solid 1px blue; */
+}
+.admin-post-button-div {
+    grid-column: 2/3;
+    /* border: solid 1px green; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.admin-post-button-div > select {
+    height: 4em;
+}
+.admin-post-img {
+    height: 100%;
+    width: 75%;
+}
+.admin-post-delete-button {
+    height: 4em;
+    background: darkred;
+    color: #fff;
+}
+.admin-post-delete-button:hover {
+    color: darkred;
+    background: #fff;
+}
+.admin-post-delete-button:active {
+    color: darkred;
+    background: #fff;
+}

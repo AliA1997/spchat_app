@@ -1,4 +1,6 @@
-
+.home-div {
+    background: none;
+}
 .home-subdiv {
     display: flex;
     margin-left: auto;

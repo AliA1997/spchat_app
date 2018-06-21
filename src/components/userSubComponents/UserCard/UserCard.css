@@ -1,0 +1,87 @@
+.user-card-container-div {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    height: 20%;
+    width: 80%;
+    border: 3px solid #fff;
+}
+.user-card-div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* .user-card-delete-button-div {
+    grid-column: 5/5;
+    height: 100%;
+    display: flex;
+    align-items: center;
+} */
+.user-card-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-card-button-div > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    margin: 10px;
+}
+.user-card-button-div > .admin-delete-button:hover {
+    background: #fff;
+    color: darkred;
+}
+.admin-delete-button {
+    background: darkred;
+    color: #fff;
+}
+.user-card-button-div > .admin-delete-button:active {
+    background: #fff;
+    color: darkred;
+}
+.admin-delete-icon {
+font-size: 2em;
+}
+
+.admin-warning-icon {
+    font-size: 2em;
+}
+.admin-warning-button {
+    background: rgb(231, 202, 35);
+    color: white;
+
+}
+.user-card-button-div > .admin-warning-button:hover {
+    background: #fff;
+    color:  rgb(231, 202, 35);
+}
+
+.user-card-button-div > .admin-warning-button:active {
+    background: #fff;
+    color:  rgb(231, 202, 35);
+}
+
+.user-card-img-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 33%;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    /* width: 25%; */
+}
+
+.user-card-info {
+    /* margin-top: 5%; */
+    width: 100%;
+}
+.user-card-img {
+    border-radius: 100%;
+    height: 100%;
+    width: 100%;
+} 

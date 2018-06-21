@@ -5,17 +5,20 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const helmet = require('helmet');
 const massive = require('massive');
-
+const path = require('path');
 //Extra technologies
 const socket = require('socket.io');
 //For Storing session store.
 const pg  = require('pg');
 const pgSession = require('connect-pg-simple')(session);
+const { Posts } = require('./helpers/PostsClass');
 //Middleware
 const checkLogin = require('./middlewaras/checkLoggedIn');
 const checkPost = require('./middlewaras/checkPost');
 // const checkComment = require('./middlewares/checkComment');
 //Controllers
+const socialMediaCtrl = require('./controllers/social_media_controller');
+const adminCtrl = require('./controllers/admin_controller');
 const cloudinaryCtrl = require('./controllers/cloudinary_controller');
 const userCtrl = require('./controllers/user_controller');
 const postCtrl = require('./controllers/post_controller');
@@ -23,36 +26,40 @@ const commentsCtrl = require('./controllers/comments_controller');
 const searchCtrl = require('./controllers/search_controller');
 const surveyCtrl = require('./controllers/survey_controller');
 const PORT = 9999;
-let socketDB = null;
+let socketDB;
 const app = express();
 app.use(helmet());
-app.use(express.static('public'));
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(bodyParser.json());
 
-
-massive(process.env.CONNECTION_STRING).then(database => {
-    app.set('db', database);
-    socketDB = database;
-})
-
-
+async function configureDatabase() {
+    await massive(process.env.CONNECTION_STRING).then(database => {
+        app.set('db', database);
+        socketDB = database;
+        // console.log('socketDB----------', socketDB);
+    }).catch(err => console.log('Massive Connection Error---------', err));
+}
+configureDatabase();
 app.use(session({
     
-    store: session ? new pgSession({
+    store: session && new pgSession({
         //Connect to session to the store
         conString: process.env.CONNECTION_STRING,
-    }) : null,
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 14,
-        secure: true
+        // secure: true
     }
 }));
 
-
+//Global Endpoint 
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../build/index.html'));
+// })
 //Cloudinary Endpoints 
 app.get('/api/upload', cloudinaryCtrl.upload)
 
@@ -73,18 +80,36 @@ app.get('/api/posts/sports/:sport', postCtrl.readPostBySport);
 app.get('/api/comments/:post_id', commentsCtrl.readComments);
 
 //Get Survey Endpoints 
-app.get('/api/survey/:id', surveyCtrl.readSurvey);
+app.get('/api/survey', surveyCtrl.readHomeSurvey);
+app.get('/api/survey/:sport_id', surveyCtrl.readSurvey);
+
+//Admin Get Endpoints
+app.get('/api/admin/users', adminCtrl.readAdminUsers);
+app.get('/api/admin/posts', adminCtrl.readAdminPosts);
 
 //Post User Endpoints
 app.post('/api/register', userCtrl.register);
 app.post('/api/login', userCtrl.login);
 app.post('/api/logout', userCtrl.logout);
 
+//Post Social Media Endpoints 
+app.post('/api/social-media/twitter', socialMediaCtrl.createTwitter);
+app.post('/api/social-media/facebook', socialMediaCtrl.createFacebook);
+app.post('/api/social-media/instagram', socialMediaCtrl.createInstagram);
+app.post('/api/social-media/snapchat', socialMediaCtrl.createSnapchat);
+app.post('/api/social-media/twitchtv', socialMediaCtrl.createTwitchTv);
+app.post('/api/social-media/reddit', socialMediaCtrl.createReddit);
+app.post('/api/social-media/playstation', socialMediaCtrl.createPlaystation);
+app.post('/api/social-media/xbox', socialMediaCtrl.createXbox);
+
 //Post Postss Endpoints
 app.post('/api/posts', postCtrl.createPost);
 
 //Post Comment Endpoints 
 app.post('/api/comments/:post_id', commentsCtrl.createComment);
+
+//Admin Post Endpoints 
+app.post('/api/warning', adminCtrl.issueUserWarning);
 
 //Put User Endpoints 
 app.put('/api/users', userCtrl.updateUser);
@@ -93,6 +118,9 @@ app.put('/email_verification', userCtrl.emailVerification);
 
 //Put Postss Endpoints 
 app.put('/api/posts', checkPost, postCtrl.updatePost);
+
+//Patch Posts Endpoint
+app.patch('/api/posts/liked', postCtrl.updatePoints)
 
 //Put Comment Endpoints 
 app.put('/api/comments/:post_id/:comment_id', commentsCtrl.updateComment);
@@ -103,116 +131,23 @@ app.delete('/api/posts', checkPost, postCtrl.deletePost);
 //Delete Comments Endpoints 
 app.delete('/api/comments/:post_id/:comment_id', commentsCtrl.deleteComment);
 
+//Delete Admin Endpoints 
+app.delete('/api/admin/users/:user_id', adminCtrl.deleteAdminUser);
+app.delete('/api/admin/posts/:post_id', adminCtrl.deleteAdminPost);
+
 //Search Get EndPoints  
 app.get('/api/search/users', searchCtrl.readUsersSearch);
 app.get('/api/search/posts', searchCtrl.readPostsSearch)
 app.get('/api/search/sports', searchCtrl.readSportPostsSearch);
 
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+  })
 const server = app.listen(PORT, () => console.log(`Listening on Port:${PORT}!`));
 
 //Socket.io configuration, and event emitters
 const io = socket(server);
 
-const nba = io.of('/nba')
-const nfl = io.of('/nfl')
-const mlb = io.of('/mlb')
-const nhl = io.of('/nhl')
-
-let nbaUsers = [];
-let nbaMessages = [];
-let nflUsers = [];
-let nflMessages = [];
-let mlbUsers = [];
-let mlbMessages = [];
-let nhlUsers = [];
-let nhlMessages = [];
-
-nba.on('connection', (socket) => {
-    console.log('NBA Namespace connected'); 
-    const filteredUser = socket.handshake.query.username !== 'Anonymous' && nbaUsers.filter(user => user === socket.handshake.query.username);
-    !filteredUser.length && nbaUsers.push(`${socket.handshake.query.username}`) 
-
-    console.log(nbaUsers);
-    console.log('imageurl-----------', socket.handshake.query.imageurl);
-    console.log('topic----------', socket.handshake.query.topic);
-    socket.broadcast.emit('SEND_USER', nbaUsers);
-    console.log(nbaUsers);
-    socket.on('TYPING', (data) => {
-        console.log('typing----------', socket.handshake.query.username);
-        socket.broadcast.emit('USER_ON_TYPING', data);
-    })
-    socket.on('SEND_MESSAGE', (data) => {
-        console.log('Message sent.', data.message);
-        data.username = socket.handshake.query.username;
-        data.imageurl = socket.handshake.query.imageurl;
-        nbaMessages.push(data);
-        console.log(nbaMessages);
-        nba.emit('RECIEVE_MESSAGE', data);
-    });
-    socket.on('disconnect', () => {
-        console.log('Disconnected from nba namespace');
-    });
-})
-
-mlb.on('connection', (socket) => {
-    console.log('MLB Namespace connected');
-    const filteredUser = socket.handshake.query.username !== 'Anonymous' && mlbUsers.filter(user => user === socket.handshake.query.username);
-    !filteredUser.length && mlbUsers.push(`${socket.handshake.query.username} #${mlbUsers.length}`) 
-    console.log(mlbUsers);
-    socket.broadcast.emit('SEND_USER', mlbUsers);
-    socket.on('TYPING', (data) => {
-        console.log('typing----------', socket.handshake.query.username);
-        socket.broadcast.emit('USER_ON_TYPING', data);
-    })
-    socket.on('SEND_MESSAGE', (data) => {
-        data.username = socket.handshake.query.username;
-        mlbMessages.push(data)
-        console.log('MLB Message sent!');
-        mlb.emit('RECIEVE_MESSAGE', data);
-    })
-    socket.on('disconnect', () => {
-        console.log('Disconnected from mlb namespace');
-    })
-})
-
-nfl.on('connection', (socket) => {
-    console.log('NFL Namespace connected');
-    const filteredUser = socket.handshake.query.username !== 'Anonymous' && nflUsers.filter(user => user === socket.handshake.query.username);
-    !filteredUser.length && nflUsers.push(`${socket.handshake.query.username} #${nflUsers.length}`) 
-    console.log(nflUsers);
-    socket.broadcast.emit('SEND_USER', nflUsers);
-    socket.on('TYPING', (data) => {
-        console.log('typing----------', socket.handshake.query.username);
-        socket.broadcast.emit('USER_ON_TYPING', data);
-    })
-    socket.on('SEND_MESSAGE', (data) => {
-        data.username = socket.handshake.query.username;
-        nflMessages.push(data)
-        console.log('NFL Message sent!');
-        nfl.emit('RECIEVE_MESSAGE', data);
-    })    
-    socket.on('disconnect', () => {
-        console.log('Disconnected from nfl namespace');
-    })
-})
-
-nhl.on('connection', (socket) => {
-    console.log('NHL Namespace connected');
-    const filteredUser = socket.handshake.query.username !== 'Anonymous' && nhlUsers.filter(user => user === socket.handshake.query.username);
-    !filteredUser.length && nhlUsers.push(`${socket.handshake.query.username} #${nhlUsers.length}`) 
-    console.log(nhlUsers);
-    socket.broadcast.emit('SEND_USER', nhlUsers);
-    socket.on('TYPING', (data) => {
-        console.log('typing----------', socket.handshake.query.username);
-        socket.broadcast.emit('USER_ON_TYPING', data);
-    })
-    socket.on('SEND_MESSAGE', (data) => {
-        data.username = socket.handshake.query.username;
-        nhlMessages.push(data);
-        console.log('NHL Message sent!');
-        nhl.emit('RECIEVE_MESSAGE', data);
-    })
-    socket.on('disconnect', () => {
-        console.log('Disconnected from nhl namespace');
-    });
-});
+setTimeout(() => {
+    require('./socket/socket')(io, Posts, socketDB);
+}, 2000);

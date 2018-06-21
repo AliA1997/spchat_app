@@ -1,8 +1,7 @@
 module.exports = {
  createComment: (req, res) => {
     const { post_id } = req.params;
-    const { text, username } = req.body;
-    const date = new Date().getUTCDate();
+    const { text, username, date } = req.body;
     const dbInstance = req.app.get('db');
 
     dbInstance.create_comment({post_id, username, text, date})

@@ -48,8 +48,10 @@ export default class SportsPage extends Component {
         // .then(res => {
         //     this.setState({sportPosts: res.data.posts});
         // }).catch(err => console.log('Get Sports Post Axios Error--------', err));
+        const sportId = this.props.match.params.sport.length > 3 ? this.props.match.params.sport[this.props.match.params.sport.length - 1].toUpperCase() :
+        this.props.match.params.sport.toUpperCase();
         const postsAxiosCall = axios.get(`/api/posts/sports/${this.props.match.params.sport}`);
-        const surveyAxiosCall = axios.get('/api/survey/1');
+        const surveyAxiosCall = axios.get(`/api/survey/${sportId}`);
         Promise.all([postsAxiosCall, surveyAxiosCall])
         .then(res => {
             this.setState({sportPosts: res[0].data.posts, survey: res[1].data.survey, loading: false})
@@ -61,24 +63,21 @@ export default class SportsPage extends Component {
         console.log('Current Image--------', currentImg);
         if(!loading) {
             return (
-                <div>
-                    <img className='sports-logo' src={currentImg && currentImg.img} 
-                    alt={`${currentImg && currentImg.sport}-logo`} />
-                    <div className='sports-page-posts'>
-                        {sportPosts && <Posts sportsPosts={sportPosts} loading={loading} />}
-                    </div>
-                    <News title={this.props.match.params.sport}/>
-                    <div className='sports-page-last-div'>
-                        <div className='sports-chat-div sports-subdiv'>
-                            <NavLink to={`/chat/${this.props.match.params.sport}`}>
-                                Chat {this.props.match.params.sport}
-                            </NavLink>
+                <div className='sports-page-container'>
+                    <div className='sports-page-wrapper'>
+                        <img className='sports-logo' src={currentImg && currentImg.img} 
+                        alt={`${currentImg && currentImg.sport}-logo`} />
+                        <div className='sports-page-posts'>
+                            {sportPosts && <Posts sportsPosts={sportPosts} loading={loading} />}
                         </div>
-                        <div className='survey-div sports-subdiv'>
-                            <Survey />
-                        </div>
-                        <div className='sports-stats-div sports-subdiv'>
-                            {/* {JSON.stringify(stats)} */}
+                        <News title={this.props.match.params.sport}/>
+                        <div className='sports-page-last-div'>
+                            <div className='survey-div sports-subdiv'>
+                                <Survey survey={survey}/>
+                            </div>
+                            <div className='sports-stats-div sports-subdiv'>
+                                {/* {JSON.stringify(stats)} */}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Slideshow from '../Slideshow/Slideshow'; 
 import axios from 'axios';
+import './News.css';
 
 export default class News extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export default class News extends Component {
         .then(res => {
             let copyOfArrState = newsArticles.slice();
             for(let i = 0; i < 5; i++) {
-                copyOfArrState = [...copyOfArrState, {title: res.data.articles[i].title, imageurl: res.data.articles[i].urlToImage}];
+                copyOfArrState = [...copyOfArrState, {title: res.data.articles[i].title, imageurl: res.data.articles[i].urlToImage, link: res.data.articles[i].url}];
             }
             this.setState({newsArticles: copyOfArrState});
         }).catch(err => console.log('Axios News Error-------', err));
@@ -30,8 +31,8 @@ export default class News extends Component {
     render() {
         const { newsArticles } = this.state;
         return (
-            <div>
-                <div className='news-header'></div>
+            <div className='news-container'>
+                {/* <div className='news-header'></div> */}
                 <Slideshow slides={newsArticles}/>
             </div>
         );

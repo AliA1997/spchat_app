@@ -16,7 +16,7 @@ class ChatPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser,
+        currentUser: state.user.currentUser,
     }
 }
 

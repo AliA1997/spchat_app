@@ -1,16 +1,44 @@
 .sports-subdiv {
     border: 2px solid #fff;
     height: 40vh;
-    width: 33vw;
+    width: 33%;
     margin: 20px;
 }
 .sports-logo {
-    height: 15em;
+    grid-row-start: 1;
+    grid-row-end: 2;
     width: 20vw;
     background: transparent;
+}
+.sports-page-posts {
+    grid-row-start: 4;
+    grid-row-end: 6;
 }
 .sports-page-last-div {
     display: flex;
     height: 25vh;
-    width: 100vw;
+}
+.sports-page-container {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+.sports-page-wrapper {
+    grid-column-start: 2;
+    grid-column-end:5;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+}
+.sports-logo {
+}
+.news-container {
+    grid-row-start: 4;
+    grid-row-end: 7;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+}
+.sports-page-last-div {
+    grid-row-start: 8;
+    grid-row-end: 10;
+    grid-column-start: 2;
+    grid-column-end: 4;
 }

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import Tag from '../../generalSubComponents/Tag/Tag';
+import { getTime } from '../../../logic';
 import { connect } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import axios from 'axios';
 import MdControlPoint from 'react-icons/lib/md/control-point';
 import sportsOptions from '../../../sports-data/sports-options.json';
-// import nhlTeams from '../../../sports-data/nhl-teams.json';
 import './PostForm.css';
 
 class PostForm extends Component {
@@ -26,6 +24,16 @@ class PostForm extends Component {
             alert('Must Login Or Register');
             this.props.redirect('login');
         }
+    }
+    deleteTag = (tag) => {
+        const copyOfSelectedTags = this.state.selectedTags.slice();
+        // console.log('selectedTags----------------', copyOfSelectedTags);
+        // console.log('tags------------', tag);
+        let tagIndex = copyOfSelectedTags.indexOf(tag, val => val === tag);
+        // console.log('tagIndex---------', tagIndex);
+        copyOfSelectedTags.splice(tagIndex, 1);
+        // console.log('After delete-----------', copyOfSelectedTags)
+        this.setState({selectedTags: copyOfSelectedTags});
     }
     handleCrtePostTitleChange(val) {
         this.setState({title: val});
@@ -82,7 +90,8 @@ class PostForm extends Component {
         if(this.props.currentUser) {
             const { id } = this.props.currentUser;
             const { title, imageurl, sport, description, selectedTags } = this.state;
-            axios.post('/api/posts', { user_id: id, title, imageurl, description, sport, selectedTags })
+            const date = getTime();
+            axios.post('/api/posts', { user_id: id, title, imageurl, date, description, sport, selectedTags })
             .then(res => {
                 console.log(res.data.message);
                 this.props.redirect('dashboard');
@@ -92,7 +101,7 @@ class PostForm extends Component {
         }
     }
     render() {
-        const { description, currentTag, imageurl, title, sports, selectedTags, tags } = this.state;
+        const { description, imageurl, title, sports, selectedTags } = this.state;
         console.log('SelectedTags----------', selectedTags);
         const { currentUser, sports_data } = this.props;
         console.log(currentUser);
@@ -118,7 +127,7 @@ class PostForm extends Component {
                     {sports_data && sports_data.map((tag, i) => <option className='post-form-tag-option' value={tag.name} key={i}>{tag.name}<MdControlPoint /></option>)}
                 </select>
                 <div className='selected-tags-div'>
-                    {selectedTags && selectedTags.map((sTag, i) => <Tag key={i} name={sTag} />)}
+                    {selectedTags && selectedTags.map((sTag, i) => <Tag key={i} name={sTag} deleteTag={this.deleteTag}/>)}
                 </div>
                 <button type='submit' className='create-form-button'>Create Post</button>
             </form>
@@ -129,9 +138,9 @@ class PostForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser,
-        doEditPost: state.doEditPost,
-        sports_data: state.sports_data
+        currentUser: state.user.currentUser,
+        doEditPost: state.post.doEditPost,
+        sports_data: state.post.sports_data
     }
 }
 

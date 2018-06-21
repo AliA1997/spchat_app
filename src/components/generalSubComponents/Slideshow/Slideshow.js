@@ -42,15 +42,19 @@ export default class Slideshow extends Component {
   jumpToSlide(index) {
     this.setState({ activeIndex: index });
   }
+  goToArticle(link) {
+    window.open(link, '_blank');
+  }
   render() {
-    
+    console.log(this.props.slides);
+    const inHome = window.location.href === 'http://localhost:3000/' ? true : false;
     return (
       <div className="slideshow">
         <ul className="slideshow-slides">
           { this.props.slides &&
             this.props.slides.map((slide, index) => (
-              <li key={index} className={ classNames({ active: index == this.state.activeIndex }) }>
-                <figure className='slide-figure'>
+              <li key={index} className={ classNames({ active: index === this.state.activeIndex }) }>
+                <figure className='slide-figure' onClick={() => inHome ? null : this.goToArticle(slide.link)}>
                   <img src={ slide.imageurl } alt={slide.title} className='slide-image'/>
                   { slide.title ? <figcaption>{ slide.title }</figcaption> : null }
                 </figure>
@@ -61,7 +65,7 @@ export default class Slideshow extends Component {
         <ul className="slideshow-dots">
           { this.props.slides &&
             this.props.slides.map((slide, index) => (
-              <li key={index} className={ (index == this.state.activeIndex) ? 'active': '' }>
+              <li key={index} className={ (index === this.state.activeIndex) ? 'active': '' }>
                 <a onClick={ (event)=> this.jumpToSlide(index) }>{ index + 1 }</a>
               </li>
             ))

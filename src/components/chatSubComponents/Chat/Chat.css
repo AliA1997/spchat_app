@@ -5,7 +5,7 @@
 }
 .chat-users-messages {
     height: 80vh;
-    width: 80vw;
+    /* width: 80vw; */
     border: solid 3px #fff;
     margin-left: auto;
     margin-right: auto;
@@ -15,7 +15,7 @@
 .chat-users-list {
     margin: 50px;
     height: 40vh;
-    width: 80vw;
+    /* width: 80vw; */
     border: solid 3px #fff;
     margin-left: auto;
     margin-right: auto;
@@ -48,4 +48,7 @@
     font-weight: 800;
     display: flex;
     align-items: baseline;
+}
+.chat-div.style {
+    width: 100%;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getTime } from '../../logic';
 import axios from 'axios';
 import Comment from '../generalSubComponents/Comment/Comment';
 import Loader from '../generalSubComponents/Loader/Loader';
@@ -33,9 +34,10 @@ class Comments extends Component {
         console.log(this.props.id);
         const { currentUser } = this.props;
         const { text } = this.state;
+        const date = getTime();
         const username = currentUser ? currentUser.username : 'Anonymous';
         console.log('username--------', username);
-        axios.post(`/api/comments/${this.props.postId}`, { text, username })
+        axios.post(`/api/comments/${this.props.postId}`, { text, username, date })
         .then(res => {
             console.log('Message--------------', res.data.message);
             this.getComments();
@@ -72,8 +74,8 @@ class Comments extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentPost: state.currentPost,
-        currentUser: state.currentUser
+        currentPost: state.user.currentPost,
+        currentUser: state.user.currentUser
     }
 }
 

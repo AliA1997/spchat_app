@@ -7,7 +7,7 @@ import Survey from '../generalSubComponents/Survey/Survey';
 import Loader from '../generalSubComponents/Loader/Loader';
 import { NavLink } from 'react-router-dom';
 import './Home.css';
-import uuid from 'uuid';
+// import uuid from 'uuid';
 import axios from 'axios';
 
 export default class Home extends Component {
@@ -21,7 +21,7 @@ export default class Home extends Component {
     }
     componentDidMount() {
         const postsAxiosRequest = axios.get('/api/posts');
-        const surveyAxiosRequest = axios.get('/api/survey/1');
+        const surveyAxiosRequest = axios.get('/api/survey');
         Promise.all([postsAxiosRequest, surveyAxiosRequest]).then(res => {
             this.setState({posts: res[0].data.posts, survey: res[1].data.survey, loading: false})
         }).catch(err => console.log('Axios all error-----------', err));
@@ -49,7 +49,7 @@ export default class Home extends Component {
                         <div className='home-login-div'>
                             <div className='home-login-subdiv'>
                                 <NavLink className='home-login-link' to='/login'>Login</NavLink>
-                                <NavLink className='home-register-link' to={`/register/${uuid.v4()}`}>Register</NavLink>
+                                <NavLink className='home-register-link' to={`/register`}>Register</NavLink>
                             </div>
                         </div>
                     </div>

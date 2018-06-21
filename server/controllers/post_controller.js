@@ -1,8 +1,9 @@
 module.exports = {
  readPosts: (req, res) => {
     const dbInstance = req.app.get('db');
+    // console.log('user posts data------------', req.session.user);
     dbInstance.read_all_posts().then(posts => {
-        console.log('posts--------------', posts);
+        // console.log('posts--------------', posts);
         res.status(200).json({posts})
     }).catch(err => console.log('Read Post DB Error-----------', err));
  },
@@ -25,28 +26,26 @@ module.exports = {
 },
  readUserPosts: (req, res) => {
      console.log('readUserPosts hit-------');
-     console.log('req.session.user-----------', req.session.user);
+    //  console.log('req.session.user-----------', req.session.user);
      const dbInstance = req.app.get('db');
-    if(req.session.user) {
-        const { username } = req.session.user;
-        console.log('getUserPosts username----------', username);
-        dbInstance.read_user_posts(username)
-        .then(posts => {
-            console.log('getUserPosts posts-----------------', posts);
-            res.status(200).json({posts});
-        }).catch(err => console.log('Read User Posts--------', err));
-    } else {
-        setTimeout(() => res.status(200).json({message: 'Must Login!'}), 1000);
-    }
+    const { username } = req.session.user;
+    console.log('getUserPosts username----------', username);
+    dbInstance.read_user_posts(username)
+    .then(posts => {
+        console.log('getUserPosts posts-----------------', posts);
+        res.status(200).json({posts});
+    }).catch(err => console.log('Read User Posts--------', err));
+    // } else {
+    //     setTimeout(() => res.status(200).json({message: 'Must Login!'}), 1000);
+    // }
  },
  readUserPostBySport: (req, res) => {
 
  },
  createPost: (req, res) => {
     const dbInstance = req.app.get('db');
-    const { user_id, title, description, imageurl, sport, selectedTags } = req.body;
-    const createDate = new Date().getDate();
-    dbInstance.create_post({ user_id, title, description, imageurl, date: createDate, sport, tags: selectedTags })
+    const { user_id, title, description, date, imageurl, sport, selectedTags } = req.body;
+    dbInstance.create_post({ user_id, title, description, date, imageurl, sport, tags: selectedTags })
     .then(post => {
         res.status(200).json({message: 'Post Created Successfully!'});
     }).catch(err => console.log('Database Post Error----------', err));
@@ -55,16 +54,38 @@ module.exports = {
     const dbInstance = req.app.get('db');
     const { id, title, description, imageurl, date, sport, selectedTags } = req.body;
     console.log(id)
-    const updateDate = new Date().getDate();
-    dbInstance.update_post({ title, description, imageurl, date: updateDate, sport, tags: selectedTags, id})
+    dbInstance.update_post({ title, description, imageurl, date, sport, tags: selectedTags, id})
     .then(post => {
         res.status(200).json(post);
     }).catch(err => console.log('Database Post Update Error----------', err));
  }, 
+ updatePoints: (req, res) => {
+    const dbInstance = req.app.get('db');
+    const { points, post_id } = req.body;
+    console.log('poits------------', points);
+    console.log('post_id---------', post_id);
+    if(points === 1) {
+        dbInstance.add_bronze({points, post_id}).then(points => {
+            res.status(200).json({message: 'Bronze Added!'});
+        }).catch(err => console.log("Database Patch Post error----------", err));
+    } else if(points === 2) {
+        dbInstance.add_silver({points, post_id}).then(points => {
+            res.status(200).json({message: 'Silver Added!'});
+        }).catch(err => console.log('Database patch post error-------', err));
+    } else {
+        dbInstance.add_gold({points, post_id}).then(points => {
+            res.status(200).json({message: 'Gold Added!!'});
+        }).catch(err => console.log('Database patch post error----------', err));
+    }
+ },
  deletePost: (req, res) => {
+    const dbInstance = req.app.get('db');
     const { id, user_id } = req.body;
+    console.log('id---------', id);
+    console.log('user_id---------', user_id);
     dbInstance.delete_post({id, user_id})
     .then(posts => {
+        console.log('delete posts------------', posts);
         res.status(200).json({message: 'Deleted Post!'});
     }).catch(err => console.log('Database delete error!!!', err));
  }

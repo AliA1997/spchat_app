@@ -1,13 +1,25 @@
 * {
-  z-index: 3;
   margin: 0;
 }
 #root {
   height: 100vh;
   width: 100vw;
 }
+
+.background {
+  background: #000;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  position: fixed;
+}
+.app {
+  background: transparent;
+  z-index: 2;
+}
 html, body {
-  background: black;
+  height: 100%;
+  width: 100%;
   color: #fff;
 }
 a {
@@ -23,8 +35,8 @@ ul {
   color: #fff;
 }
 .particles-background {
-  height: 200%;
-  width: 175%;
+  height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;

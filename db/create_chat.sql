@@ -1,0 +1,1 @@
+INSERT INTO sp_chats (post_id, messages) VALUES (${post_id}, ${messages});

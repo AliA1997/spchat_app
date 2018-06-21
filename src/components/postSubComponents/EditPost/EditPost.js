@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { editPost } from '../../../redux/reducer';
+import { getTime } from '../../../logic';
+// import { editPost } from '../../../redux/reducer';
 
 
 class EditPost extends Component {
@@ -84,7 +85,7 @@ class EditPost extends Component {
     editPost(e) {
         e.preventDefault();
         let copyOfState = {...this.state};
-        console.log('Copy of State--------', copyOfState);
+        console.log('Copy of State--------', copyOfState)
         for(var key in copyOfState) {
             if(!copyOfState[key]) {
                 //Set the property of the state to the props property if null.
@@ -95,8 +96,8 @@ class EditPost extends Component {
             }
         }
         const { title, description, selectedTags, sport, imageurl } = copyOfState;
-    
-            axios.put( `/api/posts`, { title, description, selectedTags, sport, imageurl, id: this.props.id})
+        const date = getTime();
+            axios.put( `/api/posts`, { title, description, date, selectedTags, sport, imageurl, id: this.props.id})
             .then(res => {
                 this.props.reRender();
             }).catch(err => console.log('Axios editpost error-------- ', err));
@@ -138,7 +139,7 @@ class EditPost extends Component {
 
 const mapStateToProps = state => {
     return {
-        doEditPost: state.doEditPost
+        doEditPost: state.post.doEditPost
     }
 }
 export default connect(mapStateToProps)(EditPost);

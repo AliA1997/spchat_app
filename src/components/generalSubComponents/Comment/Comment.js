@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { edit, doneEdit } from '../../../redux/reducer';
+import { getTime } from '../../../logic';
 import IoCloseCircled from 'react-icons/lib/io/close-circled';
 import GoPencil from 'react-icons/lib/go/pencil';
 import axios from 'axios';
@@ -19,7 +19,7 @@ class Comment extends Component {
         // console.log('postId--------------', this.props.post_id);
         // console.log('comment id---------------', this.props.id);
         // console.log('this.props comment----------', this.props);
-        axios.delete(`/api/comments/${this.props.currentPost[0].id}/${this.props.id}`)
+        axios.delete(`/api/comments/${this.props.currentPost.id}/${this.props.id}`)
         .then(res => {
             this.setState(this.state);            
             this.props.reRender();
@@ -31,7 +31,7 @@ class Comment extends Component {
        const { text, edit } = this.state;
        const { currentUser } = this.props;
        let today = new Date();
-       const date = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()} + `;
+       const date = getTime();
        console.log('-------date', date);
         if(edit) {
             axios.put(`/api/comments/${this.props.post_id}/${this.props.id}`, {text, date})
@@ -72,8 +72,8 @@ class Comment extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser,
-        currentPost: state.currentPost
+        currentUser: state.user.currentUser,
+        currentPost: state.post.currentPost
     }
 }
 

@@ -1,0 +1,1 @@
+DELETE FROM sp_posts WHERE id = $1;

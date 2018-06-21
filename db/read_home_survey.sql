@@ -1,0 +1,1 @@
+SELECT *  FROM sp_surveys ORDER BY RANDOM() LIMIT 1;

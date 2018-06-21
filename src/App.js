@@ -1,38 +1,46 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from './redux/reducer';
+import { loginUser, logoutUser } from './redux/reducers/userReducer';
 import Nav from './components/generalSubComponents/Nav/Nav';
 import Particles from 'react-particles-js';
-import backgroundParams from './background-particles.json';
+import subBackgroundParams from './sub-background-particles.json';
 import axios from 'axios';
 import routes from './routes';
 import './App.css';
+// import { loginUser } from './redux/reducer';
 
 class App extends Component {
     componentDidMount() {
-        const { dispatch, currentUser } = this.props;
-        axios.get('/api/user-data').then(res => {
-            dispatch(loginUser(res.data.user));
-            console.log('Current User--------', currentUser);
-        }).catch(err => console.log('User Data Error----------', err));
+      const { dispatch } = this.props;
+      axios.get('/api/user-data')
+      .then(res => {
+        if(!res.data.user) dispatch(logoutUser());
+        console.log('res.data.user-----------', res.data.user);
+        dispatch(loginUser(res.data.user));
+      }).catch(err => console.log('Get User Data Axios Error----------', err));
+
     }    
     render() {
     const { currentUser } = this.props;
     console.log('Current user----------', currentUser);
-    return (
-        <div>
-          <Nav />
-          {/* <Particles className='particles-background' params={backgroundParams} /> */}
-          {routes}
+    return (            
+      <div>
+      <Particles 
+      params={subBackgroundParams} 
+      className='background' />
+        <div className='app'>
+            <Nav />
+            {routes}
         </div>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    currentUser: state._persist.rehydrated && !state.loggedOut ? state.currentUser : state._persist.currentUser
+    currentUser: state._persist.rehydrated && !state.loggedOut ? state.user.currentUser : state._persist.user.currentUser
   }
 }
 

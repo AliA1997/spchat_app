@@ -9,20 +9,21 @@ export default class Survey extends Component {
         super();
         this.state = {
             survey: null,
-            loading: true
+            // loading: true
         }
     }
     componentDidMount() {
-        axios.get('/api/survey/1')
-        .then(res => {
-            console.log(res.data.survey);
-            this.setState({survey: res.data.survey, loading: false});
-        }).catch(err => console.log('Get Survey Axios Error!!'));
+        // axios.get('/api/survey')
+        // .then(res => {
+        //     console.log(res.data.survey);
+        //     this.setState({survey: res.data.survey, loading: false});
+        // }).catch(err => console.log('Get Survey Axios Error!!'));
     }
     render() {
-        const { clicked, survey, loading } = this.state;
+        // const { loading } = this.state;
+        const { survey } = this.props;
         console.log('Survey--------', survey);
-        if(!loading) {
+        // if(!loading) {
             return (
                 <div className='survey-div'>
                     <p className='question-text'>
@@ -31,13 +32,13 @@ export default class Survey extends Component {
                     {survey[0].answers && survey[0].answers.map((answer, i) => <SurveyAnswer key={i} answer={answer} />)}
                 </div>
             );
-        } else {
-            return (
-                <div className='loading-background'>
-                    <ReactLoading className='loading-component' color='#fff' 
-                        type='bars' height={100} width={100}/>
-                </div>
-            );
-        }
+        // } else {
+        //     return (
+        //         <div className='loading-background'>
+        //             <ReactLoading className='loading-component' color='#fff' 
+        //                 type='bars' height={100} width={100}/>
+        //         </div>
+        //     );
+        // }
     }
 }

@@ -1,0 +1,27 @@
+.error-not-found-container-div {
+    height: 100vh;
+    margin-top: 10%;
+    width: 100vw;
+}
+.error-not-found-subtext {
+    font-size: 3em;
+    transform: scale(1.5);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: -25px;
+} 
+.error-not-found-page-div {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.error-not-found-text {
+    font-size: 15em;
+}
+.not-found-img {
+    font-size: 15em;
+}

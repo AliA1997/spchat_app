@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { loginUser, logoutUser } from '../../../redux/reducer';
+import { loginUser } from '../../../redux/reducers/userReducer';
 import GoSignIn from 'react-icons/lib/go/sign-in';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -25,7 +25,7 @@ class Login extends Component {
     login(e) {
         e.preventDefault();
         const { username, password } = this.state;
-        const { dispatch, currentUser } = this.props;
+        const { dispatch } = this.props;
         // this.setState({username: '', password: ''});
         axios.post('/api/login', { username, password }).then(res => {
             console.log(res);
@@ -63,8 +63,8 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        loggedIn: state.loggedIn,
-        currentUser: state.currentUser
+        loggedIn: state.user.loggedIn,
+        currentUser: state.user.currentUser
     }
 }
 

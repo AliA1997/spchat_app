@@ -19,14 +19,14 @@
 
 .login-page-register-link {
     text-align: center;
-    margin: 50px;
+    margin: 15%;
 }
 .login-page-register-link > button {
     border: solid 3px #fff;
     background: transparent;
     color: #fff;
     font-weight: 700;
-    width: 20%;
+    width: 30%;
     height: 7.5%;
 }
 /* @media (min-width: 760px) {

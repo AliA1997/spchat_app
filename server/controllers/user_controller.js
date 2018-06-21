@@ -4,18 +4,17 @@ const nodemailerCtrl = require('./nodemailer_controller');
 const saltRounds = 12;
 module.exports = {
     readUsers: (req, res) => {
-
+        res.status(200).json({message: 'read users'});
     },
     readUser: (req, res) => {
-
+        res.status(200).json({message: 'read user'});
     },
     readUserData: (req, res) => {
         console.log('Session--------', req.session.user);
         res.status(200).json({user: req.session.user});
     },
     register: (req, res) => {
-        const { username, password, email, image, age, favoriteTeams, favoritePlayers, favoriteSport } = req.body;
-        const date = new Date().getDate();
+        const { username, password, email, image, age, date, favoriteTeams, favoritePlayers, favoriteSport } = req.body;
         const verification_link = uuid.v4();
         bcrypt.hash(password, saltRounds).then(hashedPassword => {
             const dbInstance = req.app.get('db');
@@ -23,13 +22,13 @@ module.exports = {
             console.log('------favoritePlayers', favoritePlayers);
             console.log('------favoriteTeams', favoriteTeams);            
             dbInstance.register({ username, email, date, image, age, favoriteTeams, favoritePlayers, favoriteSport, password: hashedPassword, verification_link }).then(user => {
-                nodemailerCtrl(username, email, verification_link);
+                nodemailerCtrl.verify(username, email, verification_link);
                 console.log('req-session-user', user[0])
                 req.session.user = user[0];
                 console.log('req-session-user 222s', req.session.user);
                 res.status(200).json({user: req.session.user, message: 'Register User!!'});
             }).catch(err => console.log('Register User Error------------------', err));
-        })
+        }).catch(err => console.log('Bcrypt Register Error--------', err));
     },
     login: (req, res) => {
         const { username, password } = req.body;
@@ -46,14 +45,15 @@ module.exports = {
                         console.log('Hit 3')
                         console.log('-------userData', userData);
                         req.session.user = userData;
+                        req.session.save();
                         console.log('b4 send session-----', req.session.user);
-                        res.status(200).json({user: userData});
+                        res.status(200).json({user: req.session.user});
                     } else {
                     res.status(401).json({message: 'Password and Username does not match!!'})
                     }
-                })            
+                }).catch(err => console.log('Bcrypt login error---------', err));         
             }        
-        })
+        }).catch(err => console.log('findUser database error---------', err));
     },
     logout: (req, res) => {
         req.session.destroy();
@@ -72,7 +72,7 @@ module.exports = {
             dbInstance.verify_email(userData.verification_link).then(verifiedUser => {
                 req.session.user = verifiedUser[0];
                 res.json({message: 'Account Verified!!'});
-            })
-        })
+            }).catch(err => console.log('Verify Email Database error---------', err));
+        }).catch(err => console.log('Email Verification Link error-------', err));
     }
 }

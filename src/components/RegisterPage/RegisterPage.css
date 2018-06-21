@@ -1,14 +1,10 @@
 .container-div.register {
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100vh;
+    display: grid;
+    grid-template-columns: 10% 30% 20% 30% 10%;
 }
 
 .title.register {
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: -20px;
+    width: 95vw;
+    text-align: center;
+    margin: 50px;
 }

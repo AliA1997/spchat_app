@@ -12,15 +12,20 @@ import PostsPage from './components/PostsPage/PostsPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import SportsPage from './components/SportsPage/SportsPage';
 import ErrorNotFoundPage from './components/ErrorNotFoundPage/ErrorNotFoundPage';
+import Admin from './components/Admin/Admin';
 import PostPage from './components/PostPage/PostPage';
+import EditProfilePage from './components/EditProfilePage/EditProfilePage';
+
 
 export default (
     <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/users' component={UsersPage} />        
-        <Route path='/register/:registration_id' component={RegisterPage} />
+        <Route exact path='/register' component={RegisterPage} />
+        <Route exact path='/admin' component={Admin} />
+        <Route path='/edit_profile' component={EditProfilePage} />
         <Route path='/email_verification' component={VerificationPage} />        
-        <Route path='/login' component={LoginPage}/>
+        <Route exact path='/login' component={LoginPage}/>
         <Route exact path='/posts' component={PostsPage} />
         <Route path='/posts/:sport/:post' component={PostPage}/>                      
         <Route exact path='/sports/:sport' component={SportsPage} />        

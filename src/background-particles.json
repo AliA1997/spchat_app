@@ -8,7 +8,7 @@
             "value": "#fff"
         },
         "shape": {
-            "type": "circle",
+            "type": "square",
             "height": 50,
             "width": 50
           },

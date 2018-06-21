@@ -1,0 +1,1 @@
+SELECT * FROM sp_chats WHERE post_id = $1;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PostForm from '../postSubComponents/PostForm/PostForm';
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 

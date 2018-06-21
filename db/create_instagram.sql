@@ -1,0 +1,1 @@
+INSERT INTO sp_social_media (instagram) VALUES ($1) WHERE user_id = $2;

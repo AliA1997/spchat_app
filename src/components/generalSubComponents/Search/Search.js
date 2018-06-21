@@ -1,25 +1,40 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import { doneSearch } from '../../../redux/reducers/searchReducer';
+import { connect } from 'react-redux';
 import FaSearch from 'react-icons/lib/fa/search';
 import './Search.css';
 
-export default class Search extends Component {
+class Search extends Component {
 
     render() {
         // const inSportsPage = window.location.href.includes('http://localhost:3000/sports/') ? true : false;
-        const inAccountsPage = window.location.href === 'http://localhost:3000/dashboard/account' ? true : false;
+        // const inAccountsPage = window.location.href.includes('http://localhost:3000/dashboard')
+        // ||  window.location.href === `http://localhost:3000/users` ? true : false;
+        const { dispatch, searchString } = this.props;
         // console.log('true or false---------', inAccountsPage);
         return (
             <div className='search-div'>
                 <div className='search-input'>
                     <input type='text' onChange={e => (this.props.search && this.props.search(e.target.value))}
-                    placeholder='Search........'/>
+                    onFocus={() => dispatch(doneSearch())} value={searchString}
+                    placeholder={window.location.href.includes('http://localhost:3000/dashboard')
+                    ||  window.location.href === `http://localhost:3000/users`  ? 'Search Users' : 'Search Posts'}/>
                 </div>
                 <div className='search-icon' 
-                onClick={() => this.props.linkFunc(inAccountsPage ? '/users' : '/posts')}>
+                onClick={() => this.props.linkFunc(window.location.href.includes('http://localhost:3000/dashboard')
+                ||  window.location.href === `http://localhost:3000/users` ? '/users' : '/posts')}>
                     <FaSearch />
                 </div>
             </div>
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        searchString: state.search.searchString
+    }
+}
+
+export default connect(mapStateToProps)(Search);

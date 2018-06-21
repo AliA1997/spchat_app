@@ -1,0 +1,9 @@
+.edit-profile-container {
+    width: 80%;
+    height: 80%;
+    z-index: 4;
+    background: black;
+    border: 2px solid #fff;
+    margin-left: auto;
+    margin-right: auto;
+}
