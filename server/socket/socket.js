@@ -1,9 +1,9 @@
-module.exports = (io, Posts, db) => {
+module.exports = async (io, Posts, db) => {
     const posts = new Posts();
     const topicUsers = [];
     // let currentMessages = [];
     // let chatExist = false;
-    io.sockets.on('connection', (socket) => {
+    await io.sockets.on('connection', (socket) => {
         console.log('Socket connected!!!', socket.id);
         // console.log('db-----------', db)
         const filteredUser = socket.handshake.query.username !== 'Anonymous' && topicUsers.filter(user => user === socket.handshake.query.username);
@@ -11,7 +11,9 @@ module.exports = (io, Posts, db) => {
         socket.on('room', () => {
             if(socket.handshake.query.topic) {
                 console.log('socket id---------', socket.id);
-                db.find_chat(+socket.handshake.query.post_id).then(chatResponse => {
+                console.log('post id-----------', socket.handshake.query.post_id);
+                db.find_chat(socket.handshake.query.post_id).then(chatResponse => {
+                    console.log('chatResponse--------------', chatResponse);
                     if(!chatResponse.length) {
                         posts.AddPostData(socket.id, socket.handshake.query.topic, +socket.handshake.query.post_id, []);
                         console.log('socket joined--------', socket.handshake.query.topic);
@@ -60,9 +62,9 @@ module.exports = (io, Posts, db) => {
             let room = posts.RemovePost(socket.id);
             let postsList = posts.GetPostList(room);
             console.log('postsList----------', postsList);
-            // console.log('currentMessages--------------', currentMessages);
+            console.log('currentMessages--------------', postsList.messages);
             // console.log('db-------------', db);
-            db.create_chat({post_id: postsList.post_id, messages: posts.messages}).then(posts => {
+            db.create_chat({post_id: socket.handshake.query.post_id, messages: posts.messages}).then(posts => {
                 console.log('Chat Created Successfully!');
             }).catch(err => console.log('Database create chat error--------', err));
             io.in(room).emit('SEND_USER', postsList);

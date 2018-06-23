@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getTime } from '../../../logic';
+import './EditPost.css';
 // import { editPost } from '../../../redux/reducer';
 
 
@@ -129,9 +130,10 @@ class EditPost extends Component {
                 </select>
                 <div className='selected-tags-div'>
                     {selectedTags && selectedTags.map((sTag, i) => <div key={i} className='selected-tag-div'>{sTag}</div>)}
-                </div>
-                <button type='submit'>Edit Post</button><br />
-                {this.state.meesage}
+                </div><br />
+                <div className='edit-post div'>
+                    <button type='submit' className='edit-post btn'>Edit Post</button>
+                </div><br/>
             </form>
         );
     }

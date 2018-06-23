@@ -1,8 +1,9 @@
-[
+  [
     {
       "teamId": 1610612737,
       "code": "ATL",
       "name": "Atlanta Hawks",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742369/profile-picture/atlanta_hawks-logo.png",
       "simpleName": "Hawks",
       "location": "Atlanta"
     },
@@ -10,6 +11,7 @@
       "teamId": 1610612738,
       "code": "BOS",
       "name": "Boston Celtics",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742369/profile-picture/boston_celtics-logo.png",
       "simpleName": "Celtics",
       "location": "Boston"
     },
@@ -17,6 +19,7 @@
       "teamId": 1610612751,
       "code": "BKN",
       "name": "Brooklyn Nets",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/brooklyn_nets-logo.png",
       "simpleName": "Nets",
       "location": "Brooklyn"
     },
@@ -24,6 +27,7 @@
       "teamId": 1610612766,
       "code": "CHA",
       "name": "Charlotte Hornets",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/charlotte_hornets-logo.png",
       "simpleName": "Hornets",
       "location": "Charlotte"
     },
@@ -31,6 +35,7 @@
       "teamId": 1610612741,
       "code": "CHI",
       "name": "Chicago Bulls",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/chicago_bulls-logo.png",
       "simpleName": "Bulls",
       "location": "Chicago"
     },
@@ -38,6 +43,7 @@
       "teamId": 1610612739,
       "code": "CLE",
       "name": "Cleveland Cavaliers",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/cleveland_cavaliers-logo.png",    
       "simpleName": "Cavaliers",
       "location": "Cleveland"
     },
@@ -45,6 +51,7 @@
       "teamId": 1610612742,
       "code": "DAL",
       "name": "Dallas Mavericks",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/dallas_mavericks-logo.png",      
       "simpleName": "Mavericks",
       "location": "Dallas"
     },
@@ -52,6 +59,7 @@
       "teamId": 1610612743,
       "code": "DEN",
       "name": "Denver Nuggets",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/denver_nuggets-logo.png",
       "simpleName": "Nuggets",
       "location": "Denver"
     },
@@ -59,6 +67,7 @@
       "teamId": 1610612765,
       "code": "DET",
       "name": "Detroit Pistons",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742371/profile-picture/detroit_pistons-log.png",
       "simpleName": "Pistons",
       "location": "Detroit"
     },
@@ -66,6 +75,7 @@
       "teamId": 1610612744,
       "code": "GSW",
       "name": "Golden State Warriors",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/golden_state_warriors-logo.png",
       "simpleName": "Warriors",
       "location": "Golden State"
     },
@@ -73,6 +83,7 @@
       "teamId": 1610612745,
       "code": "HOU",
       "name": "Houston Rockets",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/houston_rockets-logo.png",
       "simpleName": "Rockets",
       "location": "Houston"
     },
@@ -80,6 +91,7 @@
       "teamId": 1610612754,
       "code": "IND",
       "name": "Indiana Pacers",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/indiana_pacers-logo.png",
       "simpleName": "Pacers",
       "location": "Indiana"
     },
@@ -87,6 +99,7 @@
       "teamId": 1610612746,
       "code": "LAC",
       "name": "Los Angeles Clippers",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/los_angeles_clippers-logo.png",
       "simpleName": "Clippers",
       "location": "Los Angeles"
     },
@@ -94,6 +107,7 @@
       "teamId": 1610612747,
       "code": "LAL",
       "name": "Los Angeles Lakers",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/los_angeles_lakers-logo.png",
       "simpleName": "Lakers",
       "location": "Los Angeles"
     },
@@ -101,6 +115,7 @@
       "teamId": 1610612763,
       "code": "MEM",
       "name": "Memphis Grizzlies",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/memphis_grizzlies-logo.png",
       "simpleName": "Grizzlies",
       "location": "Memphis"
     },
@@ -108,6 +123,7 @@
       "teamId": 1610612748,
       "code": "MIA",
       "name": "Miami Heat",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/miami_heat-logo.png",
       "simpleName": "Heat",
       "location": "Miami"
     },
@@ -115,6 +131,7 @@
       "teamId": 1610612749,
       "code": "MIL",
       "name": "Milwaukee Bucks",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/milwaukee_bucks-logo.png",
       "simpleName": "Bucks",
       "location": "Milwaukee"
     },
@@ -123,12 +140,14 @@
       "code": "MIN",
       "name": "Minnesota Timberwolves",
       "simpleName": "Timberwolves",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/minnesota_timberwolves-logo.png",
       "location": "Minnesota"
     },
     {
       "teamId": 1610612740,
       "code": "NOP",
       "name": "New Orleans Pelicans",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/new_orleans_pelicans-logo.png",
       "simpleName": "Pelicans",
       "location": "New Orleans"
     },
@@ -136,6 +155,7 @@
       "teamId": 1610612752,
       "code": "NYK",
       "name": "New York Knicks",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/new_york_knicks-logo.png",
       "simpleName": "Knicks",
       "location": "New York"
     },
@@ -143,6 +163,7 @@
       "teamId": 1610612760,
       "code": "OKC",
       "name": "Oklahoma City Thunder",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/oklahoma_city_thunder-logo.png",
       "simpleName": "Thunder",
       "location": "Oklahoma City"
     },
@@ -150,6 +171,7 @@
       "teamId": 1610612753,
       "code": "ORL",
       "name": "Orlando Magic",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/orlando_magic-logo.png",
       "simpleName": "Magic",
       "location": "Orlando"
     },
@@ -157,6 +179,7 @@
       "teamId": 1610612755,
       "code": "PHI",
       "name": "Philadelphia 76ers",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/philadelphia_76ers-logo.png",
       "simpleName": "76ers",
       "location": "Philadelphia"
     },
@@ -164,6 +187,7 @@
       "teamId": 1610612756,
       "code": "PHX",
       "name": "Phoenix Suns",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/phoenix_suns-logo.png",
       "simpleName": "Suns",
       "location": "Phoenix"
     },
@@ -171,6 +195,7 @@
       "teamId": 1610612757,
       "code": "POR",
       "name": "Portland Trail Blazers",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742369/profile-picture/trail-blazers-logo.png",
       "simpleName": "Trail Blazers",
       "location": "Portland"
     },
@@ -178,6 +203,7 @@
       "teamId": 1610612758,
       "code": "SAC",
       "name": "Sacramento Kings",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/sacramento_kings-logo.png",
       "simpleName": "Kings",
       "location": "Sacramento"
     },
@@ -185,6 +211,7 @@
       "teamId": 1610612759,
       "code": "SAS",
       "name": "San Antonio Spurs",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/san_antonio_spurs-logo.png",
       "simpleName": "Spurs",
       "location": "San Antonio"
     },
@@ -192,6 +219,7 @@
       "teamId": 1610612761,
       "code": "TOR",
       "name": "Toronto Raptors",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/toronto_raptors-logo.png",
       "simpleName": "Raptors",
       "location": "Toronto"
     },
@@ -199,6 +227,7 @@
       "teamId": 1610612762,
       "code": "UTA",
       "name": "Utah Jazz",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/utah_jazz-logo.png",
       "simpleName": "Jazz",
       "location": "Utah"
     },
@@ -206,6 +235,7 @@
       "teamId": 1610612764,
       "code": "WAS",
       "name": "Washington Wizards",
+      "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/washington_wizards-logo.png",
       "simpleName": "Wizards",
       "location": "Washington"
     }

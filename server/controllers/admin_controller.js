@@ -1,5 +1,8 @@
 const nodemailerCtrl = require('./nodemailer_controller');
 module.exports = {
+    readAdminUser(req, res) {
+        res.status(200).json({message: 'Read Admin User'});
+    },
     readAdminUsers(req, res) {
         const dbInstance = req.app.get('db');
         dbInstance.read_admin_users()

@@ -9,7 +9,7 @@ module.exports = {
         const { twitter } = req.body;
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
-        dbInstance.createTwitter([twitter, id])
+        dbInstance.create_twitter([twitter, id])
         .then(response => {
             res.status(200).json({message: 'Twitter Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));

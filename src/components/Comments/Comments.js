@@ -51,8 +51,8 @@ class Comments extends Component {
             return (
                 <div className='comments-container-div'>
                     <h1>Comments</h1>
-                    <textarea onChange={e => this.changeTextArea(e.target.value)}
-                    className='create-comment-textarea' value={text} placeholder='Place comment here!'>
+                    <textarea onChange={e => this.changeTextArea(e.target.value)} max={200}
+                    className='create-comment-textarea' value={text} placeholder='Place comment here!' required>
                     </textarea>
                     <button className='create-comment-button'
                     onClick={() => this.createComment()}>Create<IoIosComposeOutline /></button>

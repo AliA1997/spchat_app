@@ -1,9 +1,25 @@
 .create-post-page-div > .title.create-post-form {
-    width: 75vw;
-    text-align: center;
+    display: flex;
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
     margin: 50px;
 }
-.create-post-page-div {
-    display: grid;
-    grid-template-columns: 10% 30% 20% 30% 10%;
+.create-post-page-wrapper {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (min-width: 720px) {
+    .create-post-page-div > .title.create-post-form {
+        font-size: 2em;
+    }
+}
+@media (min-width: 1200px) {
+    .create-post-page-div > .title.create-post-form  {
+        /* margin: 100px; */
+        padding: 100px;
+        font-size: 3em;
+    }
 }

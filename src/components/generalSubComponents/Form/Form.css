@@ -12,19 +12,41 @@
     margin-right: auto;    
     text-align: center;
 }
+.data-list-div {
+    margin-left:auto;
+    margin-right: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+.data-list-div > .input.register {
+    color: #fff;
+    width: 100%;
+}
+datalist {
+    color: #fff;
+}
+.data-list-div > button {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+.input.register.file {
+    border: 2px solid #fff;
+}
 .first-div.register {
     grid-column: 2/7;
     grid-row-start: 1;
     grid-row-end: 2;
 }
 .img-div.register {
+    padding: 10px;
     grid-row-start: 2;
     grid-row-end: 3;
     grid-column-start: 2;
     grid-column-end: 7;
     display: grid;
-    height: 75%;
-    grid-template-columns: 15% 15% 15% 10% 10% 15% 15% 10%;
+    grid-template-columns: 25% 25% 25% 25%;
 }
 .second-div.register {
     grid-row-start: 3;
@@ -45,15 +67,16 @@
     grid-row-end: 4;
 }
 .form.register > .img-div.register > .img.register {
-    grid-column-start: 3;
-    grid-column-end: 8;
-    width: 60%;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    width: 100%;
     border-radius: 50%;
 }
  .input.register {
     color: #fff;
     width: 80%;
-    height: 2em;
+    height: 3em;
+    font-size: 1.15em;
     background: transparent;
 }
 .form.register .first-div.register > p {
@@ -62,20 +85,40 @@
     justify-content: center;
     align-items: center;
 }
-
-.form.register > .select.register {
+.label.select.register {
+    display: flex;
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
+}
+.label-input {
+    display: flex;
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
+}
+.select.register {
     color: #fff;
     background: transparent;
+    display: inline-block;
     grid-column: 2/7;
-    height: 100%;
+    height: 3em;
+    font-size: 1.15em;
 }
+
 .register-form-favorite-teams-div {
+    margin: 10px;
     border: 2px solid #fff; 
     grid-column: 2/7;
     display: grid;
     grid-template-columns: 33% 33% 33%;
 }
+.register-form-favorite-teams-div > .team-card-wrapper  {
+    display: flex;
+    grid-column: 1/4;
+}
 .register-form-favorite-players-div {
+    margin: 10px;
     border: 2px solid #fff;
     grid-column: 2/7;
     display: grid;
@@ -83,11 +126,13 @@
 }
 .register-form-favorite-players-div > .player-card-wrapper {
     display: flex;
+    grid-column: 1/3;
 }
 
 .btn.register {
     margin: 20px;
     height: 10%;
+    padding: 20px;
     grid-column-start: 2;
     grid-column-end: 7;
     background: transparent;
@@ -102,4 +147,71 @@
 .btn.register:hover {
     background: #fff;
     color: black;
+}
+@media (min-width: 760px) {
+    .data-list-div {
+        margin-left:auto;
+        margin-right: auto;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    .data-list-div > .input.register {
+        width: 100%;
+    }
+    .input.register {
+        height: 2.25em;
+    }
+    .label-input {
+        font-size: 1.5em;
+    }
+    .select.register {
+        height: 2.25em;
+    }
+    .label.select.register {
+        font-size: 1.5em;
+    }
+    .register-form-favorite-teams-div {
+        margin: 20px;
+    }
+    .register-form-favorite-teams-div > .team-card-wrapper {
+        grid-column: auto;
+    }
+    .register-form-favorite-players-div {
+        margin: 20px;
+    }
+    .register-form-favorite-players-div > .player-card-wrapper {
+        grid-column: auto;
+    }
+}
+@media (min-width: 1200px) {
+    .data-list-div {
+        margin-left:auto;
+        margin-right: auto;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    .data-list-div > .input.register {
+        width: 100%;
+    }
+    .input.register {
+        height: 1.75em;
+    }
+    .label-input {
+        font-size: 1.15em;
+        margin: 10px;
+    }
+    .select.register {
+        height: 1.75em;
+    }
+    .label.select.register {
+        font-size: 1.15em;
+    }
+    .register-form-favorite-teams-div {
+        margin: 50px;
+    }
+    .register-form-favorite-players-div {
+        margin: 50px;
+    }
 }

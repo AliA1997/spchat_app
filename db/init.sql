@@ -1,17 +1,18 @@
 CREATE TABLE spchat_users (
     id SERIAL PRIMARY KEY, 
-    username VARCHAR(50) UNIQUE,
-    email VARCHAR(50) UNIQUE,
+    username VARCHAR(60) UNIQUE,
+    password TEXT,
+    email VARCHAR(60) UNIQUE,
     image VARCHAR(120),
-    age VARCHAR(5),
-    date_registered VARCHAR(50),
+    age VARCHAR(50),
+    date_registered VARCHAR(100),
     favorite_teams JSONB[],
-    favorite_players JSONB)[],
+    favorite_players JSONB[],
     favorite_sport VARCHAR(25)
     verified BOOLEAN,
-    verification_link VARCHAR(50),
-    chat_id INTEGER REFERENCES sp_chats(id),
-    survey_id INTEGER REFERENCES sp_surveys(id),
+    verification_link VARCHAR(100),
+    chat_id INTEGER REFERENCES sp_chats(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    survey_id INTEGER REFERENCES sp_surveys(id) ON DELETE CASCADE ON UPDATE CASCADE,
     survey_answer VARCHAR(60)[] REFERENCES sp_surveys(answers)
     isAdmin BOOLEAN
 );
@@ -22,15 +23,15 @@ CREATE TABLE spchat_users (
 
 CREATE TABLE sp_posts (
     id SERIAL PRIMARY KEY,    
-    user_id INTEGER REFERENCES users(id),
+    user_id INTEGER REFERENCES spchat_users(id) ON DELETE CASCADE ON UPDATE CASCADE,
     title VARCHAR(60) UNIQUE,
     description VARCHAR(200),
     image VARCHAR(200),
     date VARCHAR(100),
     tags VARCHAR(50)[],
-    free_throw INTEGER,
-    two_pointers INTEGER,
-    three_pointers INTEGER,
+    bronze INTEGER,
+    silver INTEGER,
+    gold INTEGER,
     total_points INTEGER,
     sport VARCHAR(25),
     chat_id INTEGER REFERENCES sp_chats(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -52,9 +53,9 @@ CREATE TABLE sp_chats (
 
 CREATE TABLE sp_surveys (
  id SERIAL PRIMARY KEY,
- topic VARCHAR(25),
- question VARCHAR(50),
- answers VARCHAR(50)[] UNIQUE
+ topic VARCHAR(100),
+ question VARCHAR(100),
+ answers VARCHAR(100)[] UNIQUE
 );
 
 --social media table 
@@ -80,3 +81,6 @@ CREATE TABLE "session" (
 )
 -- WITH (OIDS=FALSE);
 -- ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+----------INSERT STATEMENTS 
+INSERT INTO sp_posts (user_id, title, description, image, date, tags, bronze, silver, gold, total_points, sport) 
+VALUES (1, 'Init test', 'Init Description', 'INit cloudinary', 'asdasfljs', 'adsd, sdfslkj ,sfsfk;, afsfd', 0, 0, 0, 0, 'nba');

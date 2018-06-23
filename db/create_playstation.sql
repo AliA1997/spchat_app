@@ -1,1 +1,3 @@
-INSERT INTO sp_social_media (reddit) VALUES ($1) WHERE user_id = $2;
+UPDATE sp_social_media 
+SET playstation = $1
+WHERE user_id = $2;

@@ -1,26 +1,28 @@
 .home-div {
     background: none;
+    padding: 100px;
 }
 .home-subdiv {
-    display: flex;
+    /* display: flex; */
     margin-left: auto;
     margin-right: auto;
     height: 40vh;
     width: 80vw;
-    justify-content: space-evenly;
-    align-items: center;
+
     padding: 5%;
 }
 .home-subdiv > * {
     border: solid 1px #fff;
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
-    margin: 2%;
+    margin: 5%;
 }
 .home-login-div {
     display: grid;
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 33% 33% 33%;
+    width: 100%;
+    /* height: 100%; */
 }
 .home-login-subdiv {
     grid-column: 2/3;
@@ -49,4 +51,73 @@
     padding: 10px;
     grid-row: 4/5;
     border: 2px solid #fff;
+}
+
+.home-logout-link {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    padding: 10px;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: 800;
+}
+/* MObile Styling */
+@media (min-width: 760px) {
+        .home-subdiv {
+            height: 100%;
+            display: grid;
+            grid-template-rows: 50% 50%;
+            grid-template-columns: 50% 50%;
+        }
+
+        .home-stats-div {
+            grid-row: 1/1;
+            grid-column: 1/2;
+            height: 100%;
+            width: 80vw;
+        }
+        .home-survey-div {
+            grid-row: 2/2;
+            grid-column: 1/1;
+        }
+        .home-login-div {
+            grid-row: 2/2;
+            grid-column: 2/2;
+        }
+    .home-recent-posts-div {
+        margin: 50px;
+        border-bottom: 1px solid #fff;
+    }
+    .home-recent-posts-div > h3 {
+        font-size: 2em;
+    }
+}
+@media (min-width: 1200px) {
+    .home-subdiv {
+        grid-template-rows: 100%;
+        grid-template-columns: 33% 33% 33%;
+    }
+    .home-subdiv > * {
+        height: 100%;
+        width: 100%;
+    }
+    .home-stats-div {
+        grid-row: 1/1;
+        grid-column: 1/1;
+        height: 100%;
+        width: 80vw;
+    }
+    .home-survey-div {
+        grid-row: 1/1;
+        grid-column: 2/2;
+    }
+    .home-login-div {
+        grid-row: 1/1;
+        grid-column: 3/3;
+    }
+    .home-recent-posts-div > h3 {
+        font-size: 2.5em;
+    }
 }

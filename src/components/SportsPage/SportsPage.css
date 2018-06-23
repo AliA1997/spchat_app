@@ -1,44 +1,62 @@
-.sports-subdiv {
-    border: 2px solid #fff;
-    height: 40vh;
-    width: 33%;
-    margin: 20px;
-}
-.sports-logo {
-    grid-row-start: 1;
-    grid-row-end: 2;
-    width: 20vw;
-    background: transparent;
-}
-.sports-page-posts {
-    grid-row-start: 4;
-    grid-row-end: 6;
-}
-.sports-page-last-div {
-    display: flex;
-    height: 25vh;
-}
 .sports-page-container {
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 .sports-page-wrapper {
-    grid-column-start: 2;
-    grid-column-end:5;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+    width: 100%;
+    /* display: grid;
+    grid-template-rows: 25% 25% 25% 25%; */
 }
 .sports-logo {
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+    /* grid-row: 1/1; */
 }
-.news-container {
-    grid-row-start: 4;
-    grid-row-end: 7;
-    display: grid;
-    grid-template-rows: 10% 80% 10%;
+.sports-page-posts {
 }
 .sports-page-last-div {
-    grid-row-start: 8;
-    grid-row-end: 10;
-    grid-column-start: 2;
-    grid-column-end: 4;
+    /* border: 2px solid #fff; */
+}
+.sports-subdiv {
+    border: 2px solid #fff;
+    margin: 20px;
+}
+
+@media (min-width: 760px) {
+    .sports-page-container {
+        padding-top: 5%;
+    }
+    .sports-page-wrapper {
+        display: grid;
+        grid-template-rows: 25% 25% 25% 25%;
+    }
+    .sports-logo {
+        height: 15em;
+        width: 50%;
+        margin-top: 40px;
+    }
+    .sports-page-posts {
+        width: 100%;
+        height: 100%;
+    }
+    .sports-page-last-div {
+        display: flex;
+    }
+    .sports-subdiv {
+        margin: 40px;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .sports-page-container {
+        padding-top: 10%;
+    }
+
+    .sports-logo {
+        width: 30%;
+        margin-top: 75px;
+    }
 }

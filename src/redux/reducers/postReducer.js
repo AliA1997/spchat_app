@@ -17,6 +17,7 @@ const initialState = {
 const START_EDIT_COMMENT = 'START_EDIT_COMMENT';
 const END_EDIT_COMMENT = 'END_EDIT_COMMENT';
 const START_EDIT_POST = 'START_EDIT_POST'; 
+const END_EDIT_POST = 'END_EDIT_POST';
 const START_GET_POST = 'START_GET_POST';
 
 export default (state = initialState, action) => {
@@ -27,6 +28,8 @@ export default (state = initialState, action) => {
             return {...state, doEdit: false};
         case START_EDIT_POST:
             return {...state, doEditPost: true};
+        case END_EDIT_POST:
+            return {...state, doEditPost: false};
         case START_GET_POST:
             return {...state, currentPost: action.payload};
         default: 
@@ -58,9 +61,9 @@ export const editPost = () => {
         type: START_EDIT_POST,
     }
 }
-// export const doneEditPost = () => {
-//     return {
-//         type: END_EDIT_POST
-//     };
-// }
+export const doneEditPost = () => {
+    return {
+        type: END_EDIT_POST
+    };
+}
 

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './UsersPage.css';
 
 class UsersPage extends Component {
+
     render() {
         const { searchItems } = this.props;
         return (

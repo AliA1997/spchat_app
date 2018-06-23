@@ -6,7 +6,7 @@ const TeamCard = (props) => {
         <div className='team-card-div'>
             <div className='team-card-img-div'>
                 <img className='team-card-img'
-                src={props.teamImage} alt={props.name} />
+                src={props.logo} alt={props.name} />
             </div>
             <p>{props.name}</p>
         </div>

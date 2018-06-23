@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FaPlus from 'react-icons/lib/fa/plus';
 import TeamCard from '../../userSubComponents/TeamCard/TeamCard';
 import PlayerCard from '../../userSubComponents/PlayerCard/PlayerCard';
 import { loginUser } from '../../../redux/reducers/userReducer';
@@ -9,6 +10,15 @@ import nbaTeams from '../../../sports-data/nba-teams.json';
 import nbaPlayers from '../../../sports-data/nba-players.json';
 import './Form.css';
 import axios from 'axios';
+
+const filterNullValues = (obj, obj2) => {
+    for(let key in obj) {
+        if(!obj[key]) {
+            obj[key] = obj2[key];
+        }
+    }
+    return obj;
+}
 
 class Form extends Component {
     constructor() {
@@ -23,10 +33,32 @@ class Form extends Component {
             favoriteSport: '',
             age: '',
             ages: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            currentPlayer: '',
+            currentTeam: '',
             teams: nbaTeams,
             players: nbaPlayers,   
             sports: sportsOptions                               
         }
+    }
+    deletePlayer(playerName) {
+        //Copy the array 
+        let copyOfArr = this.state.favoritePlayers.slice();
+        const playerIndex = copyOfArr.findIndex(player => player.name === playerName);
+        copyOfArr.splice(playerIndex, 1);
+        this.setState({favoritePlayers: copyOfArr, currentPlayer: ''});
+    }
+    deleteTeam(teamName) {
+        //Copy the array 
+        let copyOfArr = this.state.favoriteTeams.slice();
+        const teamIndex = copyOfArr.findIndex(team => team.name === teamName);
+        copyOfArr.splice(teamIndex, 1);
+        this.setState({favoriteTeams: copyOfArr, currentTeam: ''});
+    }
+    handleCurrentPlayer(val) {
+        this.setState({currentPlayer: val});
+    }
+    handleCurrentTeam(val) {
+        this.setState({currentTeam: val});
     }
     hanRegUsername(val) {
         this.setState({username: val});
@@ -40,35 +72,26 @@ class Form extends Component {
     hanRegAge(val) {
         this.setState({age: val});
     }   
-    hanRegFavTeams(val) {
-        const concattedValue = nbaTeams.filter(team => team.name === val)[0];
-        console.log(concattedValue);
+    hanRegFavTeams(e) {
+        e.preventDefault();
+        // console.log('FavTeams hit---------')
+        const concattedValue = nbaTeams.filter(team => team.name === this.state.currentTeam)[0];
+        // console.log(concattedValue);
         const copyOfFavTeams = this.state.favoriteTeams.slice();
         this.setState({favoriteTeams: copyOfFavTeams.concat(concattedValue)});
     }    
 
-    hanRegFavPlayers(val) {
+    hanRegFavPlayers(e) {
+        e.preventDefault();
+        // console.log('FavTeams hit---------')
         const copyOfFavPlayers = this.state.favoritePlayers.slice();
-        const concattedValue = nbaPlayers.filter(player => player.name === val)[0]
-        this.setState({favoritePlayers: copyOfFavPlayers.concat(concattedValue)});
+        const concattedValue = nbaPlayers.filter(player => player.name === this.state.currentPlayer)[0]
+        this.setState({favoritePlayers: copyOfFavPlayers.concat(concattedValue), currentPlayer: ''});
     }    
 
     hanRegFavSport(val) {
         this.setState({favoriteSport: val});
     }    
-    register() {
-        const date = getTime();
-        const { username, email, image, password, age, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
-        const { dispatch } = this.props;
-        axios.post('/api/register', { username, email, image, password, age, date, favoriteTeams, favoritePlayers, favoriteSport })
-        .then(res => {
-            if(res.data.user) {
-                console.log(res.data.message);
-                dispatch(loginUser(res.data.user));
-            }
-        }).catch(err => console.log('Axios Post Error-------------', err));
-        this.props.redirect();
-    }
     
     handleImageUpload(files){
 
@@ -82,7 +105,7 @@ class Form extends Component {
 
         let formData = new FormData();
         formData.append("signature", response.data.payload.signature)
-        formData.append("api_key", "362976811768673");
+        formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY);
         formData.append("timestamp", response.data.payload.timestamp)
         formData.append("file", files[0]);
 
@@ -103,59 +126,90 @@ class Form extends Component {
             }) 
         })
     }     
+    register() {
+        const date = getTime();
+        const { username, email, image, password, age, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
+        const { dispatch } = this.props;
+        axios.post('/api/register', { username, email, image, password, age, date, favoriteTeams, favoritePlayers, favoriteSport })
+        .then(res => {
+            if(res.data.user) {
+                alert(res.data.message);
+                dispatch(loginUser(res.data.user));
+            }
+        }).catch(err => console.log('Axios Post Error-------------', err));
+        this.props.redirect();
+    }
+    updateProfile(e) {
+        e.preventDefault();
+        const { currentUser } = this.props;
+        const { username, email, image, age, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
+        const updatedDate = getTime() + '(Last Updated)';
+        let newObj = filterNullValues({ username, email, updatedDate, image, age, favoriteTeams, favoritePlayers, favoriteSport }, currentUser);
+        console.log(newObj);
+        axios.put('/api/users', newObj)
+        .then(res => {
+            alert(res.data.message);
+        }).catch(err => console.log('Axios Put Error--------', err));
+    }
     render() {
-        const { username, email, image, password, age, teams, players, sports, ages, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
+        const { currentPlayer, currentTeam, username, email, image, password, age, teams, players, sports, ages, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
         const { forEdit, currentUser } = this.props;
         return (
-            <form className='form register'>
+            <form className='form register' onSubmit={(e) => forEdit ? this.updateProfile(e) : this.register()}>
                 <div className='first-div register'>
-                    <p className='label register'>Username</p>
+                    <p className='label-input register'>Username</p>
                     <input type='text' className='input register' placeholder={forEdit && currentUser.username}
-                    onChange={e => this.hanRegUsername(e.target.value)} value={username} />
-                    <p className='label register'>Email</p>
-                    <input type='text' className='input register' placeholder={forEdit && currentUser.email}
-                    onChange={e => this.hanRegEmail(e.target.value)} value={email} />
+                    onChange={e => this.hanRegUsername(e.target.value)} value={username} min={6} max={40} required={!forEdit && true}/>
+                    <p className='label-input register'>Email</p>
+                    <input type='text' className='input register file' placeholder={forEdit && currentUser.email}
+                    onChange={e => this.hanRegEmail(e.target.value)} value={email} min={6} max={40} required={!forEdit && true}/>
                 </div>
                 <div className='img-div register'>
                     <img className='img register'
-                    src={image || 'https://via.placeholder.com/350x150'} alt={username} />   
+                    src={image || 'https://via.placeholder.com/350x150'} alt={username}  required={!forEdit && true}/>   
                 </div>
                 <div className='second-div register'>        
-                    <p className='label register'>Image</p>
+                    <p className='label-input register'>Image</p>
                     <input type='file' className='input register' 
-                    onChange={e => this.handleImageUpload(e.target.files)} />                
-                    <p className='label register'>Password</p>
-                    <input type='password' className='input register'
-                    onChange={e => this.hanRegPassword(e.target.value)} value={password} />     
+                    onChange={e => this.handleImageUpload(e.target.files)} required={!forEdit && true}/>                
+                    <p className='label-input register'>Password</p>
+                    {forEdit ? <button>Reset Password</button> 
+                    : <input type='password' className='input register' 
+                        onChange={e => this.hanRegPassword(e.target.value)} value={password} min={6} max={50} required={!forEdit && true}/>}     
                     <p className='label register select'>Age</p>
-                    <select className='select register'
-                    onChange={e => this.hanRegAge(e.target.value)} value={age}>
-                        {ages.map((a, i) => <option key={i}>{a}</option>)}
-                    </select>           
+                    <input className='input register' type='date' max='2005-06-01' />    
                     <p className='label register select'>Favorite Teams</p>
-                    <select className='select register'
-                    onChange={e => this.hanRegFavTeams(e.target.value)} value={favoriteTeams[favoriteTeams.length - 1] && favoriteTeams[favoriteTeams.length - 1].name}>
+                    <div className='data-list-div'>
+                        <input list='teams'  className='input register' onChange={e => this.handleCurrentTeam(e.target.value)} value={currentTeam}/>
+                        <button onClick={e => this.hanRegFavTeams(e)}><FaPlus /></button>
+                    </div>
+                    <datalist id='teams'
+                     value={favoriteTeams[favoriteTeams.length - 1] && favoriteTeams[favoriteTeams.length - 1].name} required={!forEdit && true}>
                         {teams.map((t, i) => <option key={i}>{t.name}</option>)}
-                    </select>
+                    </datalist>
                     <p className='label register select'>Favorite Players</p>
-                    <select className='select register'
-                    onChange={e => this.hanRegFavPlayers(e.target.value)} value={favoritePlayers[favoritePlayers.length - 1] && favoritePlayers[favoritePlayers.length - 1].name}>
+                    <div className='data-list-div'>
+                        <input list='players'  className='input register' onChange={e => this.handleCurrentPlayer(e.target.value)} value={currentPlayer}/>
+                        <button onClick={(e) => this.hanRegFavPlayers(e)}><FaPlus /></button>
+                    </div>
+                    <datalist id='players' 
+                    value={favoritePlayers[favoritePlayers.length - 1] && favoritePlayers[favoritePlayers.length - 1].name} required={!forEdit && true}>
                         {players.map((player, i) => <option key={i}>{player.name}</option>)}
-                    </select>
+                    </datalist>
                     <p className='label register select'>Favorite Sport</p>
                     <select className='select register'
-                    onChange={e => this.hanRegFavSport(e.target.value)} value={favoriteSport}>
+                    onChange={e => this.hanRegFavSport(e.target.value)} value={favoriteSport} required={!forEdit && true}>
                         {sports.map((sport, i) => <option key={i}>{sport.name}</option>)}
                     </select>
                     <div className='register-form-favorite-teams-div'>
-                        {favoriteTeams && favoriteTeams.map((team, i) => <div className='team-card-wrapper'><TeamCard key={i} {...team} /></div>)}
+                        {favoriteTeams && favoriteTeams.map((team, i) => <div className='team-card-wrapper' key={i} onClick={() => this.deleteTeam(team.name)}><TeamCard key={i} {...team} /></div>)}
                     </div>
                     <div className='register-form-favorite-players-div'>                    
-                        {favoritePlayers && favoritePlayers.map((player, i) => <div className='player-card-wrapper'><PlayerCard key={i} {...player} /></div>)}
+                        {favoritePlayers && favoritePlayers.map((player, i) => <div className='player-card-wrapper' key={i} onClick={() => this.deletePlayer(player.name)}><PlayerCard key={i} {...player} /></div>)}
                     </div>
                 </div>
                 <div className='btn-div register'>
-                    <button onClick={() => this.register()} className='btn register'>Register</button>
+                    <button type='submit' className='btn register'>{forEdit ? 'Edit Profile' : 'Register'}</button>
                 </div>
             </form>
         );

@@ -1,1 +1,3 @@
-INSERT INTO sp_social_media (snapchat) VALUES ($1) WHERE user_id = $2;
+UPDATE sp_social_media 
+SET snapchat = $1
+WHERE user_id = $2;

@@ -67,10 +67,9 @@ class Post extends Component {
                         <div className='post-tags-div'>
                             {this.props.tags && this.props.tags.map((tag, i) => <p key={i} className='post-tag'>{tag}</p>)}
                         </div>
-                        <p className='post-description'>{displayDescription}</p>       
                     </div>
                 </div>
-                <button style={{display: this.state.isInDashboard ? 'inline-block' : 'none'}}
+                <button className='edit-post delete-button' style={{display: this.state.isInDashboard ? 'inline-block' : 'none'}}
                     onClick={(e) => this.deletePost(e)}>Delete</button>
             </div>
         );

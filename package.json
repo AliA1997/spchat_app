@@ -16,6 +16,7 @@
     "helmet": "^3.12.1",
     "massive": "^5.0.0",
     "material-ui": "^0.20.1",
+    "mysportsfeeds-node": "^1.0.0",
     "nodemailer": "^4.6.5",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",

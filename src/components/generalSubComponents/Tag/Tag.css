@@ -1,3 +1,10 @@
+
+
+    .tag-remove-icon {
+        font-size: 0.75em;
+        margin: 5px;
+    }
+
 @media (min-width: 960px) {
     .tag {
         border: 2px solid #fff;

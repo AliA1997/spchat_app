@@ -10,7 +10,16 @@ import UsersPage from './components/UsersPage/UsersPage';
 import CreatePostPage from './components/CreatePostPage/CreatePostPage';
 import PostsPage from './components/PostsPage/PostsPage';
 import Dashboard from './components/Dashboard/Dashboard';
-import SportsPage from './components/SportsPage/SportsPage';
+import FavoriteNewsPage from './components/FavoriteNewsPage/FavoriteNewsPage';
+//Sports Component 
+import NBA from './components/sportsComponents/NBA';
+import NFL from './components/sportsComponents/NFL';
+import MLB from './components/sportsComponents/MLB';
+import NHL from './components/sportsComponents/NHL';
+import LaLiga from './components/sportsComponents/LaLiga';
+import PremierLeague from './components/sportsComponents/PremierLeague';
+import FIFA from './components/sportsComponents/Fifa';
+
 import ErrorNotFoundPage from './components/ErrorNotFoundPage/ErrorNotFoundPage';
 import Admin from './components/Admin/Admin';
 import PostPage from './components/PostPage/PostPage';
@@ -27,13 +36,22 @@ export default (
         <Route path='/email_verification' component={VerificationPage} />        
         <Route exact path='/login' component={LoginPage}/>
         <Route exact path='/posts' component={PostsPage} />
-        <Route path='/posts/:sport/:post' component={PostPage}/>                      
-        <Route exact path='/sports/:sport' component={SportsPage} />        
+        <Route path='/posts/:sport/:post' component={PostPage}/>    
+                          
+        <Route exact path='/sports/nba' component={NBA} />     
+        <Route exact path='/sports/nfl' component={NFL} />     
+        <Route exact path='/sports/nhl' component={NHL} />     
+        <Route exact path='/sports/mlb' component={MLB} />     
+        <Route exact path='/sports/premier-league' component={PremierLeague} />     
+        <Route exact path='/sports/la-liga' component={LaLiga} />
+        <Route exact path='/sports/fifa' component={FIFA} />     
+
         <Route path='/:post/chat/:chatId' component={ChatPage}/>   
         <Route exact path='/chat/:sportId' component={ChatPage} />     
         <Route exact path='/dashboard' component={Dashboard} />
-        <Route path='/dashboard/account' component={UserPage} />
-        <Route path='/dashboard/create-post' component={CreatePostPage} />     
+        <Route path='/users/:id' component={UserPage} />
+        <Route path='/dashboard/create-post' component={CreatePostPage} />    
+        <Route path='/dashboard/favorite-news' component={FavoriteNewsPage} /> 
         <Route component={ErrorNotFoundPage} />
     </Switch>
 );

@@ -8,6 +8,7 @@
     position: relative;
   }
   .slideshow-slides {
+    margin: 10%;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -24,6 +25,7 @@
     opacity: 1;
   }
   .slide-figure {
+    margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
     height: 100%;

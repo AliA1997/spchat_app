@@ -26,14 +26,21 @@
     grid-row-end: 2;
 }
 .post-page-image-div {
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     justify-content: center;
     grid-row-start: 2;
     grid-row-end: 4;
     grid-column-start: 3;
     grid-column-end: 5;
+    width: 80%;
+    height: 50%;
 }
-
+.post-page-image {
+    height: 100%;
+    width: 100%;
+}
 .post-page-user-info-wrapper {
     display: flex;
     justify-content: center;

@@ -7,15 +7,23 @@ module.exports = {
         res.status(200).json({posts})
     }).catch(err => console.log('Read Post DB Error-----------', err));
  },
- readPost: (req, res) => {
+ readRecentPosts: (req, res) => {
+     const dbInstance = req.app.get('db');
+     dbInstance.read_recent_posts()
+     .then(posts => {
+         res.status(200).json({posts});
+     }).catch(err => console.log('Read Recent Posts DB Error---------', err));
+ },
+readPost(req, res) {
     const dbInstance = req.app.get('db');
-    const { post_id } = req.params;
-    // console.log('----post id', post_id);
-    dbInstance.read_post(post_id).then(post => {
+    const { id } = req.params;
+    console.log('----post id', id);
+    return dbInstance.read_post(post_id).then(post => {
+        console.log('post------------', post);
         res.status(200).json({post});
     }).catch(err => console.log('Database Get Post Error---------', err));
  },
- readPostBySport: (req, res) => {
+ readPostBySport(req, res) {
     const dbInstance = req.app.get('db');
     const { sport } = req.params;
     console.log('Sport endpoint parameter--------', sport.toUpperCase());
@@ -24,7 +32,7 @@ module.exports = {
         res.status(200).json({posts});
     }).catch(err => console.log('Database Get Sport Post Error---------', err));
 },
- readUserPosts: (req, res) => {
+ readUserPosts(req, res) {
      console.log('readUserPosts hit-------');
     //  console.log('req.session.user-----------', req.session.user);
      const dbInstance = req.app.get('db');
@@ -42,15 +50,19 @@ module.exports = {
  readUserPostBySport: (req, res) => {
 
  },
- createPost: (req, res) => {
+ createPost(req, res) {
     const dbInstance = req.app.get('db');
-    const { user_id, title, description, date, imageurl, sport, selectedTags } = req.body;
-    dbInstance.create_post({ user_id, title, description, date, imageurl, sport, tags: selectedTags })
-    .then(post => {
-        res.status(200).json({message: 'Post Created Successfully!'});
-    }).catch(err => console.log('Database Post Error----------', err));
+    const { id } = req.session.user;
+    const { title, description, date, imageurl, sport, selectedTags } = req.body;
+    console.log('user_id---------------', id);
+    if(id) {
+        dbInstance.create_post({ user_id: id, title, description, date, imageurl, sport, tags: selectedTags })
+        .then(post => {
+            res.status(200).json({message: 'Post Created Successfully!'});
+        }).catch(err => console.log('Database Post Error----------', err));
+    }
  },
- updatePost: (req, res) => {
+ updatePost(req, res) {
     const dbInstance = req.app.get('db');
     const { id, title, description, imageurl, date, sport, selectedTags } = req.body;
     console.log(id)
@@ -59,7 +71,7 @@ module.exports = {
         res.status(200).json(post);
     }).catch(err => console.log('Database Post Update Error----------', err));
  }, 
- updatePoints: (req, res) => {
+ updatePoints(req, res) {
     const dbInstance = req.app.get('db');
     const { points, post_id } = req.body;
     console.log('poits------------', points);
@@ -78,7 +90,7 @@ module.exports = {
         }).catch(err => console.log('Database patch post error----------', err));
     }
  },
- deletePost: (req, res) => {
+ deletePost(req, res) {
     const dbInstance = req.app.get('db');
     const { id, user_id } = req.body;
     console.log('id---------', id);

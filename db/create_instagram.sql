@@ -1,1 +1,3 @@
-INSERT INTO sp_social_media (instagram) VALUES ($1) WHERE user_id = $2;
+UPDATE sp_social_media 
+SET instagram = $1
+WHERE user_id = $2;

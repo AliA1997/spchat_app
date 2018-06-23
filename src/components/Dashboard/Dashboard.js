@@ -6,10 +6,12 @@ import Post from '../postSubComponents/Post/Post';
 import EditPost from '../postSubComponents/EditPost/EditPost';
 import PlayerCard from '../userSubComponents/PlayerCard/PlayerCard';
 import TeamCard from '../userSubComponents/TeamCard/TeamCard';
-import { editPost } from '../../redux/reducers/postReducer';
+import SocialMediaSection from '../userSubComponents/SocialMediaSection/SocialMediaSection';
+import { editPost, doneEditPost } from '../../redux/reducers/postReducer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import defaultPicture from '../../imgs/default-picture.jpg';
+import GoGear from 'react-icons/lib/go/gear';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -18,6 +20,7 @@ class Dashboard extends Component {
         this.state = {
             loading: true,
             posts: [],
+            isProfile: false,
             edit: true
         }
     }
@@ -28,9 +31,13 @@ class Dashboard extends Component {
         if(currentUser) {
             axios.get('/api/user-posts')
             .then(res => {
+                console.log('Axios hit-------');
                 console.log(res.data.posts);
                 this.setState({posts: res.data.posts, loading: false});
             }).catch(err => console.log('Axios get user posts error---------', err));
+            window.location.href === `http://localhost:3000/dashboard` 
+            ? this.setState({isProfile: true}) 
+            : this.setState({isProfile: false});
         } else {
             this.setState({loading: false});
         }
@@ -48,6 +55,9 @@ class Dashboard extends Component {
 
         }
     }
+    linkFunc(path) {
+        this.props.history.push(path);
+    }
     reRender = () => {
         this.setState({loading: true});
         axios.get('/api/user-posts')
@@ -60,7 +70,7 @@ class Dashboard extends Component {
     render() {
             const { currentUser, currentPost, doEditPost } = this.props;
             const { dispatch } = this.props;
-            const { posts, loading } = this.state;
+            const { posts, loading, isProfile } = this.state;
             console.log('doEditPost------------', doEditPost);
             console.log('posts dashboard----------------', posts)
             if(!loading) {
@@ -72,9 +82,11 @@ class Dashboard extends Component {
                                     <img className='dashboard-user-img' 
                                     src={currentUser.image || defaultPicture} alt={currentUser.username} />
                                     <p>{currentUser.username && currentUser.username}</p>
+                                    <GoGear onClick={() => this.linkFunc(`/edit_profile`)} className='gear' style={{display: isProfile ? 'inline-block' : 'none'}}/>
                                 </div>
                                 <div className='dashboard-user-info-div'>
                                     <div className='dashboard-user-info-wrapper'>
+                                        <SocialMediaSection />
                                         <p className='dashboard-user-info-text'>
                                         Email: {currentUser.email && currentUser.email}
                                         </p>
@@ -84,9 +96,12 @@ class Dashboard extends Component {
                                         <p className='dashboard-user-info-text'>
                                         Favorite League: {currentUser.favorite_sport && currentUser.favorite_sport}
                                         </p>
+                                        
+                                        <p className='dashboard-user-info-text'>Favorite Players: </p>
                                         {currentUser.favorite_players && currentUser.favorite_players.map((player, i) => {
                                             return <PlayerCard key={i} {...player} />
                                         })}
+                                        <p className='dashboard-user-info-text'>Favorite Players: </p>
                                         {currentUser.favorite_teams && currentUser.favorite_teams.map((team, i) => {
                                             return <TeamCard key={i} {...team} />
                                         })}
@@ -99,8 +114,10 @@ class Dashboard extends Component {
                                     <div className='dashboard-post-wrapper'>
                                         <Post {...post} reRender={this.reRender} 
                                         user_image={currentUser.image} username={currentUser.username}/>
-                                        <button onClick={() => dispatch(editPost())}>Edit</button>
-                                        <div style={{display: doEditPost ? 'inline-block' : 'none'}}>
+                                        <button className='dashboard btn' onClick={() => doEditPost ? dispatch(doneEditPost()) : dispatch(editPost())}>
+                                            Edit
+                                        </button>
+                                        <div className='dashboard-edit-post-wrapper' style={{display: doEditPost ? 'inline-block' : 'none'}}>
                                             <EditPost reRender={this.reRender}  {...post} />
                                         </div>
                                     </div>

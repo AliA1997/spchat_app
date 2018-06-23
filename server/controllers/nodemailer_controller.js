@@ -54,5 +54,23 @@ module.exports = {
             if(err) console.log('Warning Mail Error------', err);
             console.log('Warning is successful-----------', data);
         })
+    },
+    sendUpdate(email, updatedText, link) {
+        console.log('Email----------', email);
+        let mailOptions = {
+            from: `smtp:${process.env.ADMIN_EMAIL_ADDRESS}`,
+            to: email,
+            subject: 'Update',
+            html:  `<div style={background: transparent}>
+                        <p>${updatedText}</p>
+                        <a style={text_decoration: none, color: blue} href=${link}>
+                            See Changes
+                        </a>
+                    </div>`
+        };
+        transporter.sendMail(mailOptions, (err, data) => {
+            if(err) console.log('Update Mail Error---------', err);
+            console.log('Update Mail is successful!');
+        })
     }
 }

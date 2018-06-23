@@ -8,7 +8,7 @@ import './Chat.css';
 
 
 class Chat extends Component {
-    constructor(props) {
+     constructor(props) {
         super(props);
         this.state = {
             users: [],
@@ -24,7 +24,6 @@ class Chat extends Component {
         //     id: props.id
         // }
         this.socket = io('/', {query: `username=${currentUser ? currentUser.username : 'Anonymous'}&topic=${props.topic}&post_id=${props.postId}&imageurl=${currentUser ? currentUser.image :'https://www.androidpolice.com/wp-content/uploads/2013/04/nexusae0_googlenow_help_avatar_thumb.png'}`});
-        this.socket.emit('room');
         console.log('--------room prop', props.topic);
         this.sendMessage = (val) => {
             console.log(val);
@@ -55,6 +54,7 @@ class Chat extends Component {
             // console.log('TYPING event emitter hit----------', this.state.typing);
             // console.log('Typing message---------', this.state.typingMessage);
         })
+        this.socket.emit('room');
     }
     handleChange(val) {
         const { currentUser } = this.props;

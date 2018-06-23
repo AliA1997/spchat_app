@@ -7,10 +7,23 @@ module.exports = {
         res.status(200).json({message: 'read users'});
     },
     readUser: (req, res) => {
-        res.status(200).json({message: 'read user'});
+        const dbInstance = req.app.get('db');
+        const { id } = req.params;
+        dbInstance.read_user(id)
+        .then(user => {
+            res.status(200).json({user});
+        }).catch(err => console.log('Read User Database Error-----------', err));
+    },
+    readUsersPosts: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { id } = req.params;
+        dbInstance.read_users_posts(id)
+        .then(posts => {
+            res.status(200).json({posts});
+        }).catch(err => console.log('Database get users posts error------', err));
     },
     readUserData: (req, res) => {
-        console.log('Session--------', req.session.user);
+        // console.log('Session--------', req.session.user);
         res.status(200).json({user: req.session.user});
     },
     register: (req, res) => {
@@ -38,13 +51,23 @@ module.exports = {
             if(users.length) {
                 console.log('hit 1', users[0])
                 const userData = users[0];
+                const socialMediaArray = userData.social_media.split(' ');
+                for(let i = 0; i < socialMediaArray.length; i++) {
+                    if(socialMediaArray[i] === 'twitter' || socialMediaArray[i] === 'facebook' || socialMediaArray[i] === 'snapchat'
+                    || socialMediaArray[i] === 'twitchtv' || socialMediaArray[i] === 'playstation' || socialMediaArray[i] === 'xbox' ||
+                    socialMediaArray[i] === 'reddit' || socialMediaArray[i] === 'instagram') {
+                        socialMediaArray.splice(i, 1);
+                    }
+                }
+                // console.log('socialMedia-----------', socialMediaArray)
+                userData.social_media = socialMediaArray;
                 bcrypt.compare(password, userData.password).then(doPasswordsMatch => {
                     delete userData.password;
                     console.log('hit 2', doPasswordsMatch)
                     if(doPasswordsMatch) {
                         console.log('Hit 3')
-                        console.log('-------userData', userData);
                         req.session.user = userData;
+                        console.log('-------userData', req.session.user);
                         req.session.save();
                         console.log('b4 send session-----', req.session.user);
                         res.status(200).json({user: req.session.user});
@@ -60,7 +83,37 @@ module.exports = {
         res.status(200).json({message: 'Logout successfully!!'});
     },
     updateUser: (req, res) => {
-
+        const dbInstance = req.app.get('db');
+        const { id } = req.session.user;
+        console.log('-----------session', req.session.user);
+        const { username, email, image, age, updatedDate, favoriteTeams, favoritePlayers, favoriteSport } = req.body;
+        console.log('Updated Date----------', updatedDate);
+        if(id) {
+            dbInstance.update_user({ id, username, email, date: updatedDate, image, age, favoriteTeams, favoritePlayers, favoriteSport })
+            .then(updatedUser => {
+                console.log('Updated User-------------', updatedUser);
+                nodemailerCtrl.sendUpdate(email, 'Email just got updated!', `http://localhost:3000/users/${id}`);
+                res.status(200).json({user: updatedUser});
+            }).catch(err => console.log('Database Update User error---------', err));
+        }
+    },
+    resetPassword: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { username, password, newPassword } = req.body;
+        dbInstance.find_user(username)
+        .then(users => {
+            bcrypt.compare(password, users[0].password)
+            .then(doPasswordsMatch => {
+                if(doPasswordsMatch) {
+                    dbInstance.reset_password(newPassword)
+                    .then(updatedPassword => {
+                        res.status(200).json({message: 'Password Resetted!'});
+                    })
+                } else {
+                    res.status(404).json({message: 'Passwords do not match!!'});
+                }
+            })
+        })
     },
     emailVerification: (req, res) => {
         const dbInstance = req.app.get('db');

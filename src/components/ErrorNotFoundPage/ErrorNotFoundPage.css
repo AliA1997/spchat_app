@@ -1,15 +1,20 @@
 .error-not-found-container-div {
-    height: 100vh;
-    margin-top: 10%;
     width: 100vw;
+    height: 100vh;
+    padding: 2.5%;
 }
 .error-not-found-subtext {
-    font-size: 3em;
+    font-size: 1.25em;
     transform: scale(1.5);
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: -25px;
 } 
+.error-not-found-text {
+    font-size: 7em;
+}
+.not-found-img {
+    font-size: 5em;
+}
 .error-not-found-page-div {
     grid-row-start: 3;
     grid-row-end: 4;
@@ -19,9 +24,17 @@
     justify-content: center;
     align-items: center;
 }
-.error-not-found-text {
-    font-size: 15em;
+.error-not-found-wrapper {
+    margin-top: 10%;
 }
-.not-found-img {
-    font-size: 15em;
+@media(min-width: 760px){
+    .error-not-found-subtext {
+        font-size: 3em;
+    }
+    .error-not-found-text {
+        font-size: 15em;
+    }
+    .not-found-img {
+        font-size: 15em;
+    }
 }

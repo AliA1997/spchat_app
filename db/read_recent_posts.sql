@@ -1,0 +1,1 @@
+SELECT * FROM sp_posts ORDER BY total_points DESC LIMIT 5;

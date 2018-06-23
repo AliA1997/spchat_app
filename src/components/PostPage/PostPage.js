@@ -22,7 +22,16 @@ class PostPage extends Component {
             dispatch(getPost(res.data.post[0]));
             this.setState({loading: false});
         }).catch(err => console.log('Axios All Error!!!---------', err));
+        // this.retrieveData(this.props.match.params.post);
     }
+    // async retrieveData(post_id) {
+    //     const { dispatch } = this.props;
+    //     await axios.get(`/api/posts/${post_id}`).then(res => {
+    //         console.log('post----------', res.data.post);
+    //         // dispatch(getPost(res.data.post[0]));
+    //         this.setState({loading: false});
+    //     }).catch(err => console.log('Axios All Error!!!---------', err));
+    // }
     reRender = () => {
         const { dispatch } = this.props;
         axios.get(`/api/posts/${this.props.match.params.post}`).then(res => {
@@ -55,6 +64,7 @@ class PostPage extends Component {
         }).catch(err => console.log('Axios Patch Error---------', err));
     }
     render() {
+        console.log('currentPOst------------', currentPost)
         const { currentPost, currentUser } = this.props;
         const { loading } = this.state;
         console.log('--------', this.props.match);
@@ -72,16 +82,16 @@ class PostPage extends Component {
                             alt={currentPost && currentPost.title}/>
                         </div>
                         <div className='post-page-points-div'>
-                                <p>Bronze: {currentPost.bronze} 
+                                <p>Bronze: {currentPost ? currentPost.bronze : 0} 
                                     <FaTrophy className='bronze-trophy-icon trophy' onClick={() => this.addBronze(1)} />
                                 </p>
-                                <p>Silver: {currentPost.silver}
+                                <p>Silver: {currentPost ? currentPost.silver : 0}
                                     <FaTrophy className='silver-trophy-icon trophy' onClick={() => this.addSilver(2)} />
                                 </p>
-                                <p>Gold: {currentPost.gold}
+                                <p>Gold: {currentPost ? currentPost.gold : 0}
                                     <FaTrophy className='gold-trophy-icon trophy' onClick={() => this.addGold(3)} />
                                 </p>
-                                <p>Total Points: {currentPost.total_points}</p>
+                                <p>Total Points: {currentPost ? currentPost.total_points : 0}</p>
                         </div>
                         <div className='post-page-user-info-wrapper'>
                             <div className='post-page-user-info-social-icons'>
@@ -103,8 +113,8 @@ class PostPage extends Component {
                             {currentPost && currentPost.description}
                         </div>
                         <div className='post-page-chat-container-div'>
-                            <Chat topic={currentPost && currentPost.title} 
-                            postId={currentPost && currentPost.id}/>
+                            {/* <Chat topic={currentPost && currentPost.title} 
+                            postId={currentPost && currentPost.id}/> */}
                         </div>
                         <Comments postId={this.props.match.params.post}/>
                     </div>

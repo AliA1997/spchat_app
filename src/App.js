@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from './redux/reducers/userReducer';
@@ -10,7 +10,7 @@ import routes from './routes';
 import './App.css';
 // import { loginUser } from './redux/reducer';
 
-class App extends Component {
+class App extends PureComponent {
     componentDidMount() {
       const { dispatch } = this.props;
       axios.get('/api/user-data')

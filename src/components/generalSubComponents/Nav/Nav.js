@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import Search from '../Search/Search';
+import TiThSmall from 'react-icons/lib/ti/th-small';
 import { logoutUser } from '../../../redux/reducers/userReducer';
 import { getSearch } from '../../../redux/reducers/searchReducer';
 import { connect } from 'react-redux';
@@ -19,7 +20,11 @@ class Nav extends Component {
             clickedOther: false,
             clickedHome: false,
             searchPosts: [],
+            hamburgerClicked: false 
         }
+    }
+    componentDidMount() {
+        this.setState({hamburgerClicked: false});
     }
     linkFunc = (path) => {
         this.props.history.push(path);
@@ -65,7 +70,7 @@ class Nav extends Component {
         }
     }
     render() {
-        const { clickedHome, clickedFutbol, clickedOther, searchPosts } = this.state;
+        const { clickedHome, clickedFutbol, clickedOther, hamburgerClicked, searchPosts } = this.state;
         const { currentUser } = this.props;
         // console.log('Action method---------', this.props.history.action);
         return (
@@ -84,13 +89,13 @@ class Nav extends Component {
                 
                             <ul className='submenu-nav' style={{display: clickedHome ? 'inline-block' : 'none'}}>
                                     <li className='submenu-nav-item'>
-                                        <NavLink to='/dashboard/account'>Account</NavLink>
-                                    </li>
-                                    <li className='submenu-nav-item'>
                                         <NavLink to='/dashboard/create-post'>Create Post</NavLink>
                                     </li>                            
                                     <li className='submenu-nav-item'>
                                         <NavLink to='/dashboard'>My Dashboard</NavLink>
+                                    </li>
+                                    <li className='submenu-nav-item'>
+                                        <NavLink to='/dashboard/favorite-news'>Player Or Team News</NavLink>
                                     </li>
                             </ul>
                         </li>
@@ -123,62 +128,67 @@ class Nav extends Component {
                     </ul>
                 </nav>
                 <nav className='mobile mobile-main-nav'>
-                    <div className='mobile-search-bar'><Search search={this.search} searchPosts={searchPosts}/></div>
-                    <li onClick={() => this.setState({clickedHome: !this.state.clickedHome})}
-                        className='mobile-nav-submenu-item home'>
-                        <div className='mobile-nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ?
-                             <FaAngleDown  className='mobile-nav-icon'/> : <FaAngleUp  className='mobile-nav-icon'/>}
-            
-                        <ul className='mobile-submenu-nav' style={{display: clickedHome ? 'inline-block' : 'none'}}>
-                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/dashboard/account')}>
-                                    <div>Account</div>
+                    <div className='mobile stage' onClick={() => this.setState({hamburgerClicked: !this.state.hamburgerClicked})} >
+                            <figure className='mobile ball'><span className='shadow'></span></figure>
+                    </div>
+                    <div className='mobile mobile-main-nav-wrapper' style={{display: hamburgerClicked ? 'grid' : 'none'}}>
+                        <div className='mobile-search-bar'><Search search={this.search} searchPosts={searchPosts}/></div>
+                        <li onClick={() => this.setState({clickedHome: !this.state.clickedHome})}
+                            className='mobile-nav-submenu-item home'>
+                            <div className='mobile-nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ?
+                                <FaAngleDown  className='mobile-nav-icon'/> : <FaAngleUp  className='mobile-nav-icon'/>}
+                
+                            <ul className='mobile-submenu-nav' style={{display: clickedHome ? 'inline-block' : 'none'}}>
+                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/dashboard/account')}>
+                                        <p>Account</p>
+                                    </li>
+                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/dashboard/create-post')}>
+                                        <p>Create Post</p>
+                                    </li>                            
+                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/dashboard')}>
+                                        <p>My Dashboard</p>
+                                    </li>
+                            </ul>
+                        </li>
+                        <li className='mobile-nav-item mlb' onClick={() => this.linkFunc('/sports/mlb')}>MLB</li>
+                        <li className='mobile-nav-item nba' onClick={() => this.linkFunc('/sports/nba')}>NBA</li>
+                        <li className='mobile-nav-item nfl' onClick={() => this.linkFunc('/sports/nfl')}>NFL</li>
+                        <li className='mobile-nav-item nhl' onClick={() => this.linkFunc('/sports/nhl')}>NHL</li>
+                        <li  onClick={() => this.setState({clickedFutbol: !this.state.clickedFutbol})}
+                            className='mobile-nav-submenu-item futbol'>
+                            <div className='mobile-nav-item futbol'>Futbol</div>{clickedFutbol ?
+                                <FaAngleDown className='mobile-nav-icon'/> : <FaAngleUp className='mobile-nav-icon'/>}
+                            <ul className='mobile-submenu-nav' style={{display: clickedFutbol ? 'inline-block' : 'none'}}>
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/sports/premier-league')}>
+                                    <p>Premier League</p>
                                 </li>
-                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/dashboard/create-post')}>
-                                    <div>Create Post</div>
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/fifa`)}>
+                                    <p>FIFA</p>
                                 </li>                            
-                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/dashboard')}>
-                                    <div>My Dashboard</div>
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/la-liga`)}>
+                                    <p>La Liga</p>
                                 </li>
-                        </ul>
-                    </li>
-                    <li className='mobile-nav-item mlb' onClick={() => this.linkFunc('/sports/mlb')}>MLB</li>
-                    <li className='mobile-nav-item nba' onClick={() => this.linkFunc('/sports/nba')}>NBA</li>
-                    <li className='mobile-nav-item nfl' onClick={() => this.linkFunc('/sports/nfl')}>NFL</li>
-                    <li className='mobile-nav-item nhl' onClick={() => this.linkFunc('/sports/nhl')}>NHL</li>
-                    <li  onClick={() => this.setState({clickedFutbol: !this.state.clickedFutbol})}
-                        className='mobile-nav-submenu-item futbol'>
-                        <div className='mobile-nav-item futbol'>Futbol</div>{clickedFutbol ?
-                             <FaAngleDown className='mobile-nav-icon'/> : <FaAngleUp className='mobile-nav-icon'/>}
-                        <ul className='mobile-submenu-nav' style={{display: clickedFutbol ? 'inline-block' : 'none'}}>
-                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/sports/premier-league')}>
-                                <div>Premier League</div>
-                            </li>
-                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/fifa`)}>
-                                <div>FIFA</div>
-                            </li>                            
-                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/la-liga`)}>
-                                <div>La Liga</div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li onClick={() => this.setState({clickedOther: !this.state.clickedOther})}
-                    className='mobile-nav-submenu-item other'>
-                        <div className='mobile-nav-item other'>Other</div>{clickedOther ? <FaAngleDown /> : <FaAngleUp />}
-                        <ul className='mobile-submenu-nav' style={{display: clickedOther ? 'inline-block' : 'none'}}>
-                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}>
-                                <div>BMX</div>
-                            </li>
-                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}>
-                                <div>Skateboarding</div>
-                            </li>     
-                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}>
-                                <div>Snowboarding</div>
-                            </li>
-                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/skiing`)}>
-                                <div>Skiing</div>
-                            </li>           
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                        <li onClick={() => this.setState({clickedOther: !this.state.clickedOther})}
+                        className='mobile-nav-submenu-item other'>
+                            <div className='mobile-nav-item other'>Other</div>{clickedOther ? <FaAngleDown className='mobile-nav-icon' /> : <FaAngleUp  className='mobile-nav-icon' />}
+                            <ul className='mobile-submenu-nav' style={{display: clickedOther ? 'inline-block' : 'none'}}>
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}>
+                                    <p>BMX</p>
+                                </li>
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}>
+                                    <p>Skateboarding</p>
+                                </li>     
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}>
+                                    <p>Snowboarding</p>
+                                </li>
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/skiing`)}>
+                                    <p>Skiing</p>
+                                </li>           
+                            </ul>
+                        </li>
+                    </div>
                 </nav>
             </div>
         );

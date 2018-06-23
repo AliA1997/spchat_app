@@ -24,6 +24,7 @@ const userCtrl = require('./controllers/user_controller');
 const postCtrl = require('./controllers/post_controller');
 const commentsCtrl = require('./controllers/comments_controller');
 const searchCtrl = require('./controllers/search_controller');
+const statsCtrl = require('./controllers/stats_controller');
 const surveyCtrl = require('./controllers/survey_controller');
 const PORT = 9999;
 let socketDB;
@@ -33,14 +34,12 @@ app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(bodyParser.json());
 
-async function configureDatabase() {
-    await massive(process.env.CONNECTION_STRING).then(database => {
-        app.set('db', database);
-        socketDB = database;
-        // console.log('socketDB----------', socketDB);
-    }).catch(err => console.log('Massive Connection Error---------', err));
-}
-configureDatabase();
+massive(process.env.CONNECTION_STRING).then(database => {
+    app.set('db', database);
+    socketDB = database;
+    // console.log('socketDB----------', socketDB);
+}).catch(err => console.log('Massive Connection Error---------', err));
+
 app.use(session({
     
     store: session && new pgSession({
@@ -68,9 +67,11 @@ app.get('/api/users', userCtrl.readUsers);
 app.get('/api/user-data', userCtrl.readUserData);
 //Rare use case endpoint
 app.get('/api/users/:id', userCtrl.readUser);
+app.get('/api/posts/:id', userCtrl.readUsersPosts);
 
 //Get Postss Endpoints
 app.get('/api/posts', postCtrl.readPosts);
+app.get('/api/recent-posts', postCtrl.readRecentPosts);
 app.get('/api/user-posts', postCtrl.readUserPosts);
 app.get('/api/posts/:post_id', postCtrl.readPost);
 //Get Posts By SPorts Endpoints 
@@ -85,7 +86,11 @@ app.get('/api/survey/:sport_id', surveyCtrl.readSurvey);
 
 //Admin Get Endpoints
 app.get('/api/admin/users', adminCtrl.readAdminUsers);
+app.get('/api/admin/users/:id', adminCtrl.readAdminUser);
 app.get('/api/admin/posts', adminCtrl.readAdminPosts);
+
+//Stats Get Endpoints 
+app.get('/api/stats/:sport', statsCtrl.readStats);
 
 //Post User Endpoints
 app.post('/api/register', userCtrl.register);
@@ -113,6 +118,8 @@ app.post('/api/warning', adminCtrl.issueUserWarning);
 
 //Put User Endpoints 
 app.put('/api/users', userCtrl.updateUser);
+//REset User Endpoints 
+app.patch('/api/reset_password', userCtrl.resetPassword);
 //Verify User Endpoints 
 app.put('/email_verification', userCtrl.emailVerification);
 
