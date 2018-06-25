@@ -13,18 +13,19 @@ class Search extends Component {
         // ||  window.location.href === `http://localhost:3000/users` ? true : false;
         const { dispatch, searchString } = this.props;
         // console.log('true or false---------', inAccountsPage);
+        console.log(window.location.origin);
         return (
             <div className='search-div'>
                 <div className='search-input'>
                     <input type='text' onChange={e => (this.props.search && this.props.search(e.target.value))}
                     onFocus={() => dispatch(doneSearch())} value={searchString}
-                    placeholder={window.location.href.includes('http://localhost:3000/dashboard')
-                    ||  window.location.href === `http://localhost:3000/users`  ? 'Search Users' : 'Search Posts'}/>
+                    placeholder={window.location.href === '${window.location.origin}/dashboard'
+                    ||  window.location.href === `${window.location.origin}/users`  ? 'Clicked Button Search Users' : 'Clicked Button Search Posts'}/>
                 </div>
                 <div className='search-icon' 
-                onClick={() => this.props.linkFunc(window.location.href.includes('http://localhost:3000/dashboard')
-                ||  window.location.href === `http://localhost:3000/users` ? '/users' : '/posts')}>
-                    <FaSearch />
+                onClick={() => this.props.linkFunc(window.location.href === `${window.location.origin}/dashboard`
+                ||  window.location.href === `${window.location.origin}/users` ? '/users' : '/posts')}>
+                    <FaSearch className='icon-search'/>
                 </div>
             </div>
         );

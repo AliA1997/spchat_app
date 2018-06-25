@@ -1,7 +1,7 @@
 .post-main-div {
     display: flex;
     height: 50vh; 
-    width: 60vw;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;    
     color: #fff;
@@ -36,6 +36,7 @@
 }
 .post-container-div {
     display: flex;
+    width: 80vw;
     justify-content: space-around;
 }
 .post-container-div:hover {

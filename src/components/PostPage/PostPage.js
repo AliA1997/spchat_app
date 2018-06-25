@@ -18,7 +18,8 @@ class PostPage extends Component {
     componentDidMount() {
         console.log('id------------', this.props.match.params.post);
         const { dispatch } = this.props;
-        axios.get(`/api/posts/${this.props.match.params.post}`).then(res => {
+        axios.get(`/api/post/${this.props.match.params.post}`).then(res => {
+            console.log(res.data.post);
             dispatch(getPost(res.data.post[0]));
             this.setState({loading: false});
         }).catch(err => console.log('Axios All Error!!!---------', err));
@@ -34,7 +35,7 @@ class PostPage extends Component {
     // }
     reRender = () => {
         const { dispatch } = this.props;
-        axios.get(`/api/posts/${this.props.match.params.post}`).then(res => {
+        axios.get(`/api/post/${this.props.match.params.post}`).then(res => {
             dispatch(getPost(res.data.post[0]));
             this.setState({loading: false});
         }).catch(err => console.log('Axios All Error!!!---------', err));
@@ -64,8 +65,7 @@ class PostPage extends Component {
         }).catch(err => console.log('Axios Patch Error---------', err));
     }
     render() {
-        console.log('currentPOst------------', currentPost)
-        const { currentPost, currentUser } = this.props;
+        const { currentPost } = this.props;
         const { loading } = this.state;
         console.log('--------', this.props.match);
         console.log('id------------', this.props.match.params.post);
@@ -113,8 +113,8 @@ class PostPage extends Component {
                             {currentPost && currentPost.description}
                         </div>
                         <div className='post-page-chat-container-div'>
-                            {/* <Chat topic={currentPost && currentPost.title} 
-                            postId={currentPost && currentPost.id}/> */}
+                            <Chat topic={currentPost && currentPost.title} 
+                            postId={currentPost && currentPost.id}/>
                         </div>
                         <Comments postId={this.props.match.params.post}/>
                     </div>

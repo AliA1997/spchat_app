@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FaPlus from 'react-icons/lib/fa/plus';
 import TeamCard from '../../userSubComponents/TeamCard/TeamCard';
 import PlayerCard from '../../userSubComponents/PlayerCard/PlayerCard';
+import Popup from '../Popup/Popup';
 import { loginUser } from '../../../redux/reducers/userReducer';
 import { getTime } from '../../../logic';
 import { connect } from 'react-redux';
@@ -32,7 +33,6 @@ class Form extends Component {
             favoritePlayers: [],
             favoriteSport: '',
             age: '',
-            ages: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
             currentPlayer: '',
             currentTeam: '',
             teams: nbaTeams,
@@ -40,6 +40,7 @@ class Form extends Component {
             sports: sportsOptions                               
         }
     }
+
     deletePlayer(playerName) {
         //Copy the array 
         let copyOfArr = this.state.favoritePlayers.slice();
@@ -141,78 +142,141 @@ class Form extends Component {
     }
     updateProfile(e) {
         e.preventDefault();
-        const { currentUser } = this.props;
+        const { currentUser, dispatch } = this.props;
         const { username, email, image, age, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
         const updatedDate = getTime() + '(Last Updated)';
-        let newObj = filterNullValues({ username, email, updatedDate, image, age, favoriteTeams, favoritePlayers, favoriteSport }, currentUser);
-        console.log(newObj);
+        let newObj = filterNullValues({ id: currentUser.id, username, email, updatedDate, image, age, favoriteTeams, favoritePlayers, favoriteSport }, currentUser);
+        console.log('Filtered objefct----------', newObj);
         axios.put('/api/users', newObj)
         .then(res => {
+            console.log('fucking edit profiel-----', res.data.user)
+            dispatch(loginUser(res.data.user));
             alert(res.data.message);
         }).catch(err => console.log('Axios Put Error--------', err));
+    }
+    addToFavPlayers(e) {
+        e.preventDefault();
+        const { currentUser } = this.props;
+        const { currentPlayer } = this.state;
+        const copyOfArr = this.state.favoritePlayers.slice();
+        const addedPlayer = nbaPlayers.filter(player => player.name === currentPlayer)[0];
+        copyOfArr.push(addedPlayer);
+        // console.log('Added Player---------', addedPlayer);
+        this.setState({favoritePlayers: copyOfArr});
+        axios.patch(`/api/users/${currentUser.id}/add_player`, {newPlayer: addedPlayer})
+        .then(res => {
+            alert(res.data.message);
+            this.setState({currentPlayer: ''});
+        }).catch(err => console.log('Axios Patch Error----------', err));
+    }
+    addToFavTeams(e) {
+        e.preventDefault();
+        const { currentUser } = this.props;
+        const { currentTeam } = this.state;
+        const copyOfArr = this.state.favoriteTeams.slice();
+        const addedTeam = nbaTeams.filter(team => team.name === currentTeam)[0];
+        copyOfArr.push(addedTeam);
+        // console.log('addedTeam-------------', addedTeam);
+        this.setState({favoriteTeams: copyOfArr});
+        axios.patch(`/api/users/${currentUser.id}/add_team`, {newTeam: addedTeam})
+        .then(res => {
+            alert(res.data.message);
+            this.setState({currentTeam: ''});
+        }).catch(err => console.log('Axios Patch Error----------', err));
+    }
+    removePlayers(playerName) {
+        const {currentUser} = this.props;
+        const playerToRemove = nbaPlayers.filter(player => player.name === playerName)[0];
+        const copyOfArr = this.state.favoritePlayers.slice();
+        const playerIndex = copyOfArr.findIndex(player => player.name === playerName);
+        copyOfArr.splice(playerIndex, 1);
+        this.setState({favoritePlayers: copyOfArr});
+        console.log('playerToRemove--------------', playerToRemove);
+        axios.patch(`/api/users/${currentUser.id}/remove_player`, {playerToRemove})
+        .then(res => {
+            alert(res.data.message);
+        }).catch(err => console.log('Remove Axios Player Patch Error!!', err));
+    }
+    removeTeams(teamName) {
+        const { currentUser } = this.props;
+        const teamToRemove = nbaTeams.filter(team => team.name === teamName)[0];
+        const copyOfArr = this.state.favoriteTeams.slice();
+        const teamIndex = copyOfArr.findIndex(team => team.name === teamName);
+        copyOfArr.splice(teamIndex, 1);
+        this.setState({favoriteTeams: copyOfArr});
+        axios.patch(`/api/users/${currentUser.id}/remove_team`, {teamToRemove})
+        .then(res => {
+            alert(res.data.message);
+        }).catch(err => console.log('Remove Axios Team Patch Error!!', err));
     }
     render() {
         const { currentPlayer, currentTeam, username, email, image, password, age, teams, players, sports, ages, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
         const { forEdit, currentUser } = this.props;
-        return (
-            <form className='form register' onSubmit={(e) => forEdit ? this.updateProfile(e) : this.register()}>
-                <div className='first-div register'>
-                    <p className='label-input register'>Username</p>
-                    <input type='text' className='input register' placeholder={forEdit && currentUser.username}
-                    onChange={e => this.hanRegUsername(e.target.value)} value={username} min={6} max={40} required={!forEdit && true}/>
-                    <p className='label-input register'>Email</p>
-                    <input type='text' className='input register file' placeholder={forEdit && currentUser.email}
-                    onChange={e => this.hanRegEmail(e.target.value)} value={email} min={6} max={40} required={!forEdit && true}/>
-                </div>
-                <div className='img-div register'>
-                    <img className='img register'
-                    src={image || 'https://via.placeholder.com/350x150'} alt={username}  required={!forEdit && true}/>   
-                </div>
-                <div className='second-div register'>        
-                    <p className='label-input register'>Image</p>
-                    <input type='file' className='input register' 
-                    onChange={e => this.handleImageUpload(e.target.files)} required={!forEdit && true}/>                
-                    <p className='label-input register'>Password</p>
-                    {forEdit ? <button>Reset Password</button> 
-                    : <input type='password' className='input register' 
-                        onChange={e => this.hanRegPassword(e.target.value)} value={password} min={6} max={50} required={!forEdit && true}/>}     
-                    <p className='label register select'>Age</p>
-                    <input className='input register' type='date' max='2005-06-01' />    
-                    <p className='label register select'>Favorite Teams</p>
-                    <div className='data-list-div'>
-                        <input list='teams'  className='input register' onChange={e => this.handleCurrentTeam(e.target.value)} value={currentTeam}/>
-                        <button onClick={e => this.hanRegFavTeams(e)}><FaPlus /></button>
+        if(currentUser) {
+            return (
+                <form className='form register' onSubmit={(e) => forEdit ? this.updateProfile(e) : this.register()}>
+                    <div className='first-div register'>
+                        <p className='label-input register'>Username</p>
+                        <input type='text' className='input register' placeholder={forEdit && currentUser.username}
+                        onChange={e => this.hanRegUsername(e.target.value)} value={username} min={6} max={40} required={!forEdit && true}/>
+                        <p className='label-input register'>Email</p>
+                        <input type='text' className='input register file' placeholder={forEdit && currentUser.email}
+                        onChange={e => this.hanRegEmail(e.target.value)} value={email} min={6} max={40} required={!forEdit && true}/>
                     </div>
-                    <datalist id='teams'
-                     value={favoriteTeams[favoriteTeams.length - 1] && favoriteTeams[favoriteTeams.length - 1].name} required={!forEdit && true}>
-                        {teams.map((t, i) => <option key={i}>{t.name}</option>)}
-                    </datalist>
-                    <p className='label register select'>Favorite Players</p>
-                    <div className='data-list-div'>
-                        <input list='players'  className='input register' onChange={e => this.handleCurrentPlayer(e.target.value)} value={currentPlayer}/>
-                        <button onClick={(e) => this.hanRegFavPlayers(e)}><FaPlus /></button>
+                    <div className='img-div register'>
+                        <img className='img register'
+                        src={image || 'https://via.placeholder.com/350x150'} alt={username}  required={!forEdit && true}/>   
                     </div>
-                    <datalist id='players' 
-                    value={favoritePlayers[favoritePlayers.length - 1] && favoritePlayers[favoritePlayers.length - 1].name} required={!forEdit && true}>
-                        {players.map((player, i) => <option key={i}>{player.name}</option>)}
-                    </datalist>
-                    <p className='label register select'>Favorite Sport</p>
-                    <select className='select register'
-                    onChange={e => this.hanRegFavSport(e.target.value)} value={favoriteSport} required={!forEdit && true}>
-                        {sports.map((sport, i) => <option key={i}>{sport.name}</option>)}
-                    </select>
-                    <div className='register-form-favorite-teams-div'>
-                        {favoriteTeams && favoriteTeams.map((team, i) => <div className='team-card-wrapper' key={i} onClick={() => this.deleteTeam(team.name)}><TeamCard key={i} {...team} /></div>)}
+                    <div className='second-div register'>        
+                        <p className='label-input register'>Image</p>
+                        <input type='file' className='input register' 
+                        onChange={e => this.handleImageUpload(e.target.files)} required={!forEdit && true}/>                
+                        <p className='label-input register'>Password</p>
+                        {forEdit ? <button>Reset Password</button> 
+                        : <input type='password' className='input register' 
+                            onChange={e => this.hanRegPassword(e.target.value)} value={password} min={6} max={50} required={!forEdit && true}/>}     
+                        <p className='label register select'>Age</p>
+                        <input className='input register' type='date' max='2005-06-01' />    
+                        <p className='label register select'>Favorite Teams</p>
+                        <div className='data-list-div'>
+                            <input list='teams'  className='input register' onChange={e => this.handleCurrentTeam(e.target.value)} value={currentTeam}/>
+                            <button onClick={e => forEdit ? this.addToFavTeams(e) : this.hanRegFavTeams(e)}><FaPlus /></button>
+                        </div>
+                        <datalist id='teams'
+                        value={favoriteTeams[favoriteTeams.length - 1] && favoriteTeams[favoriteTeams.length - 1].name} required={!forEdit && true}>
+                            {teams.map((t, i) => <option key={i}>{t.name}</option>)}
+                        </datalist>
+                        <p className='label register select'>Favorite Players</p>
+                        <div className='data-list-div'>
+                            <input list='players'  className='input register' onChange={e => this.handleCurrentPlayer(e.target.value)} value={currentPlayer}/>
+                            <button onClick={(e) => forEdit ? this.addToFavPlayers(e) : this.hanRegFavPlayers(e)}><FaPlus /></button>
+                        </div>
+                        <datalist id='players' 
+                        value={favoritePlayers[favoritePlayers.length - 1] && favoritePlayers[favoritePlayers.length - 1].name} required={!forEdit && true}>
+                            {players.map((player, i) => <option key={i}>{player.name}</option>)}
+                        </datalist>
+                        <p className='label register select'>Favorite Sport</p>
+                        <select className='select register'
+                        onChange={e => this.hanRegFavSport(e.target.value)} value={favoriteSport} required={!forEdit && true}>
+                            {sports.map((sport, i) => <option key={i}>{sport.name}</option>)}
+                        </select>
+                        <div className='register-form-favorite-teams-div'>
+                            {favoriteTeams && favoriteTeams.map((team, i) => <div className='team-card-wrapper' key={i} 
+                            onClick={() => forEdit ? this.removeTeams(team.name) : this.deleteTeam(team.name)}><TeamCard key={i} {...team} /></div>)}
+                        </div>
+                        <div className='register-form-favorite-players-div'>                    
+                            {favoritePlayers && favoritePlayers.map((player, i) => <div className='player-card-wrapper' key={i} 
+                            onClick={() => forEdit ? this.removePlayers(player.name) : this.deletePlayer(player.name)}><PlayerCard key={i} {...player} /></div>)}
+                        </div>
                     </div>
-                    <div className='register-form-favorite-players-div'>                    
-                        {favoritePlayers && favoritePlayers.map((player, i) => <div className='player-card-wrapper' key={i} onClick={() => this.deletePlayer(player.name)}><PlayerCard key={i} {...player} /></div>)}
+                    <div className='btn-div register'>
+                        <button type='submit' className='btn register'>{forEdit ? 'Edit Profile' : 'Register'}</button>
                     </div>
-                </div>
-                <div className='btn-div register'>
-                    <button type='submit' className='btn register'>{forEdit ? 'Edit Profile' : 'Register'}</button>
-                </div>
-            </form>
-        );
+                </form>
+            );
+        } else {
+            return <Popup />
+        }
     }
 }
 Form.defaultProps = {

@@ -15,7 +15,7 @@
 .chat-users-list {
     margin: 50px;
     height: 40vh;
-    /* width: 80vw; */
+    width: 80vw;
     border: solid 3px #fff;
     margin-left: auto;
     margin-right: auto;
@@ -29,6 +29,8 @@
 
 .chat.user {
     text-align: left;
+    font-size: 2em;
+    font-weight: 800;
 }
 .chat.message-div-user-info {
     height: 10%;
@@ -48,7 +50,61 @@
     font-weight: 800;
     display: flex;
     align-items: baseline;
+    width: 100%;
 }
 .chat-div.style {
     width: 100%;
+}
+.chat.message-form {
+    width: 100%;
+    font-size: 1.5em;
+    font-weight: 800;
+}
+.chat.message-form > * {
+    font-weight: 800;
+    width: 80%;
+    margin: 10%;
+    height: 3em;
+    font-size: 1.25em;
+}
+.chat.message-form > input {
+    color: #fff;
+    background: transparent;
+}
+.chat.message-form > button {
+    background: transparent;
+    color: #fff;
+}
+.chat.message-form > button:hover {
+    background: #fff;
+    color: #000;
+}
+.chat.message-form > button:active {
+    background: #fff;
+    color: #000;
+}
+
+@media(min-width: 760px) {
+    .chat.message-form > *  {
+        font-weight: 800;
+        height: 2.5em;
+        font-size: 1.10em;
+        margin: 5%;
+    }
+}
+@media(min-width: 1200px) {
+    .chat.message-form {
+        text-align: center;
+     
+    }
+    .chat-container-div {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .chat.message-form > * {
+        height: 2em;
+    }
+    .chat-users-list {
+        width: 100%;
+    }    
 }

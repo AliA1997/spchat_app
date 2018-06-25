@@ -47,7 +47,7 @@ export default class Slideshow extends Component {
   }
   render() {
     console.log(this.props.slides);
-    const inHome = window.location.href === 'http://localhost:3000/' ? true : false;
+    const inHome = window.location.href === `${window.location.origin}/` ? true : false;
     return (
       <div className="slideshow">
         <ul className="slideshow-slides">

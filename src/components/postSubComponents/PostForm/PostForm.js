@@ -4,7 +4,7 @@ import { getTime } from '../../../logic';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import FaPlus from 'react-icons/lib/fa/plus';
-import MdControlPoint from 'react-icons/lib/md/control-point';
+// import MdControlPoint from 'react-icons/lib/md/control-point';
 import sportsOptions from '../../../sports-data/sports-options.json';
 import './PostForm.css';
 
@@ -122,7 +122,7 @@ class PostForm extends Component {
                 <input type='text' className='input create-post' value={title}
                 onChange={e => this.handleCrtePostTitleChange(e.target.value)} min={8} max={40} required/>
                 <p className='create-form-image-label'>Description</p>
-                <textarea type='text' className='textarea create-post' value={description}
+                <textarea type='text' className='create-post-textarea' value={description}
                 onChange={e => this.handleCrtePostDescriptionChange(e.target.value)} min={15} max={200} required>
                 </textarea>
                 <p className='create-form-image-label'>Sports</p>

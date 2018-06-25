@@ -18,6 +18,7 @@ export default class UserCard extends Component {
             ]
         }
     }
+    //Admin Functions
     handleWarningsChange(val) {
         this.setState({warning: val});
     }
@@ -39,13 +40,15 @@ export default class UserCard extends Component {
             this.props.reRender();
         }).catch(err => console.log('Axios Admin Delete User Error---------', err));
     }
+    //////////////////////////////////////////////
     render() {
-        const { isAdmin, username, email, age, favorite_sport, favorite_players, favorite_teams } = this.props;
+        const { id, isAdmin, username, email, age, favorite_sport, favorite_players, favorite_teams } = this.props;
         const { warning, warnings } = this.state;
+        console.log('this.props-----------', this.props);
         console.log('Favorite teams---------', favorite_teams);
         console.log('Favorite- Players----------', favorite_players);
         return (
-            <div className='user-card-container-div'>
+            <div className='user-card-container-div' onClick={() => this.props.link(`/users/${id}`)}>
                 <div className='user-card-div'>
                     <div className='user-card-img-div'>
                         <img className='user-card-img' 
@@ -81,3 +84,4 @@ export default class UserCard extends Component {
 UserCard.defaultProps = {
     isAdmin: false
 }
+

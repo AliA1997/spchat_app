@@ -1,80 +1,72 @@
 .main-nav {
   display: none;
 }
+.hamburger-icon-div {
+  height: 2em;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+.hamburger-icon {
+  height: 100%;
+  width: 20%;
+}
+.mobile.mobile-main-nav {
+  /* height: 50vh; */
+  margin-left: 5%;
+  background: #020;
+  list-style: none;
+}
 .mobile-search-bar {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-.mobile.mobile-main-nav {
-  display: inline-block;
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  text-align: center;
-  list-style: none;
-}
 .mobile.mobile-main-nav-wrapper {
+  width: 100vw;
   display: grid;
-  grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-}
-.mobile-nav-item {
-  grid-row: auto;
-  cursor: grab;
-  height: 3em;
-  width: 100%;
-  border: solid 2px #fff;
-  background: #020;
-}
-.hamburger-icon-div {
-  width: 100%;
-  background: #020;
-}
-.hamburger-icon {
-  font-size: 2.5em;
-}
-
-.mobile-submenu-nav {
-  display: grid;
-  grid-template-rows: 25% 25% 25% 25%;
-  /* background: #ffff00; */
-  width: 100%;
   text-align: center;
-  height: 30%;
-  background: #020;
-
+  grid-template-rows: 15% 15% 15% 15% 15% 15% 10%;
 }
-
-
-.mobile-submenu-nav-item {
-  display: grid;
-  grid-template-columns: 15% 10% 15% 15% 15% 15% 10% 15%;
-  width: 100%;
-  margin-left: -12.5px;
-  grid-row: 1/4;
-  background: #020;
-}
-
-.mobile-submenu-nav-item > p {
-  display: flex;
-  grid-column: 3/6;
-  padding: 20px;
-  justify-content: center;
+.mobile.mobile-main-nav-wrapper > * {
+  font-size: 1.2em;
   padding: 10px;
+  grid-row: auto;
 }
-
 .mobile-nav-icon {
+  font-size: 2em;
+  /* margin-right: 50%; */
+}
+.mobile-nav-submenu-item {
   width: 100%;
-  background: #020;
-  height: 3em;
-} 
-@media (min-width: 960px) {
-  /* .main-nav {
-    display: none;
-  } */
-  .mobile {
-    display: inline-block;
+}
+.mobile-nav-submenu-item > ul {
+  margin-left: -5%;
+  width: 100%;
+}
+.mobile-nav-submenu-item > ul > li{
+  text-align: center;
+  width: 100%;
+  border-bottom: 2px solid #fff;
+  margin-left: -5%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+@media (min-width: 500px) {
+  .mobile-nav-submenu-item > ul  {
+    margin-left: -3%;
+  }
+  .mobile-nav-submenu-item > ul  > li {
+    margin-left: -2.5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+@media (min-width: 760px) {
+  .mobile-nav-submenu-item > ul  > li  {
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 }
 @media (min-width: 1200px){
@@ -143,9 +135,7 @@
   .submenu-nav {
       position: absolute;
       background: #020;
-      border-left: solid 1px white;
-      border-right: solid 1px white; 
-      border-bottom: solid 1px white;           
+         
       left: 0;
       right: 0;
       padding: 20px;
@@ -161,190 +151,5 @@
       z-index: 5;
   }
 }
-/* Mobile Sphere*/
-.mobile.ball {
-  display: inline-block;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  margin: 0;
-  border-radius: 50%;
-  position: relative;
-  -webkit-transform-style: preserve-3d;
-  background: url('../../../imgs/spchat-logo.png') repeat-x;
-  background-size: auto 100%;
-  -webkit-animation: move-map 15s infinite linear;
-  -moz-animation: move-map 15s infinite linear;
-  -o-animation: move-map 15s infinite linear;
-  -ms-animation: move-map 15s infinite linear;
-  animation: move-map 15s infinite linear;
-}
 
-
-.mobile.ball:before {
-  content: "";
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  width: 10%;
-  height: 10%;
-  border-radius: 50%;
-  box-shadow: -40px 10px 70px 10px rgba(0,0,0,0.5) inset;
-  z-index: 2;
-}
-
-.mobile.ball:after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  width: 10%;
-  height: 10%;
-  top: 0;
-  left: 0;
-  -webkit-filter: blur(0);
-  opacity: 0.3;
-  background: radial-gradient(circle at 50% 80%, #81e8f6, #76deef 10%, #055194 66%, #062745 100%);
-}
-
-.mobile.ball.shadow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
-  -webkit-transform: rotateX(90deg) translateZ(-150px);
-  -moz-transform: rotateX(90deg) translateZ(-150px);
-  -ms-transform: rotateX(90deg) translateZ(-150px);
-  -o-transform: rotateX(90deg) translateZ(-150px);
-  transform: rotateX(90deg) translateZ(-150px);
-  z-index: -1;
-}
-body {
-  margin: 20px auto;
-  background: linear-gradient(to bottom, rgba(100, 100, 100, 0.2) 0%, rgba(255, 255, 255, 0.5) 40%, #ffffff 100%);
-  background-repeat: no-repeat;
-}
-
-.mobile.stage {
-  width: 10%;
-  height: 10%;
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
-  -webkit-perspective: 1200px;
-  -moz-perspective: 1200px;
-  -ms-perspective: 1200px;
-  -o-perspective: 1200px;
-  perspective: 1200px;
-  -webkit-perspective-origin: 50% 50%;
-  -moz-perspective-origin: 50% 50%;
-  -ms-perspective-origin: 50% 50%;
-  -o-perspective-origin: 50% 50%;
-  perspective-origin: 50% 50%;
-}
-
-/*Desktop Sphere....................... */
-.ball {
-    display: inline-block;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    border-radius: 50%;
-    position: relative;
-    -webkit-transform-style: preserve-3d;
-    /* background: url('../../../imgs/spchat-logo.png') repeat-x; */
-    background-size: auto 100%;
-    -webkit-animation: move-map 15s infinite linear;
-    -moz-animation: move-map 15s infinite linear;
-    -o-animation: move-map 15s infinite linear;
-    -ms-animation: move-map 15s infinite linear;
-    animation: move-map 15s infinite linear;
-  }
-  
-  
-  .ball:before {
-    content: "";
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    box-shadow: -40px 10px 70px 10px rgba(0,0,0,0.5) inset;
-    z-index: 2;
-  }
-  
-  .ball:after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    -webkit-filter: blur(0);
-    opacity: 0.3;
-    background: radial-gradient(circle at 50% 80%, #81e8f6, #76deef 10%, #055194 66%, #062745 100%);
-  }
-  
-  .ball.shadow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
-    -webkit-transform: rotateX(90deg) translateZ(-150px);
-    -moz-transform: rotateX(90deg) translateZ(-150px);
-    -ms-transform: rotateX(90deg) translateZ(-150px);
-    -o-transform: rotateX(90deg) translateZ(-150px);
-    transform: rotateX(90deg) translateZ(-150px);
-    z-index: -1;
-  }
-  body {
-    margin: 20px auto;
-    background: linear-gradient(to bottom, rgba(100, 100, 100, 0.2) 0%, rgba(255, 255, 255, 0.5) 40%, #ffffff 100%);
-    background-repeat: no-repeat;
-  }
-  
-  .stage {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
-    -webkit-perspective: 1200px;
-    -moz-perspective: 1200px;
-    -ms-perspective: 1200px;
-    -o-perspective: 1200px;
-    perspective: 1200px;
-    -webkit-perspective-origin: 50% 50%;
-    -moz-perspective-origin: 50% 50%;
-    -ms-perspective-origin: 50% 50%;
-    -o-perspective-origin: 50% 50%;
-    perspective-origin: 50% 50%;
-  }
-  
-  
-  
-  @-webkit-keyframes move-map {
-    0% {background-position: -360% 0;}
-    100% {background-position: 360% 0;}
-  }
-
-  @-moz-keyframes move-map {
-  0% {background-position: -360% 0;}
-  100% {background-position: 360% 0;}
-  }
-  
-  @-o-keyframes move-map {
-    0% {background-position: -360% 0;}
-    100% {background-position: 360% 0;}
-  }
-  
-  @-ms-keyframes move-map {
-    0% {background-position: -360% 0;}
-    100% {background-position: 360% 0;}
-  }
-  
-  @keyframes move-map {
-    0% {background-position: -360% 0;}
-    100% {background-position: 360% 0;}
-  }
 /* */ 

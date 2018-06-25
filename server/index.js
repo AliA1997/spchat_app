@@ -17,15 +17,16 @@ const checkLogin = require('./middlewaras/checkLoggedIn');
 const checkPost = require('./middlewaras/checkPost');
 // const checkComment = require('./middlewares/checkComment');
 //Controllers
-const socialMediaCtrl = require('./controllers/social_media_controller');
 const adminCtrl = require('./controllers/admin_controller');
+const chatCtrl = require('./controllers/chat_controller');
 const cloudinaryCtrl = require('./controllers/cloudinary_controller');
-const userCtrl = require('./controllers/user_controller');
-const postCtrl = require('./controllers/post_controller');
 const commentsCtrl = require('./controllers/comments_controller');
+const postCtrl = require('./controllers/post_controller');
 const searchCtrl = require('./controllers/search_controller');
+const socialMediaCtrl = require('./controllers/social_media_controller');
 const statsCtrl = require('./controllers/stats_controller');
 const surveyCtrl = require('./controllers/survey_controller');
+const userCtrl = require('./controllers/user_controller');
 const PORT = 9999;
 let socketDB;
 const app = express();
@@ -36,7 +37,6 @@ app.use(bodyParser.json());
 
 massive(process.env.CONNECTION_STRING).then(database => {
     app.set('db', database);
-    socketDB = database;
     // console.log('socketDB----------', socketDB);
 }).catch(err => console.log('Massive Connection Error---------', err));
 
@@ -73,7 +73,7 @@ app.get('/api/posts/:id', userCtrl.readUsersPosts);
 app.get('/api/posts', postCtrl.readPosts);
 app.get('/api/recent-posts', postCtrl.readRecentPosts);
 app.get('/api/user-posts', postCtrl.readUserPosts);
-app.get('/api/posts/:post_id', postCtrl.readPost);
+app.get('/api/post/:post_id', postCtrl.readPost);
 //Get Posts By SPorts Endpoints 
 app.get('/api/posts/sports/:sport', postCtrl.readPostBySport);
 
@@ -88,6 +88,9 @@ app.get('/api/survey/:sport_id', surveyCtrl.readSurvey);
 app.get('/api/admin/users', adminCtrl.readAdminUsers);
 app.get('/api/admin/users/:id', adminCtrl.readAdminUser);
 app.get('/api/admin/posts', adminCtrl.readAdminPosts);
+
+//Chat Get Endpoints 
+app.get('/api/chat/:post_id', chatCtrl.readChat);
 
 //Stats Get Endpoints 
 app.get('/api/stats/:sport', statsCtrl.readStats);
@@ -116,15 +119,24 @@ app.post('/api/comments/:post_id', commentsCtrl.createComment);
 //Admin Post Endpoints 
 app.post('/api/warning', adminCtrl.issueUserWarning);
 
+//Chat Post Endpoints   
+app.post('/api/chat/:post_id', chatCtrl.createChat);
+
 //Put User Endpoints 
 app.put('/api/users', userCtrl.updateUser);
 //REset User Endpoints 
 app.patch('/api/reset_password', userCtrl.resetPassword);
+//Patch User Endpoints 
+app.patch('/api/users/:id/add_team', userCtrl.addTeam);
+app.patch('/api/users/:id/add_player', userCtrl.addPlayer);
+app.patch('/api/users/:id/remove_team', userCtrl.removeTeam);
+app.patch('/api/users/:id/remove_player', userCtrl.removePlayer);
 //Verify User Endpoints 
 app.put('/email_verification', userCtrl.emailVerification);
 
 //Put Postss Endpoints 
 app.put('/api/posts', checkPost, postCtrl.updatePost);
+
 
 //Patch Posts Endpoint
 app.patch('/api/posts/liked', postCtrl.updatePoints)
@@ -156,5 +168,5 @@ const server = app.listen(PORT, () => console.log(`Listening on Port:${PORT}!`))
 const io = socket(server);
 
 setTimeout(() => {
-    require('./socket/socket')(io, Posts, socketDB);
+    require('./socket/socket')(io, Posts);
 }, 2000);

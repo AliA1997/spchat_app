@@ -15,10 +15,9 @@ module.exports = {
      }).catch(err => console.log('Read Recent Posts DB Error---------', err));
  },
 readPost(req, res) {
+    const { post_id } = req.params;
     const dbInstance = req.app.get('db');
-    const { id } = req.params;
-    console.log('----post id', id);
-    return dbInstance.read_post(post_id).then(post => {
+    dbInstance.read_post(post_id).then(post => {
         console.log('post------------', post);
         res.status(200).json({post});
     }).catch(err => console.log('Database Get Post Error---------', err));

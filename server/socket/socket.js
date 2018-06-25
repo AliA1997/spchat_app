@@ -1,33 +1,26 @@
-module.exports = async (io, Posts, db) => {
+module.exports = (io, Posts) => {
     const posts = new Posts();
     const topicUsers = [];
     // let currentMessages = [];
     // let chatExist = false;
-    await io.sockets.on('connection', (socket) => {
+     io.sockets.on('connection', (socket) => {
         console.log('Socket connected!!!', socket.id);
         // console.log('db-----------', db)
         const filteredUser = socket.handshake.query.username !== 'Anonymous' && topicUsers.filter(user => user === socket.handshake.query.username);
         !filteredUser.length && topicUsers.push(`${socket.handshake.query.username}`)         
         socket.on('room', () => {
+            io.emit('CONNECT_ROOM');         
             if(socket.handshake.query.topic) {
                 console.log('socket id---------', socket.id);
                 console.log('post id-----------', socket.handshake.query.post_id);
-                db.find_chat(socket.handshake.query.post_id).then(chatResponse => {
-                    console.log('chatResponse--------------', chatResponse);
-                    if(!chatResponse.length) {
-                        posts.AddPostData(socket.id, socket.handshake.query.topic, +socket.handshake.query.post_id, []);
-                        console.log('socket joined--------', socket.handshake.query.topic);
-                        console.log('user imageurl-------', socket.handshake.query.imageurl);
-                    } else {
-                        posts.messages = chatResponse.messages;
-                    }
-                    console.log('chatResponse------------', chatResponse.messages);
-                    // console.log('posts------------', posts);
-                    socket.join(socket.handshake.query.topic);
-                    let postsList = posts.GetPostList(socket.handshake.query.topic);
-                    console.log('postsList---------------', postsList);
-                    io.in(socket.handshake.query.topic).emit('SEND_USER', topicUsers);
-                }).catch(err => console.log('Chat Database error--------', err));
+                posts.AddPostData(socket.id, socket.handshake.query.topic, +socket.handshake.query.post_id, []);
+                console.log('socket joined--------', socket.handshake.query.topic);
+                console.log('user imageurl-------', socket.handshake.query.imageurl);
+                // console.log('posts------------', posts);
+                socket.join(socket.handshake.query.topic);
+                let postsList = posts.GetPostList(socket.handshake.query.topic);
+                console.log('postsList---------------', postsList);
+                io.in(socket.handshake.query.topic).emit('SEND_USER', topicUsers);
             }
 
         });
@@ -53,21 +46,19 @@ module.exports = async (io, Posts, db) => {
             console.log('data----------', data)
             io.emit('RECIEVE_MESSAGE', data); 
         });        
-        socket.on('left', (left) => {
-            let room = posts.RemovePost(socket.id);
-            let postsList = posts.GetPostList(room);
-            io.in(room).emit('SEND_USER', postsList);
-        });
+        setInterval(() => {
+            io.emit('SAVE_CHAT')
+        }, (1000 * 5))
+
         socket.on('disconnect', () => {
             let room = posts.RemovePost(socket.id);
-            let postsList = posts.GetPostList(room);
-            console.log('postsList----------', postsList);
-            console.log('currentMessages--------------', postsList.messages);
+            console.log('room-------------', room);
+            // let postsList = posts.GetPostList(room);
+            // console.log('post_id----------', room.post_id);
+            // console.log('currentMessages--------------', room.messages);
             // console.log('db-------------', db);
-            db.create_chat({post_id: socket.handshake.query.post_id, messages: posts.messages}).then(posts => {
-                console.log('Chat Created Successfully!');
-            }).catch(err => console.log('Database create chat error--------', err));
-            io.in(room).emit('SEND_USER', postsList);
+            console.log('Socket Disconnected-------------');
+            io.in(room).emit('SEND_USER', room);
         });
 
     })

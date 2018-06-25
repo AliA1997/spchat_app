@@ -5,12 +5,15 @@ class Posts {
     async AddPostData(id, room, post_id, messages) {
         let post = { id, room, post_id, messages };
         this.posts.push(post);
+        // console.log('this.posts-------------', this.posts);
         return post;
     }
     RemovePost(id) {
         let indexOfPostToRemove = this.posts.findIndex(post => post.id == id);
+        // console.log('indexOFPosToRemover----------', indexOfPostToRemove);
         if(indexOfPostToRemove !== -1) {
-            let room = this.posts[indexOfPostToRemove].room;
+            let room = this.posts[indexOfPostToRemove];
+            console.log('rmeoove---------post---------', room);
             this.posts.splice(indexOfPostToRemove, 1);
             return room;
         }
@@ -20,7 +23,9 @@ class Posts {
         if(indexOfPost !== -1) return this.posts[indexOfPost];
     }
     GetPostList(room) {
+        // console.log('getPostList room----------------', room);
         let posts = this.posts.filter(post => post.room === room);
+        // console.log('getPostList--------------', posts);
         let postsArray = posts.map(post => {
             return post;
         });

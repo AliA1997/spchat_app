@@ -8,6 +8,7 @@ import PlayerCard from '../userSubComponents/PlayerCard/PlayerCard';
 import TeamCard from '../userSubComponents/TeamCard/TeamCard';
 import SocialMediaSection from '../userSubComponents/SocialMediaSection/SocialMediaSection';
 import { editPost, doneEditPost } from '../../redux/reducers/postReducer';
+import { loginUser } from '../../redux/reducers/userReducer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import defaultPicture from '../../imgs/default-picture.jpg';
@@ -26,16 +27,24 @@ class Dashboard extends Component {
     }
     componentDidMount() {
         console.log('componentDidMOunt Dashbaord hit');
-        const { currentUser } = this.props;
+        const { currentUser, dispatch } = this.props;
         console.log('Current User-----------', currentUser);
         if(currentUser) {
-            axios.get('/api/user-posts')
+            const axiosUserRequest = axios.get('/api/user-data');
+            const axiosPostRequest = axios.get('/api/user-posts');
+            // axios.get('/api/user-posts')
+            // .then(res => {
+            //     console.log('Axios hit-------');
+            //     console.log(res.data.posts);
+            // }).catch(err => console.log('Axios get user posts error---------', err));
+            Promise.all([axiosUserRequest, axiosPostRequest])
             .then(res => {
-                console.log('Axios hit-------');
-                console.log(res.data.posts);
-                this.setState({posts: res.data.posts, loading: false});
-            }).catch(err => console.log('Axios get user posts error---------', err));
-            window.location.href === `http://localhost:3000/dashboard` 
+                console.log('Axios hit------------');
+                dispatch(loginUser(res[0].data.user));
+                // console.log(res[0].data.user);
+                this.setState({posts: res[1].data.posts, loading: false});
+            }).catch(err => console.log('Axios Dashboard All Error----------', err));
+            window.location.href === `${window.location.origin}/dashboard` 
             ? this.setState({isProfile: true}) 
             : this.setState({isProfile: false});
         } else {
@@ -68,7 +77,7 @@ class Dashboard extends Component {
     }
 
     render() {
-            const { currentUser, currentPost, doEditPost } = this.props;
+            const { currentUser, doEditPost } = this.props;
             const { dispatch } = this.props;
             const { posts, loading, isProfile } = this.state;
             console.log('doEditPost------------', doEditPost);

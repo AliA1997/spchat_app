@@ -48,9 +48,10 @@ CREATE TABLE sp_comments (
 CREATE TABLE sp_chats (
     id SERIAL PRIMARY KEY,
     post_id INTEGER REFERENCES sp_posts(id),
-    messages VARCHAR(50)[]
+    messages JSONB[],
+    users JSONB[]
 );
-
+ALTER TABLE sp_chats ADD COLUMN users JSONB[];
 CREATE TABLE sp_surveys (
  id SERIAL PRIMARY KEY,
  topic VARCHAR(100),

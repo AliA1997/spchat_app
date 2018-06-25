@@ -1,41 +1,73 @@
 .comments-container-div {
+    width: 100%;
     display: grid;
-    grid-row-start: 9;
-    grid-row-end: 10;
-    background: transparent;
-    color: white;
     grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 25% 25% 25% 25%;
+    height: 100%;
+    /* border: 2px solid #fff; */
 }
-.comments-container-div > h1 {
-    text-align: center;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
+.comments-container-div > * {
+    grid-column: 2/2;
 }
 .comments-container-div > .create-comment-textarea {
     background: transparent;
     color: #fff;
-    margin: 25px;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
+    margin-bottom: 10%;
+    margin-top: 10%;
+    height: 5em;
 }
 .comments-container-div > .create-comment-button {
     background: transparent;
     color: #fff;
-    margin: 25px;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 3;
+    font-weight: 800;
+    height: 3em;
+    border: 2px solid #fff;
+    font-size: 1.25em;
 }
-.comments-div {
-    /* border: solid 3px #fff; */
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 4;
-    grid-row-end: 4;
+@media (min-width: 760px) {
+    .comments-container-div > .create-comment-textarea {
+        height: 10em;
+    }
+}
+@media (min-width: 1200px) {
+    .comments-container-div {
+        display: grid;
+        grid-row-start: 9;
+        grid-row-end: 10;
+        background: transparent;
+        color: white;
+        grid-template-columns: 10% 80% 10%;
+        grid-template-rows: 25% 25% 25% 25%;
+    }
+
+    .comments-container-div > h1 {
+        text-align: center;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+    .comments-container-div > .create-comment-textarea {
+        background: transparent;
+        color: #fff;
+        margin: 25px;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+    .comments-container-div > .create-comment-button {
+        background: transparent;
+        color: #fff;
+        margin: 10%;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 3;
+    }
+    .comments-div {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 4;
+    }
 }

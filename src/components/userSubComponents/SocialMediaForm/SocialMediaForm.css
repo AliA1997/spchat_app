@@ -1,17 +1,24 @@
 .social-media-form {
+    padding-top: 5%;
+    border: 2px solid #fff;
     height: 100%;
-    width: 80%;
+    width: 80vw;
     text-align: center;
     z-index: 3;
 }
 .social-icon-div {
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 3em;
     text-align: center;
     display: flex;
     justify-content: center;
-    margin: 30px;
+    margin-top: 30px;
 }
 .social-icon-div > input {
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
 }
 .social-icon {
@@ -34,4 +41,14 @@
 .social-media-form-button:active {
     background: #fff;
     color: black;
+}
+@media (min-width: 760px) {
+    .social-icon-div {
+        height: 2.5em;
+    }
+}
+@media (min-width: 1200px) {
+    .social-icon-div { 
+        height: 2em;
+    }
 }

@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 class SocialMediaSection extends Component {
     render() {
         const { currentUser } = this.props;
+        console.log('currentUser Social media---------------', currentUser)
         return (
             <div>
                 {currentUser && currentUser.social_media.map((item, i) => {

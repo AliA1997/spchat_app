@@ -1,0 +1,10 @@
+.posts-page-container-div {
+    padding-top: 10%;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+}
+.posts-page-container-div > * {
+    margin-left: auto;
+    margin-right: auto;
+    grid-column: 2/2;
+}

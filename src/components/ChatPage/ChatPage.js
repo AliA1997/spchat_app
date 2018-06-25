@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class ChatPage extends Component {
     render() {
-        const { currentUser } = this.props;
+        // const { currentUser } = this.props;
         return (
             <div className='chatpage container-div'>
                 <h1 className='title chatpage'>Chat {this.props.match.params.sportId}</h1>

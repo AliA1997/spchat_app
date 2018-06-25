@@ -84,16 +84,30 @@ module.exports = {
     },
     updateUser: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { id } = req.session.user;
+        // const { id } = req.session.user;
         console.log('-----------session', req.session.user);
-        const { username, email, image, age, updatedDate, favoriteTeams, favoritePlayers, favoriteSport } = req.body;
+        const { id, username, email, image, age, updatedDate, favoriteTeams, favoritePlayers, favoriteSport } = req.body;
         console.log('Updated Date----------', updatedDate);
+        console.log('updated User ', req.body);
+        console.log('--------------id', id);
         if(id) {
             dbInstance.update_user({ id, username, email, date: updatedDate, image, age, favoriteTeams, favoritePlayers, favoriteSport })
             .then(updatedUser => {
                 console.log('Updated User-------------', updatedUser);
+                const socialMediaArray = updatedUser.social_media && updatedUser.social_media.split(' ');
+                // if(socialMediaArray.length) {
+                //     for(let i = 0; i < socialMediaArray.length; i++) {
+                //         if(socialMediaArray[i] === 'twitter' || socialMediaArray[i] === 'facebook' || socialMediaArray[i] === 'snapchat'
+                //         || socialMediaArray[i] === 'twitchtv' || socialMediaArray[i] === 'playstation' || socialMediaArray[i] === 'xbox' ||
+                //         socialMediaArray[i] === 'reddit' || socialMediaArray[i] === 'instagram') {
+                //             socialMediaArray.splice(i, 1);
+                //         }
+                //     }
+                // }
+                updatedUser.social_media = socialMediaArray;
+                req.session.user = updatedUser;
                 nodemailerCtrl.sendUpdate(email, 'Email just got updated!', `http://localhost:3000/users/${id}`);
-                res.status(200).json({user: updatedUser});
+                res.status(200).json({user: updatedUser, message: 'Updated Profile!!'});
             }).catch(err => console.log('Database Update User error---------', err));
         }
     },
@@ -127,5 +141,43 @@ module.exports = {
                 res.json({message: 'Account Verified!!'});
             }).catch(err => console.log('Verify Email Database error---------', err));
         }).catch(err => console.log('Email Verification Link error-------', err));
+    },
+    //Patch Endpoints
+    addPlayer: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { newPlayer } = req.body;
+        const { id } = req.params;
+        dbInstance.add_player({id, newPlayer})
+        .then(players => {
+            res.status(200).json({message: 'Added Player!'});
+        }).catch(err => console.log('Add Player Database error----------', err));
+    },
+    addTeam: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { newTeam } = req.body;
+        const { id } = req.params;
+        dbInstance.add_team({id, newTeam})
+        .then(teams => {
+            res.status(200).json({message: 'Added Team!'});
+        }).catch(err => console.log('Add Team Database error------------', err));
+    },
+    removePlayer: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { playerToRemove } = req.body;
+        const { id } = req.params;
+        dbInstance.delete_player({id, playerToRemove})
+        .then(players => {
+            res.status(200).json({message: 'Removed Player!!'});
+        }).catch(err => console.log('Removed Player Database error------------', err));
+    },
+    removeTeam: (req, res) => {
+        const dbInstance = req.app.get('db');
+        const { teamToRemove } = req.body;
+        console.log(req.body);
+        const { id } = req.params;
+        dbInstance.delete_team({id, teamToRemove})
+        .then(teams => {
+            res.status(200).json({message: 'Removed Team!'});
+        }).catch(err => console.log('Removed Team Database Error--------------', err));
     }
 }

@@ -19,7 +19,7 @@ class Post extends Component {
         }
     }
     componentDidMount() {
-        this.setState({isInDashboard: window.location.href === `http://localhost:${window.location.port}/dashboard` ? true : false})               
+        this.setState({isInDashboard: window.location.href === `${window.location.origin}/dashboard` ? true : false})               
     }
     deletePost(e) {
         e.preventDefault();

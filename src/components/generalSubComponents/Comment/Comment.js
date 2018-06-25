@@ -4,6 +4,7 @@ import { getTime } from '../../../logic';
 import IoCloseCircled from 'react-icons/lib/io/close-circled';
 import GoPencil from 'react-icons/lib/go/pencil';
 import axios from 'axios';
+import './Comment.css';
 
 class Comment extends Component {
     constructor() {

@@ -63,6 +63,19 @@
     font-size: 2.5em;
     font-weight: 800;
 }
+.home-stats-div {
+    margin-right: auto;
+    margin-left: auto;
+}
+.home-survey-div {
+    margin-right: auto;
+    margin-left: auto;
+}
+.home-login-div {
+    border: none;
+    margin-right: auto;
+    margin-left: auto;
+}
 /* MObile Styling */
 @media (min-width: 760px) {
         .home-subdiv {
@@ -93,6 +106,9 @@
     .home-recent-posts-div > h3 {
         font-size: 2em;
     }
+    .home-login-div {
+        border: 2px solid #fff;
+    }
 }
 @media (min-width: 1200px) {
     .home-subdiv {
@@ -116,6 +132,7 @@
     .home-login-div {
         grid-row: 1/1;
         grid-column: 3/3;
+        border: 2px solid #fff;
     }
     .home-recent-posts-div > h3 {
         font-size: 2.5em;

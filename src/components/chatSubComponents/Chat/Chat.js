@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import FaCommentsO from 'react-icons/lib/fa/comments-o';
@@ -15,6 +16,7 @@ class Chat extends Component {
             messages: [],
             message: '',
             typingMessage: '',
+            chatExist: false,
             typing: false
         }
         const { currentUser } = props;
@@ -33,19 +35,44 @@ class Chat extends Component {
             console.log('Message sent---------', val);
             this.socket.emit('SEND_MESSAGE', newMessage);
         }
-
         this.isTyping = (username) => {  
             this.socket.emit('TYPING', `${username} is typing.....`);
             this.setState({typing: true});
         }
+        this.socket.on('CONNECT_ROOM', () => {
+            axios.get(`/api/chat/${props.postId}`)
+            .then(res => {
+                alert(res.data.message);
+                if(res.data.messages) {
+                    this.setState({chatExist: true, messages: res.data.messages, users: res.data.users});
+                }
+            }).catch(err => console.log('Axios Connect Room Error---------', err));
+        })
         this.socket.on('SEND_USER', (data) => {
             this.setState({users: data});
-        })
+        });
         this.socket.on('RECIEVE_MESSAGE', (data) => {
             console.log('data------------', data);
             console.log('received messages hit---------');
             // console.log('messages------------', this.state.messages);
             this.setState({messages: [...this.state.messages, data], typing: false, message: ''});
+        });
+        this.socket.on('SAVE_CHAT', () => {
+            //
+            // const { chatExist } = this.state;
+            //
+            // console.log('state.messages-----------', this.state.messages);
+            if(this.state.messages.length && this.state.users.length > 1){
+            // const axiosChatPromise = chatExist ? axios.put(`/api/chat/${props.postId}`, {messages: this.state.messages, users: this.state.users}) 
+            // : axios.post(`/api/chat/${props.postId}`, {messages: this.state.messages, users: this.state.users});
+            axios.post(`/api/chat/${props.postId}`, {messages: this.state.messages, users: this.state.users})
+            .then(res => {
+                console.log('message hit----------');
+                alert(res.data.message); 
+            }).catch(err => console.log('Axios Chat Error------------', err));
+            } else {
+                return;
+            }
         })
         this.socket.on('USER_ON_TYPING', (data) => {
             // console.log('TYPING event emitter data--------', data)
@@ -70,13 +97,13 @@ class Chat extends Component {
         console.log('Typing Message---------------', typingMessage);
         return (
             <div className='chat-container-div'>
-                <div className='chat-div style'>>
+                <div className='chat-div style'>
                     <div className='title chat'>
                         {(this.props.namespace && this.props.topic) ? this.props.namespace : null}<FaCommentsO />
                     </div>
                     <div className='chat-users-messages'>
                         {messages && messages.map((mess, i) => 
-                            <div className='chat message-div' key={i}>
+                            <div className='chat-message-div' key={i}>
                                 <div className='chat message-div-user-info'>
                                     <img className='chat-message-img' src={mess.imageurl} alt={mess.username} />
                                     <p className='chat username'>{mess.username}</p>
@@ -111,7 +138,7 @@ Chat.defaultProps = {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.user.currentUser,
+        currentUser: state.user.currentUser
     }
 }
 
