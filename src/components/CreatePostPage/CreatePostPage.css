@@ -19,7 +19,7 @@
 @media (min-width: 1200px) {
     .create-post-page-div > .title.create-post-form  {
         /* margin: 100px; */
-        padding: 100px;
+        padding: 300px;
         font-size: 3em;
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import Slideshow from '../Slideshow/Slideshow'; 
+import Slideshow from '../Slideshow/Slideshow';
 import axios from 'axios';
 import './News.css';
 

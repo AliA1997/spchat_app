@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Posts from '../Posts/Posts';
-import Slideshow from '../generalSubComponents/Slideshow/Slideshow';
+// import SlickSlideshow from '../SlideImages/SlideImages';
 import { logoutUser } from '../../redux/reducers/userReducer';
 import Survey from '../generalSubComponents/Survey/Survey';
 import Loader from '../generalSubComponents/Loader/Loader';
 import { NavLink } from 'react-router-dom';
 import './Home.css';
+import Slideshow from '../generalSubComponents/Slideshow/Slideshow';
 // import uuid from 'uuid';
 import axios from 'axios';
 
@@ -45,9 +46,9 @@ class Home extends Component {
         if(!loading) {
             return (
                 <div className='home-div'>
-                    {/* <div className='home-slideshow-div'>
-                        <Slideshow slides={displayPosts}/>
-                    </div> */}
+                    <div className='home-slideshow-div'>
+                        {/* <Slideshow slides={displayPosts}/> */}
+                    </div>
                     <div className='home-recent-posts-div'>
                             <h3>Recent Posts</h3>
                             <Posts posts={posts}/>

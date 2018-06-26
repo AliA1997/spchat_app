@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+
 import { doneSearch } from '../../../redux/reducers/searchReducer';
 import { connect } from 'react-redux';
 import FaSearch from 'react-icons/lib/fa/search';
@@ -8,6 +8,7 @@ import './Search.css';
 class Search extends Component {
 
     render() {
+
         // const inSportsPage = window.location.href.includes('http://localhost:3000/sports/') ? true : false;
         // const inAccountsPage = window.location.href.includes('http://localhost:3000/dashboard')
         // ||  window.location.href === `http://localhost:3000/users` ? true : false;

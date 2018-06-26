@@ -51,16 +51,16 @@ module.exports = {
             if(users.length) {
                 console.log('hit 1', users[0])
                 const userData = users[0];
-                const socialMediaArray = userData.social_media.split(' ');
-                for(let i = 0; i < socialMediaArray.length; i++) {
-                    if(socialMediaArray[i] === 'twitter' || socialMediaArray[i] === 'facebook' || socialMediaArray[i] === 'snapchat'
-                    || socialMediaArray[i] === 'twitchtv' || socialMediaArray[i] === 'playstation' || socialMediaArray[i] === 'xbox' ||
-                    socialMediaArray[i] === 'reddit' || socialMediaArray[i] === 'instagram') {
-                        socialMediaArray.splice(i, 1);
-                    }
-                }
+                // const socialMediaArray = userData.social_media.split(' ');
+                // for(let i = 0; i < socialMediaArray.length; i++) {
+                //     if(socialMediaArray[i] === 'twitter' || socialMediaArray[i] === 'facebook' || socialMediaArray[i] === 'snapchat'
+                //     || socialMediaArray[i] === 'twitchtv' || socialMediaArray[i] === 'playstation' || socialMediaArray[i] === 'xbox' ||
+                //     socialMediaArray[i] === 'reddit' || socialMediaArray[i] === 'instagram') {
+                //         socialMediaArray.splice(i, 1);
+                //     }
+                // }
                 // console.log('socialMedia-----------', socialMediaArray)
-                userData.social_media = socialMediaArray;
+                // userData.social_media = socialMediaArray;
                 bcrypt.compare(password, userData.password).then(doPasswordsMatch => {
                     delete userData.password;
                     console.log('hit 2', doPasswordsMatch)
@@ -94,20 +94,23 @@ module.exports = {
             dbInstance.update_user({ id, username, email, date: updatedDate, image, age, favoriteTeams, favoritePlayers, favoriteSport })
             .then(updatedUser => {
                 console.log('Updated User-------------', updatedUser);
-                const socialMediaArray = updatedUser.social_media && updatedUser.social_media.split(' ');
+                // console.log('Update.social_media-----------', Object.keys(updatedUser));
+                // const socialMediaArray = updatedUser[0].social_media && updatedUser[0].social_media.split('  ');
+                // console.log('socialmediaArray-------------', socialMediaArray);
                 // if(socialMediaArray.length) {
                 //     for(let i = 0; i < socialMediaArray.length; i++) {
-                //         if(socialMediaArray[i] === 'twitter' || socialMediaArray[i] === 'facebook' || socialMediaArray[i] === 'snapchat'
-                //         || socialMediaArray[i] === 'twitchtv' || socialMediaArray[i] === 'playstation' || socialMediaArray[i] === 'xbox' ||
-                //         socialMediaArray[i] === 'reddit' || socialMediaArray[i] === 'instagram') {
+                //         if(socialMediaArray[i] === 'twitter ' || socialMediaArray[i] === ' facebook ' || socialMediaArray[i] === ' snapchat '
+                //         || socialMediaArray[i] === ' twitchtv ' || socialMediaArray[i] === ' playstation ' || socialMediaArray[i] === ' xbox ' ||
+                //         socialMediaArray[i] === ' reddit ' || socialMediaArray[i] === ' instagram ' || socialMediaArray[i] === '') {
                 //             socialMediaArray.splice(i, 1);
                 //         }
                 //     }
                 // }
-                updatedUser.social_media = socialMediaArray;
-                req.session.user = updatedUser;
+                // console.log('socialmediaArray-------------', socialMediaArray);
+                // updatedUser[0].social_media = socialMediaArray;
+                req.session.user = updatedUser[0];
                 nodemailerCtrl.sendUpdate(email, 'Email just got updated!', `http://localhost:3000/users/${id}`);
-                res.status(200).json({user: updatedUser, message: 'Updated Profile!!'});
+                res.status(200).json({user: req.session.user, message: 'Updated Profile!!'});
             }).catch(err => console.log('Database Update User error---------', err));
         }
     },

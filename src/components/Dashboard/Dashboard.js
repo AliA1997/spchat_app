@@ -40,6 +40,7 @@ class Dashboard extends Component {
             Promise.all([axiosUserRequest, axiosPostRequest])
             .then(res => {
                 console.log('Axios hit------------');
+                console.log('res[0]user-----------', res[0].data.user);
                 dispatch(loginUser(res[0].data.user));
                 // console.log(res[0].data.user);
                 this.setState({posts: res[1].data.posts, loading: false});
@@ -110,7 +111,7 @@ class Dashboard extends Component {
                                         {currentUser.favorite_players && currentUser.favorite_players.map((player, i) => {
                                             return <PlayerCard key={i} {...player} />
                                         })}
-                                        <p className='dashboard-user-info-text'>Favorite Players: </p>
+                                        <p className='dashboard-user-info-text'>Favorite Teams: </p>
                                         {currentUser.favorite_teams && currentUser.favorite_teams.map((team, i) => {
                                             return <TeamCard key={i} {...team} />
                                         })}

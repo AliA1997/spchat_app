@@ -16,6 +16,11 @@
 .team-card-img-div {
     display: none;
 }
+.team-card-img {
+    height: 100%;
+    width: 80%;
+    border-radius: inherit;
+}
 @media (min-width: 760px) {
     .team-card-img-div {
         display: inline-block;

@@ -22,15 +22,15 @@ const filterNullValues = (obj, obj2) => {
 }
 
 class Form extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             username: '',
             email: '',
             image: '',
             password: '',
-            favoriteTeams: [],
-            favoritePlayers: [],
+            favoriteTeams: props.forEdit ? props.currentUser.favorite_teams : [],
+            favoritePlayers: props.forEdit ? props.currentUser.favorite_players : [],
             favoriteSport: '',
             age: '',
             currentPlayer: '',
@@ -152,6 +152,7 @@ class Form extends Component {
             console.log('fucking edit profiel-----', res.data.user)
             dispatch(loginUser(res.data.user));
             alert(res.data.message);
+            this.props.redirect('/dashboard');
         }).catch(err => console.log('Axios Put Error--------', err));
     }
     addToFavPlayers(e) {
@@ -212,15 +213,16 @@ class Form extends Component {
     render() {
         const { currentPlayer, currentTeam, username, email, image, password, age, teams, players, sports, ages, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
         const { forEdit, currentUser } = this.props;
-        if(currentUser) {
+        if((currentUser && window.location.href === `${window.location.origin}/edit_profile`) || 
+            window.location.href === `${window.location.origin}/register`) {
             return (
                 <form className='form register' onSubmit={(e) => forEdit ? this.updateProfile(e) : this.register()}>
                     <div className='first-div register'>
                         <p className='label-input register'>Username</p>
-                        <input type='text' className='input register' placeholder={forEdit && currentUser.username}
+                        <input type='text' className='input register' placeholder={forEdit ? currentUser.username : ''}
                         onChange={e => this.hanRegUsername(e.target.value)} value={username} min={6} max={40} required={!forEdit && true}/>
                         <p className='label-input register'>Email</p>
-                        <input type='text' className='input register file' placeholder={forEdit && currentUser.email}
+                        <input type='text' className='input register file' placeholder={forEdit ? currentUser.email : ''}
                         onChange={e => this.hanRegEmail(e.target.value)} value={email} min={6} max={40} required={!forEdit && true}/>
                     </div>
                     <div className='img-div register'>
@@ -236,7 +238,8 @@ class Form extends Component {
                         : <input type='password' className='input register' 
                             onChange={e => this.hanRegPassword(e.target.value)} value={password} min={6} max={50} required={!forEdit && true}/>}     
                         <p className='label register select'>Age</p>
-                        <input className='input register' type='date' max='2005-06-01' />    
+                        <input className='input register' type='date' max='2005-06-01' onChange={e => this.hanRegAge(e.target.value)}
+                        placeholder={forEdit ? currentUser.age : ''}/>    
                         <p className='label register select'>Favorite Teams</p>
                         <div className='data-list-div'>
                             <input list='teams'  className='input register' onChange={e => this.handleCurrentTeam(e.target.value)} value={currentTeam}/>
@@ -280,7 +283,8 @@ class Form extends Component {
     }
 }
 Form.defaultProps = {
-    forEdit: false
+    forEdit: false,
+    redirect: null
 }
 const mapStateToProps = state => {
     return {

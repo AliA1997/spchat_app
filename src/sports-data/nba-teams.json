@@ -1,6 +1,7 @@
   [
     {
       "teamId": 1610612737,
+      "colors": ["#E03A3E", "#fff"],
       "code": "ATL",
       "name": "Atlanta Hawks",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742369/profile-picture/atlanta_hawks-logo.png",
@@ -9,6 +10,7 @@
     },
     {
       "teamId": 1610612738,
+      "colors": ["#007A33", "#BA9653"],
       "code": "BOS",
       "name": "Boston Celtics",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742369/profile-picture/boston_celtics-logo.png",
@@ -17,6 +19,7 @@
     },
     {
       "teamId": 1610612751,
+      "colors": ["#000", "#fff"],
       "code": "BKN",
       "name": "Brooklyn Nets",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/brooklyn_nets-logo.png",
@@ -25,6 +28,7 @@
     },
     {
       "teamId": 1610612766,
+      "colors": ["#1D1160", "#00788C"],
       "code": "CHA",
       "name": "Charlotte Hornets",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/charlotte_hornets-logo.png",
@@ -33,6 +37,7 @@
     },
     {
       "teamId": 1610612741,
+      "colors": ["#CE1141", "#000"],
       "code": "CHI",
       "name": "Chicago Bulls",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/chicago_bulls-logo.png",
@@ -41,6 +46,7 @@
     },
     {
       "teamId": 1610612739,
+      "colors": ["#6F263D", "#FFB81C"],
       "code": "CLE",
       "name": "Cleveland Cavaliers",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/cleveland_cavaliers-logo.png",    
@@ -49,6 +55,7 @@
     },
     {
       "teamId": 1610612742,
+      "colors": ["#002B5E", "#B8C4CA"],
       "code": "DAL",
       "name": "Dallas Mavericks",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/dallas_mavericks-logo.png",      
@@ -57,6 +64,7 @@
     },
     {
       "teamId": 1610612743,
+      "colors": ["#418FDE", "#FDB927"],
       "code": "DEN",
       "name": "Denver Nuggets",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/denver_nuggets-logo.png",
@@ -65,6 +73,7 @@
     },
     {
       "teamId": 1610612765,
+      "colors": ["#ED174C", "#006BB6"],
       "code": "DET",
       "name": "Detroit Pistons",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742371/profile-picture/detroit_pistons-log.png",
@@ -73,6 +82,7 @@
     },
     {
       "teamId": 1610612744,
+      "colors": ["#006BB6", "#FDB927"],
       "code": "GSW",
       "name": "Golden State Warriors",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/golden_state_warriors-logo.png",
@@ -81,6 +91,7 @@
     },
     {
       "teamId": 1610612745,
+      "colors": ["#CE1141", "#C4CED4"],
       "code": "HOU",
       "name": "Houston Rockets",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/houston_rockets-logo.png",
@@ -89,6 +100,7 @@
     },
     {
       "teamId": 1610612754,
+      "colors": ["#002D62", "#FDBB30"],
       "code": "IND",
       "name": "Indiana Pacers",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/indiana_pacers-logo.png",
@@ -97,6 +109,7 @@
     },
     {
       "teamId": 1610612746,
+      "colors": ["#006BB6", "#ED174C"],
       "code": "LAC",
       "name": "Los Angeles Clippers",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/los_angeles_clippers-logo.png",
@@ -105,6 +118,7 @@
     },
     {
       "teamId": 1610612747,
+      "colors": ["#FDB927", "#552583"],
       "code": "LAL",
       "name": "Los Angeles Lakers",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/los_angeles_lakers-logo.png",
@@ -113,6 +127,7 @@
     },
     {
       "teamId": 1610612763,
+      "colors": ["#00285E", "#FDB927"],
       "code": "MEM",
       "name": "Memphis Grizzlies",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/memphis_grizzlies-logo.png",
@@ -121,6 +136,7 @@
     },
     {
       "teamId": 1610612748,
+      "colors": ["#98002E", "#000"],
       "code": "MIA",
       "name": "Miami Heat",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/miami_heat-logo.png",
@@ -129,6 +145,7 @@
     },
     {
       "teamId": 1610612749,
+      "colors": ["#00471B", "#EEE1C6"],
       "code": "MIL",
       "name": "Milwaukee Bucks",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/milwaukee_bucks-logo.png",
@@ -137,6 +154,7 @@
     },
     {
       "teamId": 1610612750,
+      "colors": ["#9EA2A2", "#236192"],
       "code": "MIN",
       "name": "Minnesota Timberwolves",
       "simpleName": "Timberwolves",
@@ -145,6 +163,7 @@
     },
     {
       "teamId": 1610612740,
+      "colors": ["#85714D", "#0C2340"],
       "code": "NOP",
       "name": "New Orleans Pelicans",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/new_orleans_pelicans-logo.png",
@@ -153,6 +172,7 @@
     },
     {
       "teamId": 1610612752,
+      "colors": ["#F58426", "#006BB6"],
       "code": "NYK",
       "name": "New York Knicks",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/new_york_knicks-logo.png",
@@ -161,6 +181,7 @@
     },
     {
       "teamId": 1610612760,
+      "colors": ["#007AC1", "#EF3B24"],
       "code": "OKC",
       "name": "Oklahoma City Thunder",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/oklahoma_city_thunder-logo.png",
@@ -169,6 +190,7 @@
     },
     {
       "teamId": 1610612753,
+      "colors": ["#0077C0", "#000"],
       "code": "ORL",
       "name": "Orlando Magic",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/orlando_magic-logo.png",
@@ -177,6 +199,7 @@
     },
     {
       "teamId": 1610612755,
+      "colors": ["#ED174C", "#002B5C"],
       "code": "PHI",
       "name": "Philadelphia 76ers",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/philadelphia_76ers-logo.png",
@@ -185,6 +208,7 @@
     },
     {
       "teamId": 1610612756,
+      "colors": ["#1D1160", "#E56020"],
       "code": "PHX",
       "name": "Phoenix Suns",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/phoenix_suns-logo.png",
@@ -193,6 +217,7 @@
     },
     {
       "teamId": 1610612757,
+      "colors": ["#E03A3E", "#000"],
       "code": "POR",
       "name": "Portland Trail Blazers",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742369/profile-picture/trail-blazers-logo.png",
@@ -201,6 +226,7 @@
     },
     {
       "teamId": 1610612758,
+      "colors": ["#5A2D81", "#63727A"],
       "code": "SAC",
       "name": "Sacramento Kings",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/sacramento_kings-logo.png",
@@ -209,6 +235,7 @@
     },
     {
       "teamId": 1610612759,
+      "colors": ["#000", "#C4CED4"],
       "code": "SAS",
       "name": "San Antonio Spurs",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/san_antonio_spurs-logo.png",
@@ -217,6 +244,7 @@
     },
     {
       "teamId": 1610612761,
+      "colors": ["#CE1141", "#000"],
       "code": "TOR",
       "name": "Toronto Raptors",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/toronto_raptors-logo.png",
@@ -225,6 +253,7 @@
     },
     {
       "teamId": 1610612762,
+      "colors": ["#00471B", "#F9A01B"],
       "code": "UTA",
       "name": "Utah Jazz",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/utah_jazz-logo.png",
@@ -233,6 +262,7 @@
     },
     {
       "teamId": 1610612764,
+      "colors": ["#002B5C", "#C4CED4"],
       "code": "WAS",
       "name": "Washington Wizards",
       "logo": "http://res.cloudinary.com/alia1997/image/upload/v1529742370/profile-picture/washington_wizards-logo.png",

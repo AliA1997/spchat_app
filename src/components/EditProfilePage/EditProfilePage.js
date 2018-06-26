@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from '../generalSubComponents/Form/Form';
 import SocialMediaForm from '../userSubComponents/SocialMediaForm/SocialMediaForm';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './EditProfilePage.css';
 
@@ -11,13 +12,16 @@ class EditProfilePage extends Component {
             socialMediaClicked: false,
         }
     }
+    redirect = (path) => {
+        this.props.history.push(path);
+    }
     render() {
         const { socialMediaClicked } = this.state;
         return (
             <div className='edit-profile-container' >
                 Edit Profile
                 <div className='edit-profile-wrapper'>
-                    <Form forEdit={true}/>
+                    <Form forEdit={true} redirect={this.redirect}/>
                 </div>
                 <button onClick={() => this.setState({socialMediaClicked: !this.state.socialMediaClicked})}>Social Media</button>
                 <div className='edit-profile-social-media-wrapper' style={{display: socialMediaClicked ? 'inline-block' : 'none'}}>
@@ -37,4 +41,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(EditProfilePage)
+export default withRouter(connect(mapStateToProps)(EditProfilePage));
+

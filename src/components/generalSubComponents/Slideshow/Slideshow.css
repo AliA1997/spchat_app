@@ -1,85 +1,94 @@
+.slideshow {
+  /* height: 30vh; */
+  width: 80vw;
+}
 
-  .slideshow {
-    background: none;
-    margin: 50px;
-    height: 75vh;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    position: relative;
-  }
-  .slideshow-slides {
-    margin: 10%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .slideshow-slides li {
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    margin: 0;
-    padding: 0;
-    transition: .2s;
-    opacity: 0;
-  }
-  .slideshow-slides li.active {
-    opacity: 1;
-  }
-  .slide-figure {
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  .slide-image {
-      width: 60%;
-      height: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      z-index: 1;    
-  }
-  figure {
-    margin: 0;
-    padding: 0;
-  }
-  figcaption {
-    position: absolute;
-    background: #000;
-    text-align: center;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: #fff;
-    padding: 30px;
-  }
-  
-  .slideshow-dots {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    list-style: none;
-  }
-  .slideshow-dots li {
-    display: inline;
-    margin: 0;
-    padding: 0;
-  }
-  .slideshow-dots a {
-    cursor: pointer;
-    display: inline-block;
-    width: 10px;
-    padding: 2px;
-    height: 10px;
-    margin: 0 5px;
-    background: #fff;
-    border-radius: 100%;
-    text-indent: -9990px;
-    opacity: .5;
-    transition: .3s;
-  }
-  .slideshow-dots li.active a {
-    opacity: 1;
-  }
+.slide > img {
+  padding: 5%;
+  height: 20em;
+  width: 100%;
+}
+/* .slide { position: relative; } */
+
+.slide {
+  height: 100%;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  border: 2px solid #fff;
+  margin: 10%;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 5;
+  -webkit-animation: slideshow 12s linear 0s infinite;
+  -moz-animation: slideshow 12s linear 0s infinite;
+  -ms-animation: slideshow 12s linear 0s infinite;
+  -o-animation: slideshow 12s linear 0s infinite;
+  animation: slideshow 12s linear 0s infinite;
+}
+
+.slide:nth-child(2) {
+  z-index: 4;
+  -webkit-animation: slideshow 12s linear 4s infinite;
+  -moz-animation: slideshow 12s linear 4s infinite;
+  -ms-animation: slideshow 12s linear 4s infinite;
+  -o-animation: slideshow 12s linear 4s infinite;
+  animation: slideshow 12s linear 4s infinite;
+}
+
+.slide:nth-child(3) {
+   z-index: 3;
+  -webkit-animation: slideshow 12s linear 8s infinite;
+  -moz-animation: slideshow 12s linear 8s infinite;
+  -ms-animation: slideshow 12s linear 8s infinite;
+  -o-animation: slideshow 12s linear 8s infinite;
+  animation: slideshow 12s linear 8s infinite;
+}
+.slide:nth-child(4) {
+  z-index: 2;
+ -webkit-animation: slideshow 12s linear 8s infinite;
+ -moz-animation: slideshow 12s linear 8s infinite;
+ -ms-animation: slideshow 12s linear 8s infinite;
+ -o-animation: slideshow 12s linear 8s infinite;
+ animation: slideshow 12s linear 8s infinite;
+}
+
+.slide:nth-child(5) {
+  z-index: 1;
+ -webkit-animation: slideshow 12s linear 8s infinite;
+ -moz-animation: slideshow 12s linear 8s infinite;
+ -ms-animation: slideshow 12s linear 8s infinite;
+ -o-animation: slideshow 12s linear 8s infinite;
+ animation: slideshow 12s linear 8s infinite;
+}
+
+@-webkit-keyframes slideshow {
+   25% { opacity: 1;}
+   33.33% { opacity: 0;} 
+   91.66% { opacity: 0;}
+   100% { opacity: 1;}
+}
+@-moz-keyframes slideshow {
+   25% { opacity: 1;}
+   33.33% { opacity: 0;} 
+   91.66% { opacity: 0;}
+   100% { opacity: 1;}
+}
+@-ms-keyframes slideshow {
+   25% { opacity: 1;}
+   33.33% { opacity: 0;} 
+   91.66% { opacity: 0;}
+   100% { opacity: 1;}
+}
+@-o-keyframes slideshow {
+   25% { opacity: 1;}
+   33.33% { opacity: 0;} 
+   91.66% { opacity: 0;}
+   100% { opacity: 1;}
+}
+@keyframes slideshow {
+   25% { opacity: 1;}
+   33.33% { opacity: 0;} 
+   91.66% { opacity: 0;}
+   100% { opacity: 1;}
+}
