@@ -61,11 +61,13 @@ class Chat extends Component {
             //
             // const { chatExist } = this.state;
             //
+            console.log('hit save chat event emitter')
             // console.log('state.messages-----------', this.state.messages);
-            if(this.state.messages.length && this.state.users.length > 1){
+            // if(this.state.messages.length && this.state.users.length > 1){
+            if(this.state.messages.length) {
             // const axiosChatPromise = chatExist ? axios.put(`/api/chat/${props.postId}`, {messages: this.state.messages, users: this.state.users}) 
             // : axios.post(`/api/chat/${props.postId}`, {messages: this.state.messages, users: this.state.users});
-            axios.post(`/api/chat/${props.postId}`, {messages: this.state.messages, users: this.state.users})
+            return axios.post(`/api/chat/${props.postId}`, {messages: this.state.messages, users: this.state.users})
             .then(res => {
                 console.log('message hit----------');
                 alert(res.data.message); 
@@ -124,7 +126,7 @@ class Chat extends Component {
                     </div>
                     <div className='chat-users-list'>
                         <p className='chat-users-header'>Users<GoOrganization /></p>
-                        {users && users.map((user, i) => <p className='chat user' key={i}>{user}</p>)}
+                        {users && users.map((user, i) => <p className='chat user' key={i}>{user.username}</p>)}
                     </div>
                 </div>
             </div>

@@ -6,8 +6,8 @@ module.exports = (io, Posts) => {
      io.sockets.on('connection', (socket) => {
         console.log('Socket connected!!!', socket.id);
         // console.log('db-----------', db)
-        const filteredUser = socket.handshake.query.username !== 'Anonymous' && topicUsers.filter(user => user === socket.handshake.query.username);
-        !filteredUser.length && topicUsers.push(`${socket.handshake.query.username}`)         
+        const filteredUser = socket.handshake.query.username !== 'Anonymous' && topicUsers.filter(user => user.username === socket.handshake.query.username);
+        !filteredUser.length && topicUsers.push({username: socket.handshake.query.username, imageurl: socket.handshake.query.imageurl});         
         socket.on('room', () => {
             io.emit('CONNECT_ROOM');         
             if(socket.handshake.query.topic) {
@@ -48,7 +48,7 @@ module.exports = (io, Posts) => {
         });        
         setInterval(() => {
             io.emit('SAVE_CHAT')
-        }, (1000 * 5))
+        }, (1000 * 60) * 5)
 
         socket.on('disconnect', () => {
             let room = posts.RemovePost(socket.id);

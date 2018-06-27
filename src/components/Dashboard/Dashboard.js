@@ -24,6 +24,7 @@ class Dashboard extends Component {
             isProfile: false,
             edit: true
         }
+        this.linkFunc = this.linkFunc.bind(this);
     }
     componentDidMount() {
         console.log('componentDidMOunt Dashbaord hit');
@@ -122,7 +123,7 @@ class Dashboard extends Component {
                                 return (
                                 <div className='dashboard-post-container-div' key={i}>
                                     <div className='dashboard-post-wrapper'>
-                                        <Post {...post} reRender={this.reRender} 
+                                        <Post {...post} reRender={this.reRender} isInDashboard={true} linkTo={this.linkFunc}
                                         user_image={currentUser.image} username={currentUser.username}/>
                                         <button className='dashboard btn' onClick={() => doEditPost ? dispatch(doneEditPost()) : dispatch(editPost())}>
                                             Edit

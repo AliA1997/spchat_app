@@ -12,7 +12,9 @@ class Comments extends Component {
         super();
         this.state = {
             text: '',
+            editText: '',
             comments: [],
+            edit: false,
             loading: true 
         }
     }
@@ -44,8 +46,47 @@ class Comments extends Component {
             this.setState({loading: true, text: ''});
         }).catch(err => console.log('Axios Post Error------------', err));
     }
+    showEditTextArea = (bool=null) => {
+    this.setState({edit: !this.state.edit});
+    }
+    deleteComment = (post_id, id) => {
+        // console.log('WHat-s wrong--------', this.props);
+        // console.log('currentPost----------', this.props.currentPost[0].id);
+        // console.log('postId--------------', this.props.post_id);
+        // console.log('comment id---------------', this.props.id);
+        // console.log('this.props comment----------', this.props);
+        axios.delete(`/api/comments/${post_id}/${id}`)
+        .then(res => {
+            this.setState(this.state);     
+            this.getComments();
+            // console.log('message-----------', res.data.message);
+        }).catch(err => console.log('Axios delete error!', err));
+    }
+    editComment = (post_id, id) => {
+        console.log('Edit Method hit------------');
+       const { editText, edit } = this.state;
+       const { currentUser } = this.props;
+       let today = new Date();
+       const date = getTime();
+       console.log('-------date', date);
+        if(edit) {
+            axios.put(`/api/comments/${post_id}/${id}`, {text: editText, date})
+            .then(res => {
+                console.log(res.data.message);
+                this.setState({edit: false});
+                this.getComments();
+            }).catch(err => console.log('Axios Put Error--------------', err));
+        } else {
+            // if(currentUser.username === this.props.username)
+             this.setState({edit: true})
+        }
+    }
+    handleEditChange = (val) => {
+        this.setState({editText: val});
+    } 
+    
     render() {
-        const { comments, loading, text } = this.state;
+        const { comments, loading, text, editText, edit } = this.state;
         // console.log('comments----------', comments);
         if(!loading) {
             return (
@@ -57,7 +98,8 @@ class Comments extends Component {
                     <button className='create-comment-button'
                     onClick={() => this.createComment()}>Create<IoIosComposeOutline /></button>
                     <div className='comments-div'>
-                    {comments && comments.map((comment, i) => <Comment key={i} reRender={this.getComments} {...comment}/>)}
+                    {comments && comments.map((comment, i) => <Comment key={i}  {...comment} handleChange={this.handleEditChange}
+                                                showTextArea={this.showEditTextArea} doEditComment={edit} editText={editText} delete={this.deleteComment} edit={this.editComment}/>)}
                     </div>
                 </div>
             );

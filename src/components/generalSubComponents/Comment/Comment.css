@@ -39,7 +39,7 @@
 }
 
 
-.comment-button-div > button:first-child():hover {
+.comment-button-div > button:first-child:hover {
     color: #000;
     background: #fff; 
 }

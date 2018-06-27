@@ -15,13 +15,14 @@ module.exports = {
         const dbInstance = req.app.get('db');
         const { post_id } = req.params;
         const { messages, users } = req.body;
-        // console.log('Messages------------', messages);
-        // console.log('Users----------', users);
+        console.log('Messages------------', messages);
+        console.log('Users----------', users);
         // console.log('Post_id-----------', post_id);
         dbInstance.create_chat({post_id, messages, users})
+        // dbInstance.create_chat({post_id, messages})
         .then(chat => {
             res.status(200).json({message: 'Chat Created Successfully!'});
-        }).catch(err => console.log('Database Crate Chat error--------------', err));
+        }).catch(err => console.log('Database Create Chat error--------------', err));
     },
     updateChat: (req, res) => {
         const dbInstance = req.app.get('db');
