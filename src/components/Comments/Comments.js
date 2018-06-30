@@ -6,6 +6,7 @@ import Comment from '../generalSubComponents/Comment/Comment';
 import Loader from '../generalSubComponents/Loader/Loader';
 import IoIosComposeOutline from 'react-icons/lib/io/ios-compose-outline';
 import './Comments.css';
+import CommentContainer from '../generalSubComponents/Comment/CommentContainer';
 
 class Comments extends Component {
     constructor() {
@@ -14,7 +15,6 @@ class Comments extends Component {
             text: '',
             editText: '',
             comments: [],
-            edit: false,
             loading: true 
         }
     }
@@ -46,9 +46,6 @@ class Comments extends Component {
             this.setState({loading: true, text: ''});
         }).catch(err => console.log('Axios Post Error------------', err));
     }
-    showEditTextArea = (bool=null) => {
-    this.setState({edit: !this.state.edit});
-    }
     deleteComment = (post_id, id) => {
         // console.log('WHat-s wrong--------', this.props);
         // console.log('currentPost----------', this.props.currentPost[0].id);
@@ -69,17 +66,15 @@ class Comments extends Component {
        let today = new Date();
        const date = getTime();
        console.log('-------date', date);
-        if(edit) {
+        if(editText) {
             axios.put(`/api/comments/${post_id}/${id}`, {text: editText, date})
             .then(res => {
                 console.log(res.data.message);
-                this.setState({edit: false});
+                this.setState({editText: ''});
                 this.getComments();
             }).catch(err => console.log('Axios Put Error--------------', err));
-        } else {
-            // if(currentUser.username === this.props.username)
-             this.setState({edit: true})
-        }
+        } 
+        return;
     }
     handleEditChange = (val) => {
         this.setState({editText: val});
@@ -98,8 +93,8 @@ class Comments extends Component {
                     <button className='create-comment-button'
                     onClick={() => this.createComment()}>Create<IoIosComposeOutline /></button>
                     <div className='comments-div'>
-                    {comments && comments.map((comment, i) => <Comment key={i}  {...comment} handleChange={this.handleEditChange}
-                                                showTextArea={this.showEditTextArea} doEditComment={edit} editText={editText} delete={this.deleteComment} edit={this.editComment}/>)}
+                    {comments && comments.map((comment, i) => <CommentContainer key={i}  comment={comment} handleChange={this.handleEditChange}
+                                                 editText={editText} delete={this.deleteComment} edit={this.editComment}/>)}
                     </div>
                 </div>
             );

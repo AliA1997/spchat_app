@@ -1,6 +1,10 @@
 .main-nav {
   display: none;
 }
+.nav {
+  width: 100vw;
+  margin: 0;
+}
 .submenu-nav-item {
   color: inherit;
 }
@@ -28,8 +32,9 @@
 }
 .mobile.mobile-main-nav {
   /* height: 50vh; */
+  width: 100vw;
   margin-left: 5%;
-  background: #020;
+  opacity: 0.75;
   list-style: none;
 }
 .mobile-search-bar {
@@ -39,7 +44,7 @@
   width: 100%;
 }
 .mobile.mobile-main-nav-wrapper {
-  width: 100vw;
+  width: 100%;
   display: grid;
   text-align: center;
   grid-template-rows: 15% 15% 15% 15% 15% 15% 10%;
@@ -48,6 +53,7 @@
   font-size: 1.2em;
   padding: 10px;
   grid-row: auto;
+  width: 100%;
 }
 .mobile-nav-icon {
   font-size: 2em;
@@ -104,13 +110,14 @@
     width: 75%;
   }
   .main-nav {
-    display: inline-block;
-      background: #020;
+      opacity: 0.75;
+      display: inline-block;
       height: 20vh;
       width: 100%;
       position: fixed;
       display: flex;
       justify-content: center;
+      font-weight: 800;
       align-items: center;
       top: 0;
       right: 0;

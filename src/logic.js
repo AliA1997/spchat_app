@@ -8,3 +8,11 @@ export function getTime() {
     const seconds = d.getSeconds(); // => 51
     return `Date: ${day}/${month}/${year}, Time: ${hours} : ${minutes} : ${seconds}`;
 }
+
+export function getDOB(date) {
+    const currentDate = new Date();
+    const day = currentDate.getDay(),
+    month = currentDate.getMonth(),
+    year = currentDate.getFullYear();
+    const dob = [];
+}

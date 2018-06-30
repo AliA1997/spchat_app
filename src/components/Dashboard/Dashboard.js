@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Loader from '../generalSubComponents/Loader/Loader';
 import Popup from '../generalSubComponents/Popup/Popup';
-import Post from '../postSubComponents/Post/Post';
-import EditPost from '../postSubComponents/EditPost/EditPost';
+import EditPostContainer from './EditPostContainer';
 import PlayerCard from '../userSubComponents/PlayerCard/PlayerCard';
 import TeamCard from '../userSubComponents/TeamCard/TeamCard';
 import SocialMediaSection from '../userSubComponents/SocialMediaSection/SocialMediaSection';
@@ -24,7 +23,7 @@ class Dashboard extends Component {
             isProfile: false,
             edit: true
         }
-        this.linkFunc = this.linkFunc.bind(this);
+        // this.linkFunc = this.linkFunc.bind(this);
     }
     componentDidMount() {
         console.log('componentDidMOunt Dashbaord hit');
@@ -66,7 +65,7 @@ class Dashboard extends Component {
 
         }
     }
-    linkFunc(path) {
+    linkFunc = (path) => {
         this.props.history.push(path);
     }
     reRender = () => {
@@ -122,16 +121,7 @@ class Dashboard extends Component {
                             {posts && posts.map((post, i) => {
                                 return (
                                 <div className='dashboard-post-container-div' key={i}>
-                                    <div className='dashboard-post-wrapper'>
-                                        <Post {...post} reRender={this.reRender} isInDashboard={true} linkTo={this.linkFunc}
-                                        user_image={currentUser.image} username={currentUser.username}/>
-                                        <button className='dashboard btn' onClick={() => doEditPost ? dispatch(doneEditPost()) : dispatch(editPost())}>
-                                            Edit
-                                        </button>
-                                        <div className='dashboard-edit-post-wrapper' style={{display: doEditPost ? 'inline-block' : 'none'}}>
-                                            <EditPost reRender={this.reRender}  {...post} />
-                                        </div>
-                                    </div>
+                                    <EditPostContainer post={post} reRender={this.reRender} linkFunc={this.linkFunc}/>
                                 </div>
                                 );
                                 }

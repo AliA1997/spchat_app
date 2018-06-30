@@ -8,28 +8,28 @@ const arr = [...mlbPlayers, ...mlbTeams, ...nbaPlayers,
     ...nbaTeams, ...nflTeams];
 
 const initialState = {
-    doEdit: false,
-    doEditPost: false,
+    // doEdit: false,
+    // doEditPost: false,
     currentPost: null,
     sports_data: arr
 }
 
-const START_EDIT_COMMENT = 'START_EDIT_COMMENT';
-const END_EDIT_COMMENT = 'END_EDIT_COMMENT';
-const START_EDIT_POST = 'START_EDIT_POST'; 
-const END_EDIT_POST = 'END_EDIT_POST';
+// const START_EDIT_COMMENT = 'START_EDIT_COMMENT';
+// const END_EDIT_COMMENT = 'END_EDIT_COMMENT';
+// const START_EDIT_POST = 'START_EDIT_POST'; 
+// const END_EDIT_POST = 'END_EDIT_POST';
 const START_GET_POST = 'START_GET_POST';
 
 export default (state = initialState, action) => {
     switch(action.type) {
-        case START_EDIT_COMMENT:
-            return {...state, doEdit: true};
-        case END_EDIT_COMMENT:
-            return {...state, doEdit: false};
-        case START_EDIT_POST:
-            return {...state, doEditPost: true};
-        case END_EDIT_POST:
-            return {...state, doEditPost: false};
+        // case START_EDIT_COMMENT:
+        //     return {...state, doEdit: true};
+        // case END_EDIT_COMMENT:
+        //     return {...state, doEdit: false};
+        // case START_EDIT_POST:
+        //     return {...state, doEditPost: true};
+        // case END_EDIT_POST:
+        //     return {...state, doEditPost: false};
         case START_GET_POST:
             return {...state, currentPost: action.payload};
         default: 
@@ -37,17 +37,17 @@ export default (state = initialState, action) => {
     }
 }
 
-export const edit = () => {
-    return {
-        type: START_EDIT_COMMENT
-    }
-}
+// export const edit = () => {
+//     return {
+//         type: START_EDIT_COMMENT
+//     }
+// }
 
-export const doneEdit = () => {
-    return {
-        type: END_EDIT_COMMENT
-    }
-}
+// export const doneEdit = () => {
+//     return {
+//         type: END_EDIT_COMMENT
+//     }
+// }
 
 export const getPost = (post)  => {
     return {
@@ -56,14 +56,14 @@ export const getPost = (post)  => {
     };
 }
 
-export const editPost = () => {
-    return {
-        type: START_EDIT_POST,
-    }
-}
-export const doneEditPost = () => {
-    return {
-        type: END_EDIT_POST
-    };
-}
+// export const editPost = () => {
+//     return {
+//         type: START_EDIT_POST,
+//     }
+// }
+// export const doneEditPost = () => {
+//     return {
+//         type: END_EDIT_POST
+//     };
+// }
 

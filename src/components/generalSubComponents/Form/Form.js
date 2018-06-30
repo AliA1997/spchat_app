@@ -71,7 +71,9 @@ class Form extends Component {
         this.setState({password: val});
     }
     hanRegAge(val) {
-        this.setState({age: val});
+        let DOB = +val.split('-').slice(0, 1)[0];
+        console.log('--------------------age', (2018 - DOB));
+        this.setState({age: (2018 - DOB)});
     }   
     hanRegFavTeams(e) {
         e.preventDefault();

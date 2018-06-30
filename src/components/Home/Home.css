@@ -6,8 +6,15 @@
     /* border: solid 2px #fff; */
     padding: 5%;
     margin-top: 10%;
+    margin-bottom: 5%;
     z-index: -1;
 }
+.home-recent-posts-div {
+    /* text-align: center; */
+    width: 100%;
+    /* border: 2px solid #fff; */
+}
+
 .home-div {
     background: none;
     padding: 100px;

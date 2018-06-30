@@ -28,12 +28,15 @@ export default class News extends Component {
             this.setState({newsArticles: copyOfArrState});
         }).catch(err => console.log('Axios News Error-------', err));
     }
+    linkFunc = (path) => {
+        window.open(path, '_blank');
+    }
     render() {
         const { newsArticles } = this.state;
         return (
             <div className='news-container'>
                 {/* <div className='news-header'></div> */}
-                <Slideshow slides={newsArticles}/>
+                <Slideshow slides={newsArticles} linkFunc={this.linkFunc}/>
             </div>
         );
     }

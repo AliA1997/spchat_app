@@ -12,7 +12,10 @@ import nhlLogo from '../../imgs/nhl-logo.png';
 import fifaLogo from '../../imgs/fifa-logo.png';
 import laLigaLogo from '../../imgs/la-liga-logo.png';
 import premierLeagueLogo from '../../imgs/premier-liga.png';
-import bundesLigaLogo from '../../imgs/bundes-liga.png';
+import bmxLogo from '../../imgs/bmx-logo.jpg';
+import snowboardingLogo from '../../imgs/Snowboarding-logo.svg';
+import skateboardingLogo from '../../imgs/skateboarding-logo.jpg';
+import skiingLogo from '../../imgs/skiing-logo.jpg';
 
 import './SportsPage.css';
 // import { connect } from 'net';
@@ -35,7 +38,10 @@ export const SportHOC = (sport) => {
                 {img: fifaLogo, sport: 'fifa'},
                 {img: laLigaLogo, sport: 'la-liga'}, 
                 {img: premierLeagueLogo, sport: 'premier-league'}, 
-                {img: bundesLigaLogo, sport: 'bundes-liga'}
+                {img: skateboardingLogo, sport: 'skateboarding'},
+                {img: snowboardingLogo, sport: 'snowboarding'},
+                {img: skiingLogo, sport: 'skiing'},
+                {img: bmxLogo, sport: 'bmx'}
             ];
         }
         componentDidMount() {
@@ -47,8 +53,20 @@ export const SportHOC = (sport) => {
             // .then(res => {
             //     this.setState({sportPosts: res.data.posts});
             // }).catch(err => console.log('Get Sports Post Axios Error--------', err));
-            const sportId = sport.length > 3 ? sport[sport.length- 1].toUpperCase() :
-            sport.toUpperCase();
+            let sportId = null;
+            if(sport === 'la-liga') {
+                 sportId = 'La Liga';
+            } else if(sport === 'premier-league') {
+                 sportId = 'Premier League';
+            } else if(sport === 'snowboarding') {
+                 sportId = 'Snowboarding';
+            } else if(sport === 'skateboarding') {
+                sportId = 'Skateboarding';
+            } else if(sport === 'skiing') {
+                sportId = 'Skiing';
+            } else {
+                 sportId =  sport.toUpperCase();
+            }
             const postsAxiosCall = axios.get(`/api/posts/sports/${sport}`);
             const surveyAxiosCall = axios.get(`/api/survey/${sportId}`);
             Promise.all([postsAxiosCall, surveyAxiosCall])
@@ -66,10 +84,10 @@ export const SportHOC = (sport) => {
                         <div className='sports-page-wrapper'>
                             <img className='sports-logo' src={currentImg && currentImg.img} 
                             alt={`${currentImg && currentImg.sport}-logo`} />
+                            <News title={sport}/>
                             <div className='sports-page-posts'>
                                 {sportPosts && <Posts sportsPosts={sportPosts} loading={loading} />}
                             </div>
-                            {/* <News title={sport}/> */}
                             <div className='sports-page-last-div'>
                                 <div className='survey-div sports-subdiv'>
                                     <Survey survey={survey}/>

@@ -48,7 +48,7 @@ module.exports = (io, Posts) => {
         });        
         setInterval(() => {
             io.emit('SAVE_CHAT')
-        }, (1000 * 60) * 5)
+        }, (1000 * 10))
 
         socket.on('disconnect', () => {
             let room = posts.RemovePost(socket.id);

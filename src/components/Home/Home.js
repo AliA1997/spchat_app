@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Posts from '../Posts/Posts';
 // import SlickSlideshow from '../SlideImages/SlideImages';
@@ -29,6 +30,9 @@ class Home extends Component {
             this.setState({posts: res[0].data.posts, survey: res[1].data.survey, recentPosts: res[2].data.posts, loading: false})
         }).catch(err => console.log('Axios all error-----------', err));
     }
+    linkFunc = (path) => {
+        return this.props.history.push(path);
+    }
     logout() {
         const { dispatch } = this.props;
         axios.post('/api/logout')
@@ -41,16 +45,16 @@ class Home extends Component {
         const { currentUser } = this.props;
         const { loading, posts, recentPosts, survey } = this.state;
         let displayPosts = recentPosts.map(post => {
-            return {imageurl: post.image, title: post.title}
+            return {imageurl: post.image, title: post.title, link: `/posts/${post.sport}/${post.id}`}
         });
         if(!loading) {
             return (
                 <div className='home-div'>
                     <div className='home-slideshow-div'>
-                        {/* <Slideshow slides={displayPosts}/> */}
+                        <Slideshow slides={displayPosts} linkFunc={this.linkFunc} isHome={true}/>
                     </div>
+                    <h3 style={{fontSize: '2.25em', marginLeft: 'auto', marginRight: 'auto', marginTop: '50px'}}>Recent Posts</h3>
                     <div className='home-recent-posts-div'>
-                            <h3>Recent Posts</h3>
                             <Posts posts={posts}/>
                     </div>
                     <div className='home-subdiv'>
@@ -84,4 +88,4 @@ const mapStateToProps = state => {
         currentUser: state.user.currentUser
     }
 }
-export default connect(mapStateToProps)(Home);
+export default withRouter(connect(mapStateToProps)(Home));

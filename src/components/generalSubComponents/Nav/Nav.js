@@ -93,8 +93,8 @@ class Nav extends Component {
                         {currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length ? 
                         <figure className='stage'>
                             <img className='ball' 
-                            src={currentUser.favorite_teams && currentUser.favorite_teams[randomIndex].logo} 
-                            alt={currentUser.favorite_teams && currentUser.favorite_teams[randomIndex].name}/>
+                            src={currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].logo} 
+                            alt={currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].name}/>
                         </figure>
                         :
                         <figure className='stage'>

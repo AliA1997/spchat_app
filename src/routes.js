@@ -19,6 +19,10 @@ import NHL from './components/sportsComponents/NHL';
 import LaLiga from './components/sportsComponents/LaLiga';
 import PremierLeague from './components/sportsComponents/PremierLeague';
 import FIFA from './components/sportsComponents/Fifa';
+import BMX from './components/sportsComponents/BMX';
+import Skateboarding from './components/sportsComponents/Skateboarding';
+import Snowboarding from './components/sportsComponents/Snowboarding';
+import Skiing from './components/sportsComponents/Skiing';
 
 import ErrorNotFoundPage from './components/ErrorNotFoundPage/ErrorNotFoundPage';
 import Admin from './components/Admin/Admin';
@@ -45,6 +49,10 @@ export default (
         <Route exact path='/sports/premier-league' component={PremierLeague} />     
         <Route exact path='/sports/la-liga' component={LaLiga} />
         <Route exact path='/sports/fifa' component={FIFA} />     
+        <Route exact path='/sports/skiing' component={Skiing} />
+        <Route exact path='/sports/snowboarding' component={Snowboarding} />
+        <Route exact path='/sports/skateboarding' component={Skateboarding} />
+        <Route exact path='/sports/bmx' component={BMX} />
 
         <Route path='/:post/chat/:chatId' component={ChatPage}/>   
         <Route exact path='/chat/:sportId' component={ChatPage} />     

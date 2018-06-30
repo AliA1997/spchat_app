@@ -59,109 +59,111 @@ app.use(session({
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../build/index.html'));
 // })
-//Cloudinary Endpoints 
-app.get('/api/upload', cloudinaryCtrl.upload)
+    setTimeout(() => {
+    //Cloudinary Endpoints 
+    app.get('/api/upload', cloudinaryCtrl.upload)
 
-//Get User endpoints 
-app.get('/api/users', userCtrl.readUsers);
-app.get('/api/user-data', userCtrl.readUserData);
-//Rare use case endpoint
-app.get('/api/users/:id', userCtrl.readUser);
-app.get('/api/posts/:id', userCtrl.readUsersPosts);
+    //Get User endpoints 
+    app.get('/api/users', userCtrl.readUsers);
+    app.get('/api/user-data', userCtrl.readUserData);
+    //Rare use case endpoint
+    app.get('/api/users/:id', userCtrl.readUser);
+    app.get('/api/posts/:id', userCtrl.readUsersPosts);
 
-//Get Postss Endpoints
-app.get('/api/posts', postCtrl.readPosts);
-app.get('/api/recent-posts', postCtrl.readRecentPosts);
-app.get('/api/user-posts', postCtrl.readUserPosts);
-app.get('/api/post/:post_id', postCtrl.readPost);
-//Get Posts By SPorts Endpoints 
-app.get('/api/posts/sports/:sport', postCtrl.readPostBySport);
+    //Get Postss Endpoints
+    app.get('/api/posts', postCtrl.readPosts);
+    app.get('/api/recent-posts', postCtrl.readRecentPosts);
+    app.get('/api/user-posts', postCtrl.readUserPosts);
+    app.get('/api/post/:post_id', postCtrl.readPost);
+    //Get Posts By SPorts Endpoints 
+    app.get('/api/posts/sports/:sport', postCtrl.readPostBySport);
 
-//Get Comment Endpoints 
-app.get('/api/comments/:post_id', commentsCtrl.readComments);
+    //Get Comment Endpoints 
+    app.get('/api/comments/:post_id', commentsCtrl.readComments);
 
-//Get Survey Endpoints 
-app.get('/api/survey', surveyCtrl.readHomeSurvey);
-app.get('/api/survey/:sport_id', surveyCtrl.readSurvey);
+    //Get Survey Endpoints 
+    app.get('/api/survey', surveyCtrl.readHomeSurvey);
+    app.get('/api/survey/:sport_id', surveyCtrl.readSurvey);
 
-//Admin Get Endpoints
-app.get('/api/admin/users', adminCtrl.readAdminUsers);
-app.get('/api/admin/users/:id', adminCtrl.readAdminUser);
-app.get('/api/admin/posts', adminCtrl.readAdminPosts);
+    //Admin Get Endpoints
+    app.get('/api/admin/users', adminCtrl.readAdminUsers);
+    app.get('/api/admin/users/:id', adminCtrl.readAdminUser);
+    app.get('/api/admin/posts', adminCtrl.readAdminPosts);
 
-//Chat Get Endpoints 
-app.get('/api/chat/:post_id', chatCtrl.readChat);
+    //Chat Get Endpoints 
+    app.get('/api/chat/:post_id', chatCtrl.readChat);
 
-//Stats Get Endpoints 
-app.get('/api/stats/:sport', statsCtrl.readStats);
+    //Stats Get Endpoints 
+    app.get('/api/stats/:sport', statsCtrl.readStats);
 
-//Post User Endpoints
-app.post('/api/register', userCtrl.register);
-app.post('/api/login', userCtrl.login);
-app.post('/api/logout', userCtrl.logout);
+    //Post User Endpoints
+    app.post('/api/register', userCtrl.register);
+    app.post('/api/login', userCtrl.login);
+    app.post('/api/logout', userCtrl.logout);
 
-//Post Social Media Endpoints 
-app.post('/api/social-media/twitter', socialMediaCtrl.createTwitter);
-app.post('/api/social-media/facebook', socialMediaCtrl.createFacebook);
-app.post('/api/social-media/instagram', socialMediaCtrl.createInstagram);
-app.post('/api/social-media/snapchat', socialMediaCtrl.createSnapchat);
-app.post('/api/social-media/twitchtv', socialMediaCtrl.createTwitchTv);
-app.post('/api/social-media/reddit', socialMediaCtrl.createReddit);
-app.post('/api/social-media/playstation', socialMediaCtrl.createPlaystation);
-app.post('/api/social-media/xbox', socialMediaCtrl.createXbox);
+    //Post Social Media Endpoints 
+    app.post('/api/social-media/twitter', socialMediaCtrl.createTwitter);
+    app.post('/api/social-media/facebook', socialMediaCtrl.createFacebook);
+    app.post('/api/social-media/instagram', socialMediaCtrl.createInstagram);
+    app.post('/api/social-media/snapchat', socialMediaCtrl.createSnapchat);
+    app.post('/api/social-media/twitchtv', socialMediaCtrl.createTwitchTv);
+    app.post('/api/social-media/reddit', socialMediaCtrl.createReddit);
+    app.post('/api/social-media/playstation', socialMediaCtrl.createPlaystation);
+    app.post('/api/social-media/xbox', socialMediaCtrl.createXbox);
 
-//Post Postss Endpoints
-app.post('/api/posts', postCtrl.createPost);
+    //Post Postss Endpoints
+    app.post('/api/posts', postCtrl.createPost);
 
-//Post Comment Endpoints 
-app.post('/api/comments/:post_id', commentsCtrl.createComment);
+    //Post Comment Endpoints 
+    app.post('/api/comments/:post_id', commentsCtrl.createComment);
 
-//Admin Post Endpoints 
-app.post('/api/warning', adminCtrl.issueUserWarning);
+    //Admin Post Endpoints 
+    app.post('/api/warning', adminCtrl.issueUserWarning);
 
-//Chat Post Endpoints   
-app.post('/api/chat/:post_id', chatCtrl.createChat);
+    //Chat Post Endpoints   
+    app.post('/api/chat/:post_id', chatCtrl.createChat);
 
-//Put User Endpoints 
-app.put('/api/users', userCtrl.updateUser);
-//REset User Endpoints 
-app.patch('/api/reset_password', userCtrl.resetPassword);
-//Patch User Endpoints 
-app.patch('/api/users/:id/add_team', userCtrl.addTeam);
-app.patch('/api/users/:id/add_player', userCtrl.addPlayer);
-app.patch('/api/users/:id/remove_team', userCtrl.removeTeam);
-app.patch('/api/users/:id/remove_player', userCtrl.removePlayer);
-//Verify User Endpoints 
-app.put('/email_verification', userCtrl.emailVerification);
+    //Put User Endpoints 
+    app.put('/api/users', userCtrl.updateUser);
+    //REset User Endpoints 
+    app.patch('/api/reset_password', userCtrl.resetPassword);
+    //Patch User Endpoints 
+    app.patch('/api/users/:id/add_team', userCtrl.addTeam);
+    app.patch('/api/users/:id/add_player', userCtrl.addPlayer);
+    app.patch('/api/users/:id/remove_team', userCtrl.removeTeam);
+    app.patch('/api/users/:id/remove_player', userCtrl.removePlayer);
+    //Verify User Endpoints 
+    app.put('/email_verification', userCtrl.emailVerification);
 
-//Put Postss Endpoints 
-app.put('/api/posts', checkPost, postCtrl.updatePost);
+    //Put Postss Endpoints 
+    app.put('/api/posts', checkPost, postCtrl.updatePost);
 
 
-//Patch Posts Endpoint
-app.patch('/api/posts/liked', postCtrl.updatePoints)
+    //Patch Posts Endpoint
+    app.patch('/api/posts/liked', postCtrl.updatePoints)
 
-//Put Comment Endpoints 
-app.put('/api/comments/:post_id/:comment_id', commentsCtrl.updateComment);
+    //Put Comment Endpoints 
+    app.put('/api/comments/:post_id/:comment_id', commentsCtrl.updateComment);
 
-//Delete Postss Endpoints 
-app.delete('/api/posts', checkPost, postCtrl.deletePost);
+    //Delete Postss Endpoints 
+    app.delete('/api/posts', checkPost, postCtrl.deletePost);
 
-//Delete Comments Endpoints 
-app.delete('/api/comments/:post_id/:comment_id', commentsCtrl.deleteComment);
+    //Delete Comments Endpoints 
+    app.delete('/api/comments/:post_id/:comment_id', commentsCtrl.deleteComment);
 
-//Delete Admin Endpoints 
-app.delete('/api/admin/users/:user_id', adminCtrl.deleteAdminUser);
-app.delete('/api/admin/posts/:post_id', adminCtrl.deleteAdminPost);
+    //Delete Admin Endpoints 
+    app.delete('/api/admin/users/:user_id', adminCtrl.deleteAdminUser);
+    app.delete('/api/admin/posts/:post_id', adminCtrl.deleteAdminPost);
 
-//Search Get EndPoints  
-app.get('/api/search/users', searchCtrl.readUsersSearch);
-app.get('/api/search/posts', searchCtrl.readPostsSearch)
-app.get('/api/search/sports', searchCtrl.readSportPostsSearch);
+    //Search Get EndPoints  
+    app.get('/api/search/users', searchCtrl.readUsersSearch);
+    app.get('/api/search/posts', searchCtrl.readPostsSearch)
+    app.get('/api/search/sports', searchCtrl.readSportPostsSearch);
 
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-  })
+    app.get('*', (req, res)=>{
+        res.sendFile(path.join(__dirname, '../build/index.html'));
+    })
+}, 100);
 const server = app.listen(PORT, () => console.log(`Listening on Port:${PORT}!`));
 
 //Socket.io configuration, and event emitters
