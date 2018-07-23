@@ -2,3 +2,39 @@
     font-size: 2em;
     margin: 20px;
 }
+.dashboard-social-icons.twitter-icon:hover {
+    background: #fff;
+    border-radius: 10%;
+    color: lightskyblue;
+}
+.dashboard-social-icons.facebook-icon:hover {
+    background: #fff;
+    border-radius: 10%;
+    color: darkblue;
+}
+.dashboard-social-icons.instagram-icon:hover {
+    border-radius: 10%;
+    background: linear-gradient(#4c68d7, #cd486b, #fbad50)
+}
+.dashboard-social-icons.snapchat-icon:hover {
+    border-radius: 10%;
+    background: #FFFC00;
+}
+.dashboard-social-icons.twitchtv-icon:hover {
+    border-radius: 10%;
+    background: purple;
+}
+.dashboard-social-icons.reddit-icon:hover {
+    border-radius: 10%;
+    background: #ff4301;
+}
+
+.dashboard-social-icons.playstation-icon:hover {
+    border-radius: 10%;
+    background: linear-gradient(#DF0024, #F3C300, #00AC9F, #2E6DB4);
+}
+
+.dashboard-social-icons.xbox-icon:hover {
+    background: lightgreen;
+    border-radius: 10%;
+}
