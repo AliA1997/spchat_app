@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getTime } from '../../logic';
+import CommentContainer from '../generalSubComponents/Comment/CommentContainer';
 import axios from 'axios';
-import Comment from '../generalSubComponents/Comment/Comment';
 import Loader from '../generalSubComponents/Loader/Loader';
 import IoIosComposeOutline from 'react-icons/lib/io/ios-compose-outline';
 import './Comments.css';
-import CommentContainer from '../generalSubComponents/Comment/CommentContainer';
 
 class Comments extends Component {
     constructor() {
@@ -61,9 +60,9 @@ class Comments extends Component {
     }
     editComment = (post_id, id) => {
         console.log('Edit Method hit------------');
-       const { editText, edit } = this.state;
-       const { currentUser } = this.props;
-       let today = new Date();
+       const { editText } = this.state;
+    //    const { currentUser } = this.props;
+    //    let today = new Date();
        const date = getTime();
        console.log('-------date', date);
         if(editText) {
@@ -81,8 +80,7 @@ class Comments extends Component {
     } 
     
     render() {
-        const { comments, loading, text, editText, edit } = this.state;
-        // console.log('comments----------', comments);
+        const { comments, loading, text, editText } = this.state;
         if(!loading) {
             return (
                 <div className='comments-container-div'>

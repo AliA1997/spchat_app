@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import ReactLoading from 'react-loading';
+// import axios from 'axios';
+// import ReactLoading from 'react-loading';
 import SurveyAnswer from './SurveyAnswer/SurveyAnswer';
 import './Survey.css';
 

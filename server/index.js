@@ -171,4 +171,4 @@ const io = socket(server);
 
 setTimeout(() => {
     require('./socket/socket')(io, Posts);
-}, 2000);
+}, 500);

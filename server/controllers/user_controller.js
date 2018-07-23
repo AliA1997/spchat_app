@@ -51,16 +51,16 @@ module.exports = {
             if(users.length) {
                 console.log('hit 1', users[0])
                 const userData = users[0];
-                // const socialMediaArray = userData.social_media.split(' ');
-                // for(let i = 0; i < socialMediaArray.length; i++) {
-                //     if(socialMediaArray[i] === 'twitter' || socialMediaArray[i] === 'facebook' || socialMediaArray[i] === 'snapchat'
-                //     || socialMediaArray[i] === 'twitchtv' || socialMediaArray[i] === 'playstation' || socialMediaArray[i] === 'xbox' ||
-                //     socialMediaArray[i] === 'reddit' || socialMediaArray[i] === 'instagram') {
-                //         socialMediaArray.splice(i, 1);
-                //     }
-                // }
-                // console.log('socialMedia-----------', socialMediaArray)
-                // userData.social_media = socialMediaArray;
+                const socialMediaArray = userData.social_media.split(' ');
+                for(let i = 0; i < socialMediaArray.length; i++) {
+                    if(socialMediaArray[i] === 'twitter' || socialMediaArray[i] === 'facebook' || socialMediaArray[i] === 'snapchat'
+                    || socialMediaArray[i] === 'twitchtv' || socialMediaArray[i] === 'playstation' || socialMediaArray[i] === 'xbox' ||
+                    socialMediaArray[i] === 'reddit' || socialMediaArray[i] === 'instagram') {
+                        socialMediaArray.splice(i, 1);
+                    }
+                }
+                console.log('socialMedia-----------', socialMediaArray)
+                userData.social_media = socialMediaArray;
                 bcrypt.compare(password, userData.password).then(doPasswordsMatch => {
                     delete userData.password;
                     console.log('hit 2', doPasswordsMatch)

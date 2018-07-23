@@ -33,7 +33,7 @@ export default class AdminPost extends Component {
         }).catch(err => console.log('Axios Admin Delete Error-------', err));
     }
     render() {
-        const { id, title, image, description, sport, username, tags } = this.props;
+        const { title, image, description, sport, tags } = this.props;
         const { reason, reasons } = this.state;
         console.log('---------tags', tags);
         return (

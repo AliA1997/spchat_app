@@ -21,6 +21,9 @@ class App extends PureComponent {
       }).catch(err => console.log('Get User Data Axios Error----------', err));
 
     }    
+    componentWillUnmount() {
+      clearTimeout();
+    }
     render() {
     const { currentUser } = this.props;
     console.log('Current user----------', currentUser);

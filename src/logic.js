@@ -9,10 +9,10 @@ export function getTime() {
     return `Date: ${day}/${month}/${year}, Time: ${hours} : ${minutes} : ${seconds}`;
 }
 
-export function getDOB(date) {
-    const currentDate = new Date();
-    const day = currentDate.getDay(),
-    month = currentDate.getMonth(),
-    year = currentDate.getFullYear();
-    const dob = [];
-}
+// export function getDOB() {
+//     const currentDate = new Date();
+//     const day = currentDate.getDay(),
+//     month = currentDate.getMonth(),
+//     year = currentDate.getFullYear();
+//     // const dob = [];
+// }

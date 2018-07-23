@@ -6,7 +6,7 @@ import EditPostContainer from './EditPostContainer';
 import PlayerCard from '../userSubComponents/PlayerCard/PlayerCard';
 import TeamCard from '../userSubComponents/TeamCard/TeamCard';
 import SocialMediaSection from '../userSubComponents/SocialMediaSection/SocialMediaSection';
-import { editPost, doneEditPost } from '../../redux/reducers/postReducer';
+// import { editPost, doneEditPost } from '../../redux/reducers/postReducer';
 import { loginUser } from '../../redux/reducers/userReducer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -79,7 +79,7 @@ class Dashboard extends Component {
 
     render() {
             const { currentUser, doEditPost } = this.props;
-            const { dispatch } = this.props;
+            // const { dispatch } = this.props;
             const { posts, loading, isProfile } = this.state;
             console.log('doEditPost------------', doEditPost);
             console.log('posts dashboard----------------', posts)

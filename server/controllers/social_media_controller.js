@@ -10,7 +10,7 @@ module.exports = {
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
         dbInstance.create_twitter([twitter, id])
-        .then(response => {
+        .then(social_media => {
             res.status(200).json({message: 'Twitter Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));
     },
@@ -19,7 +19,7 @@ module.exports = {
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
         dbInstance.create_facebook([facebook, id])
-        .then(response => {
+        .then(social_media => {
             res.status(200).json({message: 'Facebook Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));
     },
@@ -28,7 +28,7 @@ module.exports = {
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
         dbInstance.create_instagram([instagram, id])
-        .then(response => {
+        .then(social_media => {
             res.status(200).json({message: 'Instagram Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));
     },
@@ -37,7 +37,7 @@ module.exports = {
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
         dbInstance.create_snapchat([snapchat, id])
-        .then(response => {
+        .then(social_media => {
             res.status(200).json({message: 'Snapchat Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));
     },
@@ -46,16 +46,17 @@ module.exports = {
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
         dbInstance.create_twitchtv([twitchtv, id])
-        .then(response => {
+        .then(social_media => {
             res.status(200).json({message: 'TwitchTv Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));
     },
     createReddit(req, res) {
         const { reddit } = req.body;
+        console.log('req.body------------', req.body);
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
         dbInstance.create_reddit([reddit, id])
-        .then(response => {
+        .then(social_media => {
             res.status(200).json({message: 'Reddit Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));
     },
@@ -64,7 +65,7 @@ module.exports = {
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
         dbInstance.create_playstation([playstation, id])
-        .then(response => {
+        .then(social_media => {
             res.status(200).json({message: 'playstation Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));
     },
@@ -73,7 +74,7 @@ module.exports = {
         const { id } = req.session.user;
         const dbInstance = req.app.get('db');
         dbInstance.create_xbox([xbox, id])
-        .then(response => {
+        .then(social_media => {
             res.status(200).json({message: 'Xbox Link Created Successfully!'});
         }).catch(err => console.log('Database Social Media Error Error---------', err));
     }

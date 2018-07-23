@@ -20,6 +20,9 @@ export default class VerificationPage extends Component {
             }, 2000)
         })
     }
+    componentWillUnmount() {
+        clearTimeout();
+    }
     render() {
         return (
             <div className='email-verification-container'>

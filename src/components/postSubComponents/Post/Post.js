@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React from 'react';
+// import { withRouter } from 'react-router-dom';
+// import { connect } from 'react-redux';
 import './Post.css';
 
-function displayLongWord(str) {
-    if(str.length > 10) {
-        let strArr = str.split('').slice(0, 20);
-        return strArr.concat('....')
-        // .join('');
-    }
-}
+// function displayLongWord(str) {
+//     if(str.length > 10) {
+//         let strArr = str.split('').slice(0, 20);
+//         return strArr.concat('....')
+//         // .join('');
+//     }
+// }
 const Post = props => {
-        const displayDescription = displayLongWord(props.description); 
+        // const displayDescription = displayLongWord(props.description); 
         // console.log('isInDashboard State-------------', props.state.isInDashboard);
         // console.log('-----------location', window.location.href)
         // console.log('--------desired location', `http://lalhost:${window.location.port}/dashboard`);

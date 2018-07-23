@@ -1,4 +1,4 @@
-UPDATE sp_chats;
+UPDATE sp_chats
 SET messages = ${messages}::jsonb[],
 users = ${users}::jsonb[]
 WHERE post_id = ${post_id};

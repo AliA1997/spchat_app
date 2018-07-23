@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
-import Particles from 'react-particles-js';
+// import Particles from 'react-particles-js';
 import './Loader.css';
 
 const Loader = (props) => {

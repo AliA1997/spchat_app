@@ -213,7 +213,7 @@ class Form extends Component {
         }).catch(err => console.log('Remove Axios Team Patch Error!!', err));
     }
     render() {
-        const { currentPlayer, currentTeam, username, email, image, password, age, teams, players, sports, ages, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
+        const { currentPlayer, currentTeam, username, email, image, password, teams, players, sports, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
         const { forEdit, currentUser } = this.props;
         if((currentUser && window.location.href === `${window.location.origin}/edit_profile`) || 
             window.location.href === `${window.location.origin}/register`) {
@@ -224,7 +224,7 @@ class Form extends Component {
                         <input type='text' className='input register' placeholder={forEdit ? currentUser.username : ''}
                         onChange={e => this.hanRegUsername(e.target.value)} value={username} min={6} max={40} required={!forEdit && true}/>
                         <p className='label-input register'>Email</p>
-                        <input type='text' className='input register file' placeholder={forEdit ? currentUser.email : ''}
+                        <input type='text' className='input register file' placeholder={forEdit ? currentUser.email : ''} autoComplete='email'
                         onChange={e => this.hanRegEmail(e.target.value)} value={email} min={6} max={40} required={!forEdit && true}/>
                     </div>
                     <div className='img-div register'>

@@ -45,6 +45,9 @@
     "deploy": "now --public --dotenv=.env.prod -d"
   },
   "now": {
-    "alias": "sports-chat"
+    "alias": "sports-talk"
+  },
+  "devDependencies": {
+    "cypress": "^3.0.2"
   }
 }

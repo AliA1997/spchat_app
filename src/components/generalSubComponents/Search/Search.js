@@ -20,7 +20,7 @@ class Search extends Component {
                 <div className='search-input'>
                     <input type='text' onChange={e => (this.props.search && this.props.search(e.target.value))}
                     onFocus={() => dispatch(doneSearch())} value={searchString}
-                    placeholder={window.location.href === '${window.location.origin}/dashboard'
+                    placeholder={window.location.href === `${window.location.origin}/dashboard`
                     ||  window.location.href === `${window.location.origin}/users`  ? 'Clicked Button Search Users' : 'Clicked Button Search Posts'}/>
                 </div>
                 <div className='search-icon' 

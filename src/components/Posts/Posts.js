@@ -40,7 +40,7 @@ class Posts extends Component {
         console.log('--------searchItems-----', this.props.searchItems);
         console.log('this.linkTo------------', this.linkTo);
         return (
-            <div>
+            <div className='posts-div'>
                 {(!this.props.sportsPosts && !this.props.searchItems)
                 ?   (posts && posts.map((post, i) => <Post key={i} {...post} linkTo={this.linkTo} deletePost={this.deletePost} isInDashboard={this.props.isInDashboard} />))
                 : (!this.props.searchItems || !this.props.searchItems.length)

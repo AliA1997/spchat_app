@@ -33,14 +33,14 @@ export default class Slideshow extends Component {
     }
     render() {
         const { slideIndex } = this.state;
-        const { slides, isHome } = this.props;
+        const { slides } = this.props;
         console.log('slides---------------', slides);
         return (
             <div className="container" style={{margin: '5%'}}>
                 {slides.map((slide, i) => 
                 <div className="mySlides" key={i} style={{display: slideIndex === i ? 'block' : 'none', width: '100%', height: "100%"}}>
                     <div className={slideIndex === this.key ? "numbertext active" : "numbertext"}></div>
-                    <img src={slide.imageurl} style={{width: "100%"}} 
+                    <img src={slide.imageurl} style={{width: "100%"}} alt={slide.title}
                     onClick={() => this.props.linkFunc(slide.link)}/>
                     <div className="caption-container" >
                         <p id="caption">{slide.title}</p>
