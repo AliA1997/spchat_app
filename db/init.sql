@@ -15,6 +15,7 @@ CREATE TABLE spchat_users (
     survey_id INTEGER REFERENCES sp_surveys(id) ON DELETE CASCADE ON UPDATE CASCADE,
     survey_answer VARCHAR(60)[] REFERENCES sp_surveys(answers)
     isAdmin BOOLEAN
+    posts TEXT[];
 );
 -- HOW TO ALTER A TABLE TO JSON OR JSONB
 -- ALTER TABLE spchat_users ALTER COLUMN favorite_teams TYPE JSONB[] USING favorite_players::JSONB[];

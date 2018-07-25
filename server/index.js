@@ -15,6 +15,7 @@ const { Posts } = require('./helpers/PostsClass');
 //Middleware
 const checkLogin = require('./middlewaras/checkLoggedIn');
 const checkPost = require('./middlewaras/checkPost');
+const checkTrophy = require('./middlewaras/checkTrophy');
 // const checkComment = require('./middlewares/checkComment');
 //Controllers
 const adminCtrl = require('./controllers/admin_controller');
@@ -140,7 +141,7 @@ app.use(session({
 
 
     //Patch Posts Endpoint
-    app.patch('/api/posts/liked', postCtrl.updatePoints)
+    app.patch('/api/posts/liked', checkTrophy, postCtrl.updatePoints)
 
     //Put Comment Endpoints 
     app.put('/api/comments/:post_id/:comment_id', commentsCtrl.updateComment);

@@ -41,9 +41,10 @@ class PostPage extends Component {
         }).catch(err => console.log('Axios All Error!!!---------', err));
     }
     addGold(points) {
+        const { title } = this.props.currentPost;
         console.log('-----------id', this.props.match.params.post);
         console.log('-------------currentPoint', points);
-        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post})
+        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post, title})
         .then(res => {
             console.log('-----------currentPoint', points);
             this.reRender();
@@ -51,14 +52,16 @@ class PostPage extends Component {
         }).catch(err => console.log('Axios Patch Error---------', err));
     }
     addSilver(points) {
-        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post})
+        const { title } = this.props.currentPost;
+        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post, title})
         .then(res => {
             this.reRender();
             alert(res.data.message);
         }).catch(err => console.log('Axios Patch Error---------', err));
     }
     addBronze(points) {
-        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post})
+        const { title } = this.props.currentPost;
+        axios.patch('/api/posts/liked', {points, post_id: this.props.match.params.post, title})
         .then(res => {
             this.reRender();
             alert(res.data.message);

@@ -72,19 +72,22 @@ readPost(req, res) {
  }, 
  updatePoints(req, res) {
     const dbInstance = req.app.get('db');
-    const { points, post_id } = req.body;
+    const { points, post_id, title } = req.body;
     console.log('poits------------', points);
     console.log('post_id---------', post_id);
     if(points === 1) {
-        dbInstance.add_bronze({points, post_id}).then(points => {
+        dbInstance.add_bronze({points, post_id, title, id: req.session.user ? req.session.user.id : 140})
+        .then(points => {
             res.status(200).json({message: 'Bronze Added!'});
         }).catch(err => console.log("Database Patch Post error----------", err));
     } else if(points === 2) {
-        dbInstance.add_silver({points, post_id}).then(points => {
+        dbInstance.add_silver({points, post_id, title, id: req.session.user ? req.session.user.id : 140})
+        .then(points => {
             res.status(200).json({message: 'Silver Added!'});
         }).catch(err => console.log('Database patch post error-------', err));
     } else {
-        dbInstance.add_gold({points, post_id}).then(points => {
+        dbInstance.add_gold({points, post_id, title, id: req.session.user ? req.session.user.id : 140})
+        .then(points => {
             res.status(200).json({message: 'Gold Added!!'});
         }).catch(err => console.log('Database patch post error----------', err));
     }
