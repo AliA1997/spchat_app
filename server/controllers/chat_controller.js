@@ -5,7 +5,8 @@ module.exports = {
         dbInstance.find_chat(post_id)
         .then(chat => {
             if(chat.length) {
-                res.status(200).json({message: 'Chat Recieved!!', messages: chat.messages, users: chat.users});
+                console.log('chat users------------', chat[0].users);
+                res.status(200).json({message: 'Chat Recieved!!', messages: chat[0].messages, users: chat[0].users});
             } else {
                 res.status(200).json({message: 'New Chat Created!'});
             }
@@ -21,7 +22,7 @@ module.exports = {
         dbInstance.find_chat(post_id)
         .then(chat => {
             if(chat.length) {
-                let newMessages = [...chat[0].messages, ...messages]
+                let newMessages = messages
                 let filteredUsers = users.filter((user, i) => user.username !== chat[0].users[i].username)
                 console.log('filteredUsers-----------------', filteredUsers);
                 let newUsers = [...filteredUsers, ...chat[0].users];

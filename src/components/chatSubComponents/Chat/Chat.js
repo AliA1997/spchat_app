@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
@@ -6,6 +7,9 @@ import FaCommentsO from 'react-icons/lib/fa/comments-o';
 import FaCommentO from 'react-icons/lib/fa/comment-o';
 import GoOrganization from 'react-icons/lib/go/organization';
 import './Chat.css';
+import Chance from 'chance';
+
+const chance = new Chance();
 
 
 class Chat extends Component {
@@ -25,7 +29,7 @@ class Chat extends Component {
         //     room: props.topic,
         //     id: props.id
         // }
-        this.socket = io('/', {query: `username=${currentUser ? currentUser.username : 'Anonymous'}&topic=${props.topic}&post_id=${props.postId}&imageurl=${currentUser ? currentUser.image :'https://www.androidpolice.com/wp-content/uploads/2013/04/nexusae0_googlenow_help_avatar_thumb.png'}`});
+        this.socket = io('/', {query: `username=${currentUser ? currentUser.username : `Anonymous-${chance.animal()}`}&topic=${props.topic}&post_id=${props.postId}&imageurl=${currentUser ? currentUser.image :'https://www.androidpolice.com/wp-content/uploads/2013/04/nexusae0_googlenow_help_avatar_thumb.png'}`});
         console.log('--------room prop', props.topic);
         this.sendMessage = (val) => {
             console.log(val);
@@ -43,6 +47,7 @@ class Chat extends Component {
             axios.get(`/api/chat/${props.postId}`)
             .then(res => {
                 alert(res.data.message);
+                console.log('users------------', res.data.users);
                 if(res.data.messages) {
                     this.setState({chatExist: true, messages: res.data.messages, users: res.data.users});
                 }
@@ -70,7 +75,7 @@ class Chat extends Component {
             return axios.post(`/api/chat/${props.postId}`, {messages: this.state.messages, users: this.state.users})
             .then(res => {
                 console.log('message hit----------');
-                alert(res.data.message); 
+                // alert(res.data.message); 
             }).catch(err => console.log('Axios Chat Error------------', err));
             } else {
                 return;

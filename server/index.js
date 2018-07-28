@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const sharedSession = require('express-socket.io-session');
 const helmet = require('helmet');
 const massive = require('massive');
 const path = require('path');
@@ -41,7 +42,7 @@ massive(process.env.CONNECTION_STRING).then(database => {
     // console.log('socketDB----------', socketDB);
 }).catch(err => console.log('Massive Connection Error---------', err));
 
-app.use(session({
+const initializedSession = session({
     
     store: session && new pgSession({
         //Connect to session to the store
@@ -54,54 +55,56 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 14,
         // secure: true
     }
-}));
+});
+
+app.use(initializedSession);
 
 //Global Endpoint 
 // app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../build/index.html'));
-// })
+    //     res.sendFile(path.join(__dirname, '../build/index.html'));
+    // })
     setTimeout(() => {
-    //Cloudinary Endpoints 
-    app.get('/api/upload', cloudinaryCtrl.upload)
+        //Cloudinary Endpoints 
+        app.get('/api/upload', cloudinaryCtrl.upload)
+        
+        //Get User endpoints 
+        app.get('/api/users', userCtrl.readUsers);
+        app.get('/api/user-data', userCtrl.readUserData);
+        //Rare use case endpoint
+        app.get('/api/users/:id', userCtrl.readUser);
+        app.get('/api/posts/:id', userCtrl.readUsersPosts);
+        
+        //Get Postss Endpoints
+        app.get('/api/posts', postCtrl.readPosts);
+        app.get('/api/recent-posts', postCtrl.readRecentPosts);
+        app.get('/api/user-posts', postCtrl.readUserPosts);
+        app.get('/api/post/:post_id', postCtrl.readPost);
+        //Get Posts By SPorts Endpoints 
+        app.get('/api/posts/sports/:sport', postCtrl.readPostBySport);
+        
+        //Get Comment Endpoints 
+        app.get('/api/comments/:post_id', commentsCtrl.readComments);
 
-    //Get User endpoints 
-    app.get('/api/users', userCtrl.readUsers);
-    app.get('/api/user-data', userCtrl.readUserData);
-    //Rare use case endpoint
-    app.get('/api/users/:id', userCtrl.readUser);
-    app.get('/api/posts/:id', userCtrl.readUsersPosts);
-
-    //Get Postss Endpoints
-    app.get('/api/posts', postCtrl.readPosts);
-    app.get('/api/recent-posts', postCtrl.readRecentPosts);
-    app.get('/api/user-posts', postCtrl.readUserPosts);
-    app.get('/api/post/:post_id', postCtrl.readPost);
-    //Get Posts By SPorts Endpoints 
-    app.get('/api/posts/sports/:sport', postCtrl.readPostBySport);
-
-    //Get Comment Endpoints 
-    app.get('/api/comments/:post_id', commentsCtrl.readComments);
-
-    //Get Survey Endpoints 
-    app.get('/api/survey', surveyCtrl.readHomeSurvey);
+        //Get Survey Endpoints 
+        app.get('/api/survey', surveyCtrl.readHomeSurvey);
     app.get('/api/survey/:sport_id', surveyCtrl.readSurvey);
-
+    
     //Admin Get Endpoints
     app.get('/api/admin/users', adminCtrl.readAdminUsers);
     app.get('/api/admin/users/:id', adminCtrl.readAdminUser);
     app.get('/api/admin/posts', adminCtrl.readAdminPosts);
-
+    
     //Chat Get Endpoints 
     app.get('/api/chat/:post_id', chatCtrl.readChat);
-
+    
     //Stats Get Endpoints 
     app.get('/api/stats/:sport', statsCtrl.readStats);
-
+    
     //Post User Endpoints
     app.post('/api/register', userCtrl.register);
     app.post('/api/login', userCtrl.login);
     app.post('/api/logout', userCtrl.logout);
-
+    
     //Post Social Media Endpoints 
     app.post('/api/social-media/twitter', socialMediaCtrl.createTwitter);
     app.post('/api/social-media/facebook', socialMediaCtrl.createFacebook);
@@ -117,13 +120,13 @@ app.use(session({
 
     //Post Comment Endpoints 
     app.post('/api/comments/:post_id', commentsCtrl.createComment);
-
+    
     //Admin Post Endpoints 
     app.post('/api/warning', adminCtrl.issueUserWarning);
-
+    
     //Chat Post Endpoints   
     app.post('/api/chat/:post_id', chatCtrl.createChat);
-
+    
     //Put User Endpoints 
     app.put('/api/users', userCtrl.updateUser);
     //REset User Endpoints 
@@ -135,32 +138,32 @@ app.use(session({
     app.patch('/api/users/:id/remove_player', userCtrl.removePlayer);
     //Verify User Endpoints 
     app.put('/email_verification', userCtrl.emailVerification);
-
+    
     //Put Postss Endpoints 
     app.put('/api/posts', checkPost, postCtrl.updatePost);
-
-
+    
+    
     //Patch Posts Endpoint
     app.patch('/api/posts/liked', checkTrophy, postCtrl.updatePoints)
-
+    
     //Put Comment Endpoints 
     app.put('/api/comments/:post_id/:comment_id', commentsCtrl.updateComment);
-
+    
     //Delete Postss Endpoints 
     app.delete('/api/posts', checkPost, postCtrl.deletePost);
-
+    
     //Delete Comments Endpoints 
     app.delete('/api/comments/:post_id/:comment_id', commentsCtrl.deleteComment);
-
+    
     //Delete Admin Endpoints 
     app.delete('/api/admin/users/:user_id', adminCtrl.deleteAdminUser);
     app.delete('/api/admin/posts/:post_id', adminCtrl.deleteAdminPost);
-
+    
     //Search Get EndPoints  
     app.get('/api/search/users', searchCtrl.readUsersSearch);
     app.get('/api/search/posts', searchCtrl.readPostsSearch)
     app.get('/api/search/sports', searchCtrl.readSportPostsSearch);
-
+    
     app.get('*', (req, res)=>{
         res.sendFile(path.join(__dirname, '../build/index.html'));
     })
@@ -170,6 +173,10 @@ const server = app.listen(PORT, () => console.log(`Listening on Port:${PORT}!`))
 //Socket.io configuration, and event emitters
 const io = socket(server);
 
+
 setTimeout(() => {
+    io.use(sharedSession(initializedSession, {
+        autosave: false
+    }));
     require('./socket/socket')(io, Posts);
 }, 500);
