@@ -35,6 +35,7 @@ module.exports = {
         console.log(searchPost);
         dbInstance.search_posts(searchPost)
         .then(posts => {
+            console.log('posts----------', posts);
             res.status(200).json({posts});
         }).catch(err => console.log('Search Posts Error---------------', err));
     }

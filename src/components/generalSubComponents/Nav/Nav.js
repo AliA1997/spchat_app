@@ -26,14 +26,14 @@ class Nav extends Component {
             clickedFutbol: false,
             clickedOther: false,
             clickedHome: false,
-            searchPosts: [],
             hamburgerClicked: false,
+            searchString: '',
             randomIndex: props.currentUser ? Math.floor(Math.random() * props.currentUser.favorite_teams.length) : 0
             // logoIndex: Math.floor(Math.random() * props.currentUser.favorite_teams.length)
         }
     }
     componentDidMount() {
-        this.setState({hamburgerClicked: false, clickedFutbol: false, clickedHome: false, clickedOther: false});
+        this.setState({hamburgerClicked: false, clickedFutbol: false, clickedHome: false, clickedOther: false, searchString: ''});
     }
     linkFunc = (path) => {
         this.props.history.push(path);
@@ -48,38 +48,19 @@ class Nav extends Component {
             console.log(res.data.message);
         }).catch(err => console.log('Axios Post Error---------', err));
     }
-    search = (val) => {
+    handleSearchString = (val) => {
+        this.setState({searchString: val});
+    }
+    search = () => {
+        const { searchString } = this.state;
         const { dispatch } = this.props;
-        if(window.location.href === `${window.location.origin}/users`) {
-            console.log('Users search hit-----------');
-            axios.get(`/api/search/users?user=${val}`)
-            .then(res => {
-                console.log('Users search ---------', res.data.users);
-                dispatch(getSearch(val, res.data.users));
-                console.log('Users search Items ----', this.props.searchItems);
-            }).catch(err => console.log('Axios get searchUsers--------', err));
-        } else if(window.location.href.includes(`${window.location.origin}/sports`)) {
-            const sport = window.location.href.split('/');
-            // console.log(sport[4]);
-            // console.log('values------------', val);
-            console.log('Sports Search hit------------');
-            axios.get(`/api/search/sports?sport=${sport[4]}&post=${val}`)
-            .then(res => {
-                console.log('postss------------------', res.data.posts);
-                dispatch(getSearch(val, res.data.posts));
-            }).catch(err => console.log('Axios sports-search error---------', err));
-        }else {
-            console.log('Search hit---------------');
-            axios.get(`/api/search/posts?post=${val}`)
-            .then(res => {
-                console.log('Posts of search-------------', res.data.posts);
-                dispatch(getSearch(val, res.data.posts));
-                console.log('Posts of search-------------', this.props.searchItems);                        
-            }).catch(err => console.log('Axios get searchPosts--------', err));
+        if(searchString) {
+            dispatch(getSearch(searchString))
         }
+        return;
     }
     render() {
-        const { clickedHome, clickedFutbol, clickedOther, hamburgerClicked, searchPosts, randomIndex } = this.state;
+        const { clickedHome, clickedFutbol, clickedOther, hamburgerClicked, randomIndex, searchString } = this.state;
         const { currentUser } = this.props;
         const teamLogos = [fifaLogo, laLigaLogo, premierLeagueLogo, mlbLogo, nbaLogo, nhlLogo, nflLogo];
         const indexOfLogo = Math.floor(Math.random() * teamLogos.length);
@@ -102,7 +83,7 @@ class Nav extends Component {
                             <img className='ball' src={teamLogos[indexOfLogo]} alt='Spchat-logo'/>
                         </figure>}
                         <div className='search-bar'>
-                            <Search linkFunc={this.linkFunc} search={this.search} searchPosts={searchPosts}/>
+                            <Search linkFunc={this.linkFunc} handleChange={this.handleSearchString} searchString={searchString} searchString={searchString} search={this.search}/>
                         </div>
                         <li onClick={() => this.setState({clickedHome: !this.state.clickedHome})}
                         className='nav-submenu-item home'>
@@ -172,7 +153,7 @@ class Nav extends Component {
                         </figure>
                         <div className='mobile mobile-main-nav-wrapper' style={{display: hamburgerClicked ? 'grid' : 'none'}}>
                             <div className='mobile-search-bar'>
-                                <Search linkFunc={this.linkFunc} search={this.search} searchPosts={searchPosts}/>
+                                <Search linkFunc={this.linkFunc} handleChange={this.handleSearchString} searchString={searchString} search={this.search}/>
                             </div>
                             <li onClick={() => this.setState({clickedHome: !this.state.clickedHome})}
                                 className='mobile-nav-submenu-item home'>
@@ -239,9 +220,9 @@ class Nav extends Component {
 }
 
 
+
 const mapStateToProps = state => {
     return {
-        searchItems: state.search.searchItems,
         currentUser: state.user.currentUser
     }
 };
