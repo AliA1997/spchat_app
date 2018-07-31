@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import FaPlus from 'react-icons/lib/fa/plus';
+import FaCheckCircle from 'react-icons/lib/fa/check-circle';
 import TeamCard from '../../userSubComponents/TeamCard/TeamCard';
 import PlayerCard from '../../userSubComponents/PlayerCard/PlayerCard';
 import Popup from '../Popup/Popup';
-import { loginUser } from '../../../redux/reducers/userReducer';
+import { loginUser, updateFavoritePlayers, updateFavoriteTeams } from '../../../redux/reducers/userReducer';
 import { getTime } from '../../../logic';
 import { connect } from 'react-redux';
 import sportsOptions from '../../../sports-data/sports-options.json';
@@ -25,6 +26,7 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            clickedReset: false,
             username: '',
             email: '',
             image: '',
@@ -188,7 +190,7 @@ class Form extends Component {
         }).catch(err => console.log('Axios Patch Error----------', err));
     }
     removePlayers(playerName) {
-        const {currentUser} = this.props;
+        const {currentUser, dispatch } = this.props;
         const playerToRemove = nbaPlayers.filter(player => player.name === playerName)[0];
         const copyOfArr = this.state.favoritePlayers.slice();
         const playerIndex = copyOfArr.findIndex(player => player.name === playerName);
@@ -197,11 +199,12 @@ class Form extends Component {
         console.log('playerToRemove--------------', playerToRemove);
         axios.patch(`/api/users/${currentUser.id}/remove_player`, {playerToRemove})
         .then(res => {
+            dispatch(updateFavoritePlayers(res.data.favorite_players));
             alert(res.data.message);
         }).catch(err => console.log('Remove Axios Player Patch Error!!', err));
     }
     removeTeams(teamName) {
-        const { currentUser } = this.props;
+        const { currentUser, dispatch } = this.props;
         const teamToRemove = nbaTeams.filter(team => team.name === teamName)[0];
         const copyOfArr = this.state.favoriteTeams.slice();
         const teamIndex = copyOfArr.findIndex(team => team.name === teamName);
@@ -209,11 +212,21 @@ class Form extends Component {
         this.setState({favoriteTeams: copyOfArr});
         axios.patch(`/api/users/${currentUser.id}/remove_team`, {teamToRemove})
         .then(res => {
+            dispatch(updateFavoriteTeams(res.data.teams));
             alert(res.data.message);
         }).catch(err => console.log('Remove Axios Team Patch Error!!', err));
     }
+    resetPassword(e) {
+        e.preventDefault();
+        const { currentUser } = this.props;
+        axios.patch('/api/reset_password', {username: currentUser.username, email: currentUser.email}).then(res => {
+            alert(res.data.message);
+            this.setState({clickedReset: true});
+        }).catch(err => console.log('Reset Password Error-------------', err));
+    }
     render() {
-        const { currentPlayer, currentTeam, username, email, image, password, teams, players, sports, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
+        const { currentPlayer, currentTeam, username, email, image, password, teams, clickedReset,
+            players, sports, favoriteTeams, favoritePlayers, favoriteSport } = this.state;
         const { forEdit, currentUser } = this.props;
         if((currentUser && window.location.href === `${window.location.origin}/edit_profile`) || 
             window.location.href === `${window.location.origin}/register`) {
@@ -236,7 +249,8 @@ class Form extends Component {
                         <input type='file' className='input register' 
                         onChange={e => this.handleImageUpload(e.target.files)} required={!forEdit && true}/>                
                         <p className='label-input register'>Password</p>
-                        {forEdit ? <button>Reset Password</button> 
+                        {forEdit ? (!clickedReset ? <button onClick={(e) => this.resetPassword(e)}>Reset Password</button> 
+                            : <p className='label-input register'>Email Sent<FaCheckCircle style={{color: 'green'}} /></p>)
                         : <input type='password' className='input register' 
                             onChange={e => this.hanRegPassword(e.target.value)} value={password} min={6} max={50} required={!forEdit && true}/>}     
                         <p className='label register select'>Age</p>
@@ -257,7 +271,7 @@ class Form extends Component {
                             <button onClick={(e) => forEdit ? this.addToFavPlayers(e) : this.hanRegFavPlayers(e)}><FaPlus /></button>
                         </div>
                         <datalist id='players' 
-                        value={favoritePlayers[favoritePlayers.length - 1] && favoritePlayers[favoritePlayers.length - 1].name} required={!forEdit && true}>
+                        value={favoritePlayers && favoritePlayers[favoritePlayers.length - 1] && favoritePlayers[favoritePlayers.length - 1].name} required={!forEdit && true}>
                             {players.map((player, i) => <option key={i}>{player.name}</option>)}
                         </datalist>
                         <p className='label register select'>Favorite Sport</p>

@@ -24,6 +24,7 @@ const chatCtrl = require('./controllers/chat_controller');
 const cloudinaryCtrl = require('./controllers/cloudinary_controller');
 const commentsCtrl = require('./controllers/comments_controller');
 const postCtrl = require('./controllers/post_controller');
+const nodemailerCtrl = require('./controllers/nodemailer_controller');
 const searchCtrl = require('./controllers/search_controller');
 const socialMediaCtrl = require('./controllers/social_media_controller');
 const statsCtrl = require('./controllers/stats_controller');
@@ -130,7 +131,7 @@ app.use(initializedSession);
     //Put User Endpoints 
     app.put('/api/users', userCtrl.updateUser);
     //REset User Endpoints 
-    app.patch('/api/reset_password', userCtrl.resetPassword);
+    app.patch('/api/reset_password', nodemailerCtrl.resetPassword);
     //Patch User Endpoints 
     app.patch('/api/users/:id/add_team', userCtrl.addTeam);
     app.patch('/api/users/:id/add_player', userCtrl.addPlayer);

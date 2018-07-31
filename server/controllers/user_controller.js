@@ -114,7 +114,7 @@ module.exports = {
             }).catch(err => console.log('Database Update User error---------', err));
         }
     },
-    resetPassword: (req, res) => {
+    updatePassword: (req, res) => {
         const dbInstance = req.app.get('db');
         const { username, password, newPassword } = req.body;
         dbInstance.find_user(username)
@@ -169,8 +169,9 @@ module.exports = {
         const { playerToRemove } = req.body;
         const { id } = req.params;
         dbInstance.delete_player({id, playerToRemove})
-        .then(players => {
-            res.status(200).json({message: 'Removed Player!!'});
+        .then(users => {
+            //Since by default, sql returns an array, get the first index, and retrieve the players array from that user.
+            res.status(200).json({message: 'Removed Player!!', players: users[0].favorite_players});
         }).catch(err => console.log('Removed Player Database error------------', err));
     },
     removeTeam: (req, res) => {
