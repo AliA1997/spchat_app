@@ -35,13 +35,10 @@
   width: 100vw;
   margin-left: 5%;
   opacity: 0.75;
+  position: fixed;
+  top: 0;
   list-style: none;
-}
-.mobile-search-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  z-index: 10;
 }
 .mobile.mobile-main-nav-wrapper {
   width: 100%;
@@ -121,6 +118,10 @@
       align-items: center;
       top: 0;
       right: 0;
+      z-index: 10;
+  }
+  .main-nav:hover {
+    opacity: 1;
   }
   .main-nav > ul {
       height: 100%;
