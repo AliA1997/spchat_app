@@ -1,6 +1,7 @@
 
 /* Position the image container (needed to position the left and right arrows) */
 .container {
+  z-index: inherit;
   position: relative;
   width: 100%;
   margin-left: auto;
@@ -17,9 +18,14 @@
 .mySlides > img {
   height: 100%;
   width: 100%;
+  z-index: inherit;
 }
 .mySlides:hover {
   opacity: 1;
+  z-index: inherit;
+}
+.mySlides > img:hover {
+  z-index: inherit;
 }
 /* Add a pointer when hovering over the thumbnail images */
 .cursor {

@@ -6,7 +6,7 @@
   "proxy": "http://localhost:9999",
   "dependencies": {
     "axios": "^0.18.0",
-    "bcrypt": "^2.0.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chance": "^1.0.16",
     "cloudinary": "^1.11.0",

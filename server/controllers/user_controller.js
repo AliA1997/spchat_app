@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const nodemailerCtrl = require('./nodemailer_controller');
 const saltRounds = 12;
@@ -114,23 +114,27 @@ module.exports = {
             }).catch(err => console.log('Database Update User error---------', err));
         }
     },
-    resetPassword: (req, res) => {
+    updatePassword: (req, res) => {
         const dbInstance = req.app.get('db');
         const { username, password, newPassword } = req.body;
         dbInstance.find_user(username)
         .then(users => {
-            bcrypt.compare(password, users[0].password)
-            .then(doPasswordsMatch => {
-                if(doPasswordsMatch) {
-                    dbInstance.reset_password(newPassword)
-                    .then(updatedPassword => {
-                        res.status(200).json({message: 'Password Resetted!'});
-                    })
-                } else {
-                    res.status(404).json({message: 'Passwords do not match!!'});
-                }
-            })
-        })
+            if(users.length) {
+                bcrypt.compare(password, users[0].password)
+                .then(doPasswordsMatch => {
+                    if(doPasswordsMatch) {
+                        bcrypt.hash(newPassword, saltRounds).then(updateHashedPassword => {
+                            dbInstance.reset_password(updateHashedPassword)
+                            .then(updatedPassword => {
+                                res.status(200).json({message: 'Password Resetted!'});
+                            }).catch(err => console.log('Update Password Error---------', err));
+                        }).catch(err => console.log('Bcrypt Hashing Error----------', err));
+                    } else {
+                        res.status(404).json({message: 'Passwords do not match!!'});
+                    }
+                }).catch(err => console.log('Do Passwords Match Error------', err));
+            }
+        }).catch(err => console.log('FindUser Error---------', err));
     },
     emailVerification: (req, res) => {
         const dbInstance = req.app.get('db');

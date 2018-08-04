@@ -72,5 +72,25 @@ module.exports = {
             if(err) console.log('Update Mail Error---------', err);
             console.log('Update Mail is successful!');
         })
+    }, 
+    resetPassword(req, res) {
+        const { username, email } = req.body;
+        let mailOptions = {
+            from: `stmp.${process.env.ADMIN_EMAIL_ADDRESS}`,
+            to: email,
+            subject: `Reset Password ${username}`,
+            html: `<div style="background: transparent">
+                        <p>Email: ${email}</p>
+                        <p> Please Don't Reply to this email.</p>
+                        <p>CLick the link to reset password</p>
+                        <a href="http://localhost:3000/update_password/${uuid.v4()}">Reset Password</a>
+                    <div>`
+        };
+        transporter.sendMail(mailOptions, (err, data) => {
+            //If there is an error, console.log the err with a identifier to identify it.
+            if(err) console.log('Send Reset Password Mail----------------', err);
+            console.log('Data------------', data);
+            res.status(200).json({message: 'Reset Password Sent!!'});
+        });
     }
 }

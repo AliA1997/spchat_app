@@ -1,0 +1,1 @@
+SELECT questions FROM spchat_users WHERE id = $1;

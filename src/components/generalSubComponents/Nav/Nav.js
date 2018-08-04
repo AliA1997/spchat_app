@@ -28,7 +28,7 @@ class Nav extends Component {
             clickedHome: false,
             hamburgerClicked: false,
             searchString: '',
-            randomIndex: props.currentUser ? Math.floor(Math.random() * props.currentUser.favorite_teams.length) : 0
+            randomIndex: props.currentUser.favorite_teams && props.currentUser.favorite_teams ? Math.floor(Math.random() * props.currentUser.favorite_teams.length) : 0
             // logoIndex: Math.floor(Math.random() * props.currentUser.favorite_teams.length)
         }
     }
@@ -69,14 +69,14 @@ class Nav extends Component {
         
         return (
             <div className='nav'>
-                <nav className='main-nav' style={{backgroundColor: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
-                                                color: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
+                <nav className='main-nav' style={{backgroundColor: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
+                                                color: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
                     <ul>
-                        {currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? 
+                        {currentUser.favorite_teams && currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? 
                         <figure className='stage'>
                             <img className='ball' 
-                            src={currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].logo} 
-                            alt={currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].name}/>
+                            src={currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].logo} 
+                            alt={currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].name}/>
                         </figure>
                         :
                         <figure className='stage'>
@@ -90,8 +90,8 @@ class Nav extends Component {
                             <div className='nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ? <FaAngleDown /> : <FaAngleUp />}
                 
                             <ul className='submenu-nav' style={{display: clickedHome ? 'inline-block' : 'none',
-                            backgroundColor: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
-                            color: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
+                            backgroundColor: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
+                            color: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
                                     <li className='submenu-nav-item'>
                                         <NavLink to='/dashboard/create-post'>Create Post</NavLink>
                                     </li>                            
@@ -111,8 +111,8 @@ class Nav extends Component {
                         className='nav-submenu-item futbol'>
                             <div className='nav-item futbol'>Futbol</div>{clickedFutbol ? <FaAngleDown /> : <FaAngleUp />}
                             <ul className='submenu-nav' style={{display: clickedFutbol ? 'inline-block' : 'none', 
-                            backgroundColor: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
-                            color: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
+                            backgroundColor: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
+                            color: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
                                     <li className='submenu-nav-item' onClick={() => this.linkFunc('/sports/premier-league')}>Premier League</li>
                                     <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/fifa`)}>FIFA</li>                            
                                     <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/la-liga`)}>La Liga</li>
@@ -122,8 +122,8 @@ class Nav extends Component {
                         className='nav-submenu-item other'>
                             <div className='nav-item other'>Other</div>{clickedOther ? <FaAngleDown /> : <FaAngleUp />}
                             <ul className='submenu-nav' style={{display: clickedOther ? 'inline-block' : 'none', 
-                            backgroundColor: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
-                            color: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
+                            backgroundColor: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
+                            color: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
                                 <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}>BMX</li>
                                 <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}>Skateboarding</li>     
                                 <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}>Snowboarding</li>
@@ -136,11 +136,11 @@ class Nav extends Component {
                     </ul>
                 </nav>
                 <nav className='mobile mobile-main-nav'  style={{backgroundColor:
-                currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
-                color: currentUser && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
+                currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
+                color: currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
                     <div className='mobile mobile-main-nav-wrapper'>
                         <figure className='hamburger-icon-div' onClick={() => this.setState({hamburgerClicked: !this.state.hamburgerClicked})}>
-                            {currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length ? 
+                            {currentUser.favorite_teams && currentUser.favorite_teams && currentUser.favorite_teams.length ? 
                             <figure className='stage'>
                                 <img className='ball' 
                                 src={currentUser.favorite_teams && currentUser.favorite_teams[randomIndex].logo} 

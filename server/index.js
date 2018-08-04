@@ -14,6 +14,7 @@ const pg  = require('pg');
 const pgSession = require('connect-pg-simple')(session);
 const { Posts } = require('./helpers/PostsClass');
 //Middleware
+const checkQuestion  = require('./middlewaras/checkQuestion');
 const checkLogin = require('./middlewaras/checkLoggedIn');
 const checkPost = require('./middlewaras/checkPost');
 const checkTrophy = require('./middlewaras/checkTrophy');
@@ -24,6 +25,7 @@ const chatCtrl = require('./controllers/chat_controller');
 const cloudinaryCtrl = require('./controllers/cloudinary_controller');
 const commentsCtrl = require('./controllers/comments_controller');
 const postCtrl = require('./controllers/post_controller');
+const nodemailerCtrl = require('./controllers/nodemailer_controller');
 const searchCtrl = require('./controllers/search_controller');
 const socialMediaCtrl = require('./controllers/social_media_controller');
 const statsCtrl = require('./controllers/stats_controller');
@@ -87,7 +89,9 @@ app.use(initializedSession);
 
         //Get Survey Endpoints 
         app.get('/api/survey', surveyCtrl.readHomeSurvey);
-    app.get('/api/survey/:sport_id', surveyCtrl.readSurvey);
+        app.get('/api/survey/:sport_id', surveyCtrl.readSurvey);
+        app.patch('/api/answer/survey', checkQuestion, surveyCtrl.answerQuestion);
+        app.patch('/api/unanswer/survey', surveyCtrl.unanswerQuestion);
     
     //Admin Get Endpoints
     app.get('/api/admin/users', adminCtrl.readAdminUsers);
@@ -130,7 +134,7 @@ app.use(initializedSession);
     //Put User Endpoints 
     app.put('/api/users', userCtrl.updateUser);
     //REset User Endpoints 
-    app.patch('/api/reset_password', userCtrl.resetPassword);
+    app.patch('/api/reset_password', nodemailerCtrl.resetPassword);
     //Patch User Endpoints 
     app.patch('/api/users/:id/add_team', userCtrl.addTeam);
     app.patch('/api/users/:id/add_player', userCtrl.addPlayer);
