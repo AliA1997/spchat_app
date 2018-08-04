@@ -18,14 +18,14 @@ readPost(req, res) {
     const { post_id } = req.params;
     const dbInstance = req.app.get('db');
     dbInstance.read_post(post_id).then(post => {
-        console.log('post------------', post);
+        // console.log('post------------', post);
         res.status(200).json({post});
     }).catch(err => console.log('Database Get Post Error---------', err));
  },
  readPostBySport(req, res) {
     const dbInstance = req.app.get('db');
     const { sport } = req.params;
-    console.log('Sport endpoint parameter--------', sport.toUpperCase());
+    // console.log('Sport endpoint parameter--------', sport.toUpperCase());
     dbInstance.read_posts_by_sport(sport.toUpperCase())
     .then(posts => {
         res.status(200).json({posts});
@@ -36,10 +36,10 @@ readPost(req, res) {
     //  console.log('req.session.user-----------', req.session.user);
      const dbInstance = req.app.get('db');
     const { username } = req.session.user;
-    console.log('getUserPosts username----------', username);
+    // console.log('getUserPosts username----------', username);
     dbInstance.read_user_posts(username)
     .then(posts => {
-        console.log('getUserPosts posts-----------------', posts);
+        // console.log('getUserPosts posts-----------------', posts);
         res.status(200).json({posts});
     }).catch(err => console.log('Read User Posts--------', err));
     // } else {
@@ -57,7 +57,8 @@ readPost(req, res) {
     if(id) {
         dbInstance.create_post({ user_id: id, title, description, date, imageurl, sport, tags: selectedTags })
         .then(post => {
-            res.status(200).json({message: 'Post Created Successfully!'});
+            console.log('Returning Post Created_-----------', post[0])
+            res.status(200).json({message: 'Post Created Successfully!', post: post[0]});
         }).catch(err => console.log('Database Post Error----------', err));
     }
  },

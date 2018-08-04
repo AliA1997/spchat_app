@@ -3,7 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Posts from '../Posts/Posts';
 // import SlickSlideshow from '../SlideImages/SlideImages';
-import { logoutUser } from '../../redux/reducers/userReducer';
+import { logoutUser, userFinishedRegistered } from '../../redux/reducers/userReducer';
+import UserPopup from './UserPopup/UserPopup';
+import Popup from '../generalSubComponents/Popup/Popup';
 import Survey from '../generalSubComponents/Survey/Survey';
 import Loader from '../generalSubComponents/Loader/Loader';
 import { NavLink } from 'react-router-dom';
@@ -42,12 +44,21 @@ class Home extends Component {
         }).catch(err => console.log('Axios Post Error---------', err));
     }
     render() {
-        const { currentUser } = this.props;
+        const { currentUser, registeredUser } = this.props;
         const { loading, posts, recentPosts, survey } = this.state;
         let displayPosts = recentPosts.map(post => {
             return {imageurl: post.image, title: post.title, link: `/posts/${post.sport}/${post.id}`}
         });
         if(!loading) {
+            if(registeredUser) {
+                setTimeout(() => {
+                    const { dispatch  } = this.props;
+                    dispatch(userFinishedRegistered());
+                }, 10000);
+                return <Popup>
+                            <UserPopup/>
+                        </Popup>
+            }
             return (
                 <div className='home-div'>
                     <div className='home-slideshow-div'>
@@ -85,6 +96,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
     return {
+        registeredUser: state.user.registeredUser,
         currentUser: state.user.currentUser
     }
 }

@@ -17,7 +17,10 @@
 
 .home-div {
     background: none;
-    padding: 100px;
+    padding: 75px;
+    width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 .home-subdiv {
     /* display: flex; */
@@ -94,6 +97,9 @@
 }
 /* MObile Styling */
 @media (min-width: 760px) {
+        .home-div {
+            padding: 100px;
+        }
         .home-subdiv {
             height: 100%;
             display: grid;

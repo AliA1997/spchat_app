@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Loader from '../generalSubComponents/Loader/Loader';
 import Popup from '../generalSubComponents/Popup/Popup';
+import PostPopup from './PostPopup/PostPopup';
 import EditPostContainer from './EditPostContainer';
 import PlayerCard from '../userSubComponents/PlayerCard/PlayerCard';
 import TeamCard from '../userSubComponents/TeamCard/TeamCard';
 import SocialMediaSection from '../userSubComponents/SocialMediaSection/SocialMediaSection';
 // import { editPost, doneEditPost } from '../../redux/reducers/postReducer';
 import { loginUser } from '../../redux/reducers/userReducer';
+import { postFinished } from '../../redux/reducers/postReducer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import defaultPicture from '../../imgs/default-picture.jpg';
@@ -78,13 +80,24 @@ class Dashboard extends Component {
     }
 
     render() {
-            const { currentUser, doEditPost } = this.props;
+            const { currentUser, doEditPost, createdPost } = this.props;
             // const { dispatch } = this.props;
             const { posts, loading, isProfile } = this.state;
             console.log('doEditPost------------', doEditPost);
             console.log('posts dashboard----------------', posts)
             if(!loading) {
                 if(currentUser) {
+                    //If a post was created display a popup before returning a dashboard.
+                    if(createdPost) {
+                        setTimeout(() => {
+                            const { dispatch } = this.props;
+                            dispatch(postFinished());
+                        }, 5000);
+                        return <Popup userUpdate={true}>
+                                    <PostPopup {...createdPost} />
+                                </Popup>
+                    }
+                    //
                     return (
                         <div className='dashboard-container-div'>
                             <div className='dashboard-user-div'>
@@ -139,6 +152,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
     return {
+        createdPost: state.post.createdPost,
         currentUser: state._persist.rehydrated && !state.loggedOut ? state.user.currentUser : state._persist.user.currentUser,
         doEditPost: state.post.doEditPost
     }

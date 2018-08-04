@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import { connect } from 'react-redux';
 import Login from '../../userSubComponents/Login/Login';
 import { Link } from 'react-router-dom';
 import './Popup.css';
@@ -20,7 +21,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
  
-export default class Popup extends Component {
+class Popup extends Component {
   constructor() {
     super();
  
@@ -47,25 +48,52 @@ export default class Popup extends Component {
   }
  
   render() {
-    return (
-      <div className='popup-container-div'>
-        <button className='popup-open-modal' onClick={this.openModal}>Login</button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <div className='popup-header'>Need to Login</div>
-          <div className='login-popup-container-div'>
-           <Login />
-            <div className='register-popup-link-div'>
-              <Link to='/register'>Register</Link>
+    const { createdPost, registeredUser } = this.props;
+    if(createdPost || registeredUser) {
+      return (
+        <div className='popup-container-div'>
+          <button className='popup-open-modal' onClick={this.openModal}>Login</button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >  
+          {this.props.children}
+          </Modal>
+        </div>
+      )
+    } else {
+      return (
+        <div className='popup-container-div'>
+          <button className='popup-open-modal' onClick={this.openModal}>Login</button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          > 
+            <div className='popup-header'>Need to Login</div>
+            <div className='login-popup-container-div'>
+            <Login />
+              <div className='register-popup-link-div'>
+                <Link to='/register'>Register</Link>
+              </div>
             </div>
-          </div>
-        </Modal>
-      </div>
-    );
+          </Modal>
+        </div>
+      );
+    }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    createdPost: state.post.createdPost,
+    registeredUser: state.user.registeredUser
+  }
+}
+
+export default connect(mapStateToProps)(Popup);

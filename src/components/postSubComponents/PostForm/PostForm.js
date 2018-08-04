@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tag from '../../generalSubComponents/Tag/Tag';
 import { getTime } from '../../../logic';
+import { postCreated } from '../../../redux/reducers/postReducer';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import FaPlus from 'react-icons/lib/fa/plus';
@@ -95,9 +96,11 @@ class PostForm extends Component {
         console.log(this.props.currentUser);
         if(this.props.currentUser) {
             const { title, imageurl, sport, description, selectedTags } = this.state;
+            const { dispatch } = this.props;
             const date = getTime();
             axios.post('/api/posts', { title, imageurl, date, description, sport, selectedTags })
             .then(res => {
+                dispatch(postCreated(res.data.post));
                 console.log(res.data.message);
                 this.props.redirect('dashboard');
             }).catch((err) => console.log('Axios create post error---------', err));

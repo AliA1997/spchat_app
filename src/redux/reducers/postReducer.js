@@ -11,6 +11,7 @@ const initialState = {
     // doEdit: false,
     // doEditPost: false,
     currentPost: null,
+    createdPost: null,
     sports_data: arr
 }
 
@@ -19,6 +20,8 @@ const initialState = {
 // const START_EDIT_POST = 'START_EDIT_POST'; 
 // const END_EDIT_POST = 'END_EDIT_POST';
 const START_GET_POST = 'START_GET_POST';
+const POST_CREATED_POPUP = 'POST_CREATED_POPUP';
+const POST_CLOSED_POPUP = 'POST_CLOSED_POPUP';
 
 export default (state = initialState, action) => {
     switch(action.type) {
@@ -32,6 +35,10 @@ export default (state = initialState, action) => {
         //     return {...state, doEditPost: false};
         case START_GET_POST:
             return {...state, currentPost: action.payload};
+        case POST_CREATED_POPUP:
+            return {...state, createdPost: action.payload};
+        case POST_CLOSED_POPUP:
+            return {...state, createdPost: null};
         default: 
         return state;
     }
@@ -55,6 +62,20 @@ export const getPost = (post)  => {
         payload: post
     };
 }
+
+export const postCreated = (post) => {
+    return {
+        type: POST_CREATED_POPUP,
+        payload: post
+    }
+}
+
+export const postFinished = () => {
+    return {
+        type: POST_CLOSED_POPUP,
+    }
+}
+
 
 // export const editPost = () => {
 //     return {

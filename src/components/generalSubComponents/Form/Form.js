@@ -3,7 +3,7 @@ import FaPlus from 'react-icons/lib/fa/plus';
 import TeamCard from '../../userSubComponents/TeamCard/TeamCard';
 import PlayerCard from '../../userSubComponents/PlayerCard/PlayerCard';
 import Popup from '../Popup/Popup';
-import { loginUser } from '../../../redux/reducers/userReducer';
+import { loginUser, userRegistered } from '../../../redux/reducers/userReducer';
 import { getTime } from '../../../logic';
 import { connect } from 'react-redux';
 import sportsOptions from '../../../sports-data/sports-options.json';
@@ -138,6 +138,7 @@ class Form extends Component {
             if(res.data.user) {
                 alert(res.data.message);
                 dispatch(loginUser(res.data.user));
+                dispatch(userRegistered(res.data.user));
             }
         }).catch(err => console.log('Axios Post Error-------------', err));
         this.props.redirect();
