@@ -7,10 +7,9 @@ import mlbLogo from '../../../imgs/mlb-logo.png';
 import nbaLogo from '../../../imgs/nba-logo.png';
 import nhlLogo from '../../../imgs/nhl-logo.png';
 import nflLogo from '../../../imgs/nfl-logo.png';
-import Search from '../Search/Search';
+
 // import TiThSmall from 'react-icons/lib/ti/th-small';
 import { logoutUser } from '../../../redux/reducers/userReducer';
-import { getSearch } from '../../../redux/reducers/searchReducer';
 import { connect } from 'react-redux';
 import axios from 'axios';
 //React Icons-----------
@@ -48,19 +47,8 @@ class Nav extends Component {
             console.log(res.data.message);
         }).catch(err => console.log('Axios Post Error---------', err));
     }
-    handleSearchString = (val) => {
-        this.setState({searchString: val});
-    }
-    search = () => {
-        const { searchString } = this.state;
-        const { dispatch } = this.props;
-        if(searchString) {
-            dispatch(getSearch(searchString))
-        }
-        return;
-    }
     render() {
-        const { clickedHome, clickedFutbol, clickedOther, hamburgerClicked, randomIndex, searchString } = this.state;
+        const { clickedHome, clickedFutbol, clickedOther, hamburgerClicked, randomIndex } = this.state;
         const { currentUser } = this.props;
         const teamLogos = [fifaLogo, laLigaLogo, premierLeagueLogo, mlbLogo, nbaLogo, nhlLogo, nflLogo];
         const indexOfLogo = Math.floor(Math.random() * teamLogos.length);
@@ -82,9 +70,9 @@ class Nav extends Component {
                         <figure className='stage'>
                             <img className='ball' src={teamLogos[indexOfLogo]} alt='Spchat-logo'/>
                         </figure>}
-                        <div className='search-bar'>
-                            <Search linkFunc={this.linkFunc} handleChange={this.handleSearchString} searchString={searchString} searchString={searchString} search={this.search}/>
-                        </div>
+
+                        <li className='nav-item' onClick={() => this.linkFunc('/posts')}>Posts</li>    
+                        <li className='nav-item' onClick={() => this.linkFunc('/users')}>Users</li>    
                         <li onClick={() => this.setState({clickedHome: !this.state.clickedHome})}
                         className='nav-submenu-item home'>
                             <div className='nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ? <FaAngleDown /> : <FaAngleUp />}
@@ -152,9 +140,8 @@ class Nav extends Component {
                             </figure>}
                         </figure>
                         <div className='mobile mobile-main-nav-wrapper' style={{display: hamburgerClicked ? 'grid' : 'none'}}>
-                            <div className='mobile-search-bar'>
-                                <Search linkFunc={this.linkFunc} handleChange={this.handleSearchString} searchString={searchString} search={this.search}/>
-                            </div>
+                            <li className='nav-item' onClick={() => this.linkFunc('/posts')}>Posts</li>    
+                            <li className='nav-item' onClick={() => this.linkFunc('/users')}>Users</li>    
                             <li onClick={() => this.setState({clickedHome: !this.state.clickedHome})}
                                 className='mobile-nav-submenu-item home'>
                                 <div className='mobile-nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ?

@@ -13,16 +13,13 @@ const Search = props => {
     return (
         <div className='search-div'>
             <div className='search-input'>
-                <input type='text' onChange={e => (props.search && props.search(e.target.value))}
-                onFocus={() => window.location.href === `${window.location.origin}/dashboard` || 
-                window.location.href === `${window.location.origin}/users` ? props.linkFunc('/users') : props.linkFunc('/posts')}
-                 onBlur={() => !searchString && props.linkFunc('/')} 
+                <input type='text' onChange={e => (props.search && props.search(e.target.value))} 
                  value={searchString}
                  onChange={(e) => props.handleChange(e.target.value)}
                 placeholder={window.location.href === `${window.location.origin}/dashboard`
-                ||  window.location.href === `${window.location.origin}/users`  ? 'Clicked Button Search Users' : 'Clicked Button Search Posts'}/>
+                ||  window.location.href === `${window.location.origin}/users`  ? 'Search Users' : 'Search Posts'}/>
             </div>
-            <div className='search-icon' onClick={() => props.search()}>
+            <div className='search-icon'>
                 <FaSearch className='icon-search'/>
             </div>
         </div>

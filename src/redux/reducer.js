@@ -1,12 +1,10 @@
 import post from './reducers/postReducer';
 import user from './reducers/userReducer';
-import search from './reducers/searchReducer';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
     post,
     user, 
-    search
 });
 // import mlbPlayers from '../sports-data/mlb-players.json';
 // import mlbTeams from '../sports-data/mlb-teams.json';
