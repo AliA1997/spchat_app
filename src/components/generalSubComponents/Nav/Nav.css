@@ -127,6 +127,7 @@
     width: 75%;
   }
   .main-nav {
+    font-size: 1.5em !important;
     opacity: 0.75;
     display: inline-block;
     height: 20vh;
@@ -141,9 +142,9 @@
     right: 0;
   }
   .main-nav > ul {
-      height: 100%;
-      width: 100%;
-      display: grid;
+    height: 100%;
+    width: 100%;
+    display: grid;
       grid-template-columns: 10% 10% 10% 10% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5%;
       z-index: 1;
   }
