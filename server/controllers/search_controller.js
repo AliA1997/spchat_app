@@ -5,6 +5,8 @@ module.exports = {
         const userSearch = `%${user}%`;
         dbInstance.search_users(userSearch)
         .then(users => {
+            let adminIndex= users.findIndex(user => user.id === 139);
+            users.splice(adminIndex, 1);
             console.log('Users', users)
             res.status(200).json({users});
         }).catch(err => console.log('Search Users Error---------------', err));

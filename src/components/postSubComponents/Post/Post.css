@@ -23,8 +23,8 @@
     display: none;
 }
 .post-main-div:hover {
+    transition: transform 500ms ease-out;
     transform: scale(1.05);
-    transition: ease-in-out;
     cursor: grab;
 }
 

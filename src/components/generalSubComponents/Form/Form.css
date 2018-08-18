@@ -2,16 +2,17 @@
     font-weight: 700;
     grid-column-start: 2;
     grid-column-end: 5;
+    width: 100%;
     display: grid;
     grid-template-columns: 10% 20% 15% 15% 20% 10% 10%;
     grid-template-rows: 10% 20% 60% 10%;
-    color: #fff;
-    width: 80vw;   
+    color: #fff;   
     margin-top: 15vh;
     margin-left: auto;
     margin-right: auto;    
     text-align: center;
 }
+
 .data-list-div {
     margin-left:auto;
     margin-right: auto;
@@ -23,6 +24,7 @@
     color: #fff;
     width: 100%;
 }
+
 datalist {
     color: #fff;
 }

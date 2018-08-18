@@ -2,16 +2,22 @@
   display: none;
 }
 .nav {
+  position: fixed;
+  top: 0;
   width: 100%;
   transform: scaleX(1.3);
   margin: 0;
 }
+
 .submenu-nav-item {
   color: inherit;
+  cursor: pointer;
 }
+
 .submenu-nav-item > a {
   color: inherit;
 }
+
 .hamburger-icon-div {
   height: 4em;
   width: 100%;

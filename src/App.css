@@ -24,6 +24,7 @@ body {
   z-index: -1;
   position: fixed;
 }
+
 .background > canvas {
   width: 100%;
 }

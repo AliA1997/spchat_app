@@ -7,7 +7,10 @@ import mlbLogo from '../../../imgs/mlb-logo.png';
 import nbaLogo from '../../../imgs/nba-logo.png';
 import nhlLogo from '../../../imgs/nhl-logo.png';
 import nflLogo from '../../../imgs/nfl-logo.png';
-
+import skateBoardLogo from '../../../imgs/skateboarding-logo.jpg';
+import snowBoardLogo from '../../../imgs/Snowboarding-logo.svg';
+import bmxLogo from '../../../imgs/bmx-logo.jpg';
+import skiingLogo from '../../../imgs/skiing-logo.jpg';
 // import TiThSmall from 'react-icons/lib/ti/th-small';
 import { logoutUser } from '../../../redux/reducers/userReducer';
 import { connect } from 'react-redux';
@@ -38,6 +41,27 @@ class Nav extends Component {
         this.props.history.push(path);
         // this.setState(this.state);
         // this.props.history.go(path);
+    }
+    clickedAngleIcon(icon) {
+        if(icon === 'clickedOther') {
+            this.setState({
+                clickedOther: !this.state.clickedOther,
+                clickedFutbol: false,
+                clickedHome: false
+            })
+        } else if(icon === 'clickedFutbol') {
+            this.setState({
+                clickedFutbol: !this.state.clickedFutbol,
+                clickedHome: false,
+                clickedOther: false
+            }) 
+        } else {
+            this.setState({
+                clickedHome: !this.state.clickedHome,
+                clickedFutbol: false,
+                clickedOther: false
+            })
+        }
     }
     logout() {
         const { dispatch } = this.props;
@@ -73,7 +97,7 @@ class Nav extends Component {
 
                         <li className='nav-item' onClick={() => this.linkFunc('/posts')}>Posts</li>    
                         <li className='nav-item' onClick={() => this.linkFunc('/users')}>Users</li>    
-                        <li onClick={() => this.setState({clickedHome: !this.state.clickedHome})}
+                        <li onClick={() => this.clickedAngleIcon('clickedHome')}
                         className='nav-submenu-item home'>
                             <div className='nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ? <FaAngleDown /> : <FaAngleUp />}
                 
@@ -95,7 +119,7 @@ class Nav extends Component {
                         <li className='nav-item nba' onClick={() => this.linkFunc('/sports/nba')}>NBA</li>
                         <li className='nav-item nfl' onClick={() => this.linkFunc('/sports/nfl')}>NFL</li>
                         <li className='nav-item nhl' onClick={() => this.linkFunc('/sports/nhl')}>NHL</li>
-                        <li  onClick={() => this.setState({clickedFutbol: !this.state.clickedFutbol})}
+                        <li  onClick={() => this.clickedAngleIcon('clickedFutbol')}
                         className='nav-submenu-item futbol'>
                             <div className='nav-item futbol'>Futbol</div>{clickedFutbol ? <FaAngleDown /> : <FaAngleUp />}
                             <ul className='submenu-nav' style={{display: clickedFutbol ? 'inline-block' : 'none', 
@@ -106,16 +130,16 @@ class Nav extends Component {
                                     <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/la-liga`)}>La Liga</li>
                             </ul>
                         </li>
-                        <li onClick={() => this.setState({clickedOther: !this.state.clickedOther})}
+                        <li onClick={() => this.clickedAngleIcon('clickedOther')}
                         className='nav-submenu-item other'>
                             <div className='nav-item other'>Other</div>{clickedOther ? <FaAngleDown /> : <FaAngleUp />}
                             <ul className='submenu-nav' style={{display: clickedOther ? 'inline-block' : 'none', 
                             backgroundColor: currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
                             color: currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
-                                <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}>BMX</li>
-                                <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}>Skateboarding</li>     
-                                <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}>Snowboarding</li>
-                                <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skiing`)}>Skiing</li>           
+                                <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}><img src={bmxLogo} alt={'BMX'} style={{height: '2em', width: '2em'}}/></li>
+                                <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}><img src={skateBoardLogo} alt={'Skateboarding'} style={{height: '2em', width: '2em'}}/></li>     
+                                <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}><img src={snowBoardLogo} alt={'Snowboarding'} style={{height: '2em', width: '2em'}}/></li>
+                                <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skiing`)}><img src={skiingLogo} alt={'Skiing'} style={{height: '2em', width: '2em'}}/></li>           
                             </ul>
                         </li>  
                         <li className='nav-item login-logout' onClick={() => currentUser ? this.logout() : this.linkFunc('/login')}>
@@ -142,7 +166,7 @@ class Nav extends Component {
                         <div className='mobile mobile-main-nav-wrapper' style={{display: hamburgerClicked ? 'grid' : 'none'}}>
                             <li className='nav-item' onClick={() => this.linkFunc('/posts')}>Posts</li>    
                             <li className='nav-item' onClick={() => this.linkFunc('/users')}>Users</li>    
-                            <li onClick={() => this.setState({clickedHome: !this.state.clickedHome})}
+                            <li onClick={() => this.clickedAngleIcon('clickedHome')}
                                 className='mobile-nav-submenu-item home'>
                                 <div className='mobile-nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ?
                                     <FaAngleDown  className='mobile-nav-icon'/> : <FaAngleUp  className='mobile-nav-icon'/>}
@@ -163,7 +187,7 @@ class Nav extends Component {
                             <li className='mobile-nav-item nba' onClick={() => this.linkFunc('/sports/nba')}>NBA</li>
                             <li className='mobile-nav-item nfl' onClick={() => this.linkFunc('/sports/nfl')}>NFL</li>
                             <li className='mobile-nav-item nhl' onClick={() => this.linkFunc('/sports/nhl')}>NHL</li>
-                            <li  onClick={() => this.setState({clickedFutbol: !this.state.clickedFutbol})}
+                            <li  onClick={() => this.clickedAngleIcon('clickedFutbol')}
                                 className='mobile-nav-submenu-item futbol'>
                                 <div className='mobile-nav-item futbol'>Futbol</div>{clickedFutbol ?
                                     <FaAngleDown className='mobile-nav-icon'/> : <FaAngleUp className='mobile-nav-icon'/>}<br/>
@@ -179,23 +203,15 @@ class Nav extends Component {
                                     </li>
                                 </ul>
                             </li>
-                            <li onClick={() => this.setState({clickedOther: !this.state.clickedOther})}
+                            <li onClick={() => this.clickedAngleIcon('clickedOther')}
                             className='mobile-nav-submenu-item other'>
                                 <div className='mobile-nav-item other'>Other</div>{clickedOther ? <FaAngleDown className='mobile-nav-icon' /> 
                                 : <FaAngleUp  className='mobile-nav-icon' />}
                                 <ul className='mobile-submenu-nav' style={{display: clickedOther ? 'inline-block' : 'none'}}>
-                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}>
-                                        <p>BMX</p>
-                                    </li>
-                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}>
-                                        <p>Skateboarding</p>
-                                    </li>     
-                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}>
-                                        <p>Snowboarding</p>
-                                    </li>
-                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/skiing`)}>
-                                        <p>Skiing</p>
-                                    </li>           
+                                    <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}><img src={bmxLogo} alt={'BMX'} style={{height: '2em', width: '2em'}}/></li>
+                                    <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}><img src={skateBoardLogo} alt={'Skateboarding'} style={{height: '2em', width: '2em'}}/></li>     
+                                    <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}><img src={snowBoardLogo} alt={'Snowboarding'} style={{height: '2em', width: '2em'}}/></li>
+                                    <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skiing`)}><img src={skiingLogo} alt={'Skiing'} style={{height: '2em', width: '2em'}}/></li>              
                                 </ul>
                             </li>
                         </div>

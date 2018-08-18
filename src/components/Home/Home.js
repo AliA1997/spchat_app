@@ -54,9 +54,9 @@ class Home extends Component {
                 setTimeout(() => {
                     const { dispatch  } = this.props;
                     dispatch(userFinishedRegistered());
-                }, 10000);
+                }, 5000);
                 return <Popup>
-                            <UserPopup/>
+                            <UserPopup {...registeredUser}/>
                         </Popup>
             }
             return (

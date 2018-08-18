@@ -1,5 +1,7 @@
 .user-page-container-div {
-    padding-top: 10%;
+    width: 100%;
+    min-height: 100%;
+    padding-top: 20%;
     display: grid;
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 20% 10% 70%;
@@ -16,10 +18,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3em;
-    padding: 5%;
+    height: 100%;
+    padding-top: 5%;
+    padding-bottom: 2.5%;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
 }
-
+.user-page-container-div > *:first-child > * {
+    height: 25%;
+}
+.user-page-container-div > *:first-child > * > * {
+    font-size: 1.25em;
+}
 
 .user-page-container-div > *:nth-child(2) {
     grid-row: 2/2;
@@ -27,14 +37,18 @@
 }
 
 .user-page-container-div > *:nth-child(3) {
+    width: 100%;
     grid-row: 3/3;
+    min-height: 100%;
     grid-column: 2/2;
+    grid-template-columns: 10% 80% 10%;
 }
-.user-page-container-div > *:nth-child(3) > * {
+
+/* .user-page-container-div > *:nth-child(3) > * {
     display: grid;
     grid-template-columns: 40% 60%;
     width: 100%;
-}
+} */
 .user-page-container-div > *:nth-child(3) > * > *:first-child {
     grid-column: 1/1;
 }

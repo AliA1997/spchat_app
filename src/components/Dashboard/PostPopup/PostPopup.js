@@ -5,9 +5,11 @@ import './PostPopup.css';
 const PostPopup = (props) => {
     const { title, description, image, date, tags, sport } = props;
     return (
-            <div>
+            <div className='post-popup-container'>
                 {/*Check */}
+                <h1>Post Created</h1>
                 <MdCheck className='post-popup-check' />
+                <img src={image} alt={title} className="post-popup-image"/>
                 <p>Title: {title}</p>
                 <p>Description: {description}</p>
                 <p>Date: {date}</p>

@@ -16,9 +16,7 @@ class CreatePostPage extends Component {
         return (
             <div className='create-post-page-div'>
                 <h1 className='title create-post-form'>Create New Post</h1>
-                <div className='create-post-page-wrapper'>
-                    <PostForm redirect={this.redirect}/>
-                </div>
+                <PostForm redirect={this.redirect}/>
             </div>
         );
     }

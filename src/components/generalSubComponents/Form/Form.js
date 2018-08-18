@@ -257,7 +257,7 @@ class Form extends Component {
                             <input list='players'  className='input register' onChange={e => this.handleCurrentPlayer(e.target.value)} value={currentPlayer}/>
                             <button onClick={(e) => forEdit ? this.addToFavPlayers(e) : this.hanRegFavPlayers(e)}><FaPlus /></button>
                         </div>
-                        <datalist id='players' 
+                        <datalist id='players'  className='register-player-datalist'
                         value={favoritePlayers[favoritePlayers.length - 1] && favoritePlayers[favoritePlayers.length - 1].name} required={!forEdit && true}>
                             {players.map((player, i) => <option key={i}>{player.name}</option>)}
                         </datalist>

@@ -57,10 +57,6 @@ export default class UserCard extends Component {
                     </div>
                     <div className='user-card-info-div'>
                         <div className='user-card-info'>
-                            <p className='user-card-info-text'>Email: {email && email}</p><br/>
-                            <p className='user-card-info-text'>Age: {age && age}</p><br/>
-                            <p className='user-card-info-text'>Favorite Sport: {favorite_sport && favorite_sport}</p><br/>
-                            <p className='user-card-verified-text'>Verified: {JSON.stringify(this.props.verified)}</p>
                             <select onChange={(e) => this.handleWarningsChange(e.target.value)} 
                             style={{display: isAdmin ? 'inline-block' : 'none'}}>
                                 {warnings.map((warningItem, i) => <option key={i}>{warningItem}</option>)}

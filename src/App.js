@@ -28,15 +28,13 @@ class App extends PureComponent {
     const { currentUser } = this.props;
     console.log('Current user----------', currentUser);
     return (            
-      <div>
-      <Particles 
-      params={subBackgroundParams} 
-      className='background' />
         <div className='app'>
+            <Particles 
+            params={subBackgroundParams} 
+            className='background' />
             <Nav />
             {routes}
         </div>
-      </div>
     );
   }
 }

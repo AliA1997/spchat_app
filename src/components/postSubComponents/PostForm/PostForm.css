@@ -3,13 +3,13 @@
 }
 .create-post.form {
     color: #fff;
-    width: 80vw;
-    grid-column: 1/2;
+    width: 100%;
+    grid-column: 2/2;
     text-align: center;    
     border: solid 3px #fff;
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
-    grid-template-rows: 30% 60% 30%;
+    grid-template-rows: 30% 40% 30%;
 }
 .input.create-post  {
 
