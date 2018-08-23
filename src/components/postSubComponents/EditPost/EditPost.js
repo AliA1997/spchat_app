@@ -106,25 +106,25 @@ class EditPost extends Component {
     render() {
         const { title, description, selectedTags, sport, sports, tags, imageurl } = this.state;        
         return (
-            <form className='create-post form'  onSubmit={e => this.editPost(e)}>
-                <img src={imageurl}  className='create-post-image' alt={title} />
-                <p className='create-form-image-label'>Image</p>
-                <input type='file' className='input create-post'
+            <form className='edit-post form'  onSubmit={e => this.editPost(e)}>
+                <img src={imageurl}  className='edit-post-image' alt={title} />
+                <p className='edit-form-image-label'>Image</p>
+                <input type='file' className='input edit-post'
                 onChange={e => this.handleEditPostImageUpload(e.target.files)} />
-                <p className='create-form-image-label'>Title</p>
-                <input type='text' className='input create-post'
+                <p className='edit-form-image-label'>Title</p>
+                <input type='text' className='input edit-post'
                 onChange={e => this.handleEditPostTitleChange(e.target.value)}
                 placeholder={title} />
-                <p className='create-form-image-label'>Description</p>
-                <textarea type='text' className='textarea create-post'
+                <p className='edit-form-image-label'>Description</p>
+                <textarea type='text' className='textarea edit-post'
                 onChange={e => this.handleEditPostDescriptionChange(e.target.value)}
                 placeholder={description}>
                 </textarea>
-                <p className='create-form-image-label'>Sports</p>
+                <p className='edit-form-image-label'>Sports</p>
                 <select selected={sport} onChange={e => this.handleEditPostSportsChange(e.target.value)}>
                     {sports && sports.map((sport, i) => <option key={i}>{sport}</option>)}
                 </select>
-                <p className='create-form-image-label'>Tags</p>
+                <p className='edit-form-image-label'>Tags</p>
                 <select selected='' onChange={e => this.handleEditPostTagsChange(e.target.value)}>
                     {tags && tags.map((tag, i) => <option key={i}>{tag}</option>)}
                 </select>

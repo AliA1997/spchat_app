@@ -1,5 +1,5 @@
 .page-container-div.login {
-    /* width: 80vw; */
+    width: 100%;
     display: grid;
     grid-template-rows: 20% 60% 20%;
     grid-template-columns: 15% 15% 15% 15% 25% 15%;
@@ -33,14 +33,7 @@
     margin: 10px;
 }
 @media (min-width: 760px) {
-    /* .title.login {
-        margin-bottom: -40px;
-    } */
-    /* .page-container-div.login {
-        height: 60vh;
-        width: 60vw;
-        vertical-align: middle;
-    } */
+
 
 }
 
@@ -49,8 +42,6 @@
         /* margin-bottom: -50px; */
     }
     .page-container-div.login {
-        /* height: 60vh;
-        width: 40vw; */
         vertical-align: middle;
     }
     .page-div.login {

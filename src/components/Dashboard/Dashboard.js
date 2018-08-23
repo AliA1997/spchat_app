@@ -153,7 +153,7 @@ class Dashboard extends Component {
 const mapStateToProps = state => {
     return {
         createdPost: state.post.createdPost,
-        currentUser: state._persist.rehydrated && !state.loggedOut ? state.user.currentUser : state._persist.user.currentUser,
+        currentUser: state.user.currentUser,
         doEditPost: state.post.doEditPost
     }
 }

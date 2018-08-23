@@ -1,5 +1,7 @@
 .home-slideshow-div {
-    width: 60vw;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
     /* p-top: 10%;
     padding-right: 5%;
     padding-left: 5%; */
@@ -11,23 +13,31 @@
 }
 .home-recent-posts-div {
     /* text-align: center; */
-    width: 100%;
+    min-width: 100%;
     /* border: 2px solid #fff; */
 }
-
-.home-div {
-    background: none;
-    padding: 75px;
-    width: 100%;
+.home-recent-posts-div > * {
     margin-left: auto;
     margin-right: auto;
+}
+.home-div {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    padding: 0;
+    width: 100%;
+}
+.home-div > * {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    grid-column: 1/3 !important;
+    width: 100% !important;
 }
 .home-subdiv {
     /* display: flex; */
     margin-left: auto;
     margin-right: auto;
-    height: 40vh;
-    width: 80vw;
+    height: 40%;
+    width: 100%;
     padding: 5%;
 }
 .home-subdiv > * {
@@ -99,8 +109,10 @@
 @media (min-width: 760px) {
         .home-div {
             padding: 100px;
+            grid-template-columns: 5% 90% 5%;
         }
         .home-subdiv {
+            min-width: 100%;
             height: 100%;
             display: grid;
             grid-template-rows: 50% 50%;
@@ -111,7 +123,7 @@
             grid-row: 1/1;
             grid-column: 1/2;
             height: 100%;
-            width: 80vw;
+            width: 100%;
         }
         .home-survey-div {
             grid-row: 2/2;
@@ -134,8 +146,10 @@
 }
 @media (min-width: 1200px) {
     .home-subdiv {
+        width: 100%;
+        padding: 0;
         grid-template-rows: 100%;
-        grid-template-columns: 33% 33% 33%;
+        grid-template-columns: 33.3% 33.3% 33.3%;
     }
     .home-subdiv > * {
         height: 100%;
@@ -145,7 +159,7 @@
         grid-row: 1/1;
         grid-column: 1/1;
         height: 100%;
-        width: 80vw;
+        width: 100%;
     }
     .home-survey-div {
         grid-row: 1/1;

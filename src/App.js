@@ -39,10 +39,4 @@ class App extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state._persist.rehydrated && !state.loggedOut ? state.user.currentUser : state._persist.user.currentUser
-  }
-}
-
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(connect()(App));

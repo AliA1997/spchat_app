@@ -19,14 +19,14 @@ class EditProfilePage extends Component {
         const { socialMediaClicked } = this.state;
         return (
             <div className='edit-profile-container' >
-                Edit Profile
+                <h1>Edit Profile</h1>
                 <div className='edit-profile-wrapper'>
                     <Form forEdit={true} redirect={this.redirect}/>
                 </div>
                 <button onClick={() => this.setState({socialMediaClicked: !this.state.socialMediaClicked})}>Social Media</button>
                 <div className='edit-profile-social-media-wrapper' style={{display: socialMediaClicked ? 'inline-block' : 'none'}}>
                     <div>
-                    <p>Edit Social Media</p>
+                    <h1>Edit Social Media</h1>
                     <SocialMediaForm />
                     </div>
                 </div>

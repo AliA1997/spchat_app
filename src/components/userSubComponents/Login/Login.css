@@ -5,12 +5,17 @@
 }
 .form.login {
     color: #fff;
-    width: 60vw;
+    width: 100%;
+    grid-template-columns: 10% 80% 10%;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.form.login > * {
+    width: 100%;
+    grid-column: 2/2;
 }
 .login-div {
     margin-top: 50%;
@@ -28,7 +33,7 @@
     width: 60%;
     height: 3.5em;
     font-size: 1.15em;
-    margin: 50px;
+    margin: 10px;
 }
 .login-div > input {
     position: relative;
@@ -41,7 +46,7 @@
 }
 @media (min-width: 760px) {
     form.login {
-        width: 40vw;
+        width: 100%;
     }
     .login-div > input  {
         height: 2.5em;
@@ -68,7 +73,8 @@
 
 @media (min-width: 1200px) {
     .form.login {
-        width: 40vw;
+        width: 100%;
+        min-height: 100%;
         display: grid;
         grid-template-rows: 10% 80% 10%;
     }

@@ -18,6 +18,7 @@ import axios from 'axios';
 //React Icons-----------
 //Up and Down Icons 
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
+import FaSearch from 'react-icons/lib/fa/search';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import './Nav.css';
 
@@ -29,6 +30,8 @@ class Nav extends Component {
             clickedOther: false,
             clickedHome: false,
             hamburgerClicked: false,
+            clickedMobileSports: false,
+            clickedSearch: false,
             searchString: '',
             randomIndex: props.currentUser && props.currentUser.favorite_teams && props.currentUser.favorite_teams.length ? Math.floor(Math.random() * props.currentUser.favorite_teams.length) : 0
             // logoIndex: Math.floor(Math.random() * props.currentUser.favorite_teams.length)
@@ -46,19 +49,41 @@ class Nav extends Component {
         if(icon === 'clickedOther') {
             this.setState({
                 clickedOther: !this.state.clickedOther,
+                clickedMobileSports: false,
                 clickedFutbol: false,
+                clickedSearch: false, 
                 clickedHome: false
             })
         } else if(icon === 'clickedFutbol') {
             this.setState({
                 clickedFutbol: !this.state.clickedFutbol,
+                clickedMobileSports: false,
+                clickedHome: false,
+                clickedSearch: false,
+                clickedOther: false
+            }) 
+        } else if(icon === 'clickedSearch') {
+            this.setState({
+                clickedSearch: !this.state.clickedSearch,
+                clickedMobileSports: false,
+                clickedFutbol: false,
+                clickedHome: false,
+                clickedOther: false
+            }) 
+        } else if(icon === 'clickedMobileSports') {
+            this.setState({
+                clickedMobileSports: !this.state.clickedMobileSports,
+                clickedSearch: false,
+                clickedFutbol: false,
                 clickedHome: false,
                 clickedOther: false
             }) 
         } else {
             this.setState({
                 clickedHome: !this.state.clickedHome,
+                clickedMobileSports: false,
                 clickedFutbol: false,
+                clickedSearch: false,
                 clickedOther: false
             })
         }
@@ -72,7 +97,7 @@ class Nav extends Component {
         }).catch(err => console.log('Axios Post Error---------', err));
     }
     render() {
-        const { clickedHome, clickedFutbol, clickedOther, hamburgerClicked, randomIndex } = this.state;
+        const { clickedHome, clickedFutbol, clickedOther, clickedMobileSports, clickedSearch, hamburgerClicked, randomIndex } = this.state;
         const { currentUser } = this.props;
         const teamLogos = [fifaLogo, laLigaLogo, premierLeagueLogo, mlbLogo, nbaLogo, nhlLogo, nflLogo];
         const indexOfLogo = Math.floor(Math.random() * teamLogos.length);
@@ -94,9 +119,20 @@ class Nav extends Component {
                         <figure className='stage'>
                             <img className='ball' src={teamLogos[indexOfLogo]} alt='Spchat-logo'/>
                         </figure>}
-
-                        <li className='nav-item' onClick={() => this.linkFunc('/posts')}>Posts</li>    
-                        <li className='nav-item' onClick={() => this.linkFunc('/users')}>Users</li>    
+                        <li onClick={() => this.clickedAngleIcon('clickedSearch')}
+                        className='nav-submenu-item search'>
+                            <div className='nav-item other'><FaSearch style={{fontSize: '2em'}} /></div>{clickedSearch ? <FaAngleDown /> : <FaAngleUp />}
+                            <ul className='submenu-nav' style={{display: clickedSearch ? 'inline-block' : 'none',
+                            backgroundColor: currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
+                            color: currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
+                                    <li className='submenu-nav-item'>
+                                        <NavLink to='/posts'>Posts</NavLink>
+                                    </li>                            
+                                    <li className='submenu-nav-item'>
+                                        <NavLink to='/users'>Users</NavLink>
+                                    </li>
+                            </ul>
+                        </li>
                         <li onClick={() => this.clickedAngleIcon('clickedHome')}
                         className='nav-submenu-item home'>
                             <div className='nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ? <FaAngleDown /> : <FaAngleUp />}
@@ -164,8 +200,21 @@ class Nav extends Component {
                             </figure>}
                         </figure>
                         <div className='mobile mobile-main-nav-wrapper' style={{display: hamburgerClicked ? 'grid' : 'none'}}>
-                            <li className='nav-item' onClick={() => this.linkFunc('/posts')}>Posts</li>    
-                            <li className='nav-item' onClick={() => this.linkFunc('/users')}>Users</li>    
+                        <li onClick={() => this.clickedAngleIcon('clickedSearch')}
+                        className='nav-submenu-item search'>
+                            <div className='mobile-nav-item search'><FaSearch style={{fontSize: '2em'}}/></div>{clickedSearch ?
+                                <FaAngleDown  className='mobile-nav-icon'/> : <FaAngleUp  className='mobile-nav-icon'/>}
+                            <ul className='submenu-nav' style={{display: clickedSearch ? 'inline-block' : 'none',
+                            backgroundColor: currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[0] : '#020',
+                            color: currentUser && currentUser.favorite_teams && currentUser.favorite_teams.length && currentUser.favorite_teams[randomIndex].colors.length ? currentUser.favorite_teams[randomIndex].colors[1] : '#fff'}}>
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/posts')}>
+                                    <p>Posts</p>
+                                </li>                            
+                                <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/users')}>
+                                    <p>Users</p>
+                                </li>
+                            </ul>
+                            </li>  
                             <li onClick={() => this.clickedAngleIcon('clickedHome')}
                                 className='mobile-nav-submenu-item home'>
                                 <div className='mobile-nav-item home' onClick={() => this.linkFunc('/')}>Home</div>{clickedHome ?
@@ -183,35 +232,41 @@ class Nav extends Component {
                                         </li>
                                 </ul>
                             </li>
-                            <li className='mobile-nav-item mlb' onClick={() => this.linkFunc('/sports/mlb')}>MLB</li>
-                            <li className='mobile-nav-item nba' onClick={() => this.linkFunc('/sports/nba')}>NBA</li>
-                            <li className='mobile-nav-item nfl' onClick={() => this.linkFunc('/sports/nfl')}>NFL</li>
-                            <li className='mobile-nav-item nhl' onClick={() => this.linkFunc('/sports/nhl')}>NHL</li>
-                            <li  onClick={() => this.clickedAngleIcon('clickedFutbol')}
-                                className='mobile-nav-submenu-item futbol'>
-                                <div className='mobile-nav-item futbol'>Futbol</div>{clickedFutbol ?
-                                    <FaAngleDown className='mobile-nav-icon'/> : <FaAngleUp className='mobile-nav-icon'/>}<br/>
-                                <ul className='mobile-submenu-nav' style={{display: clickedFutbol ? 'inline-block' : 'none'}}>
-                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/sports/premier-league')}>
-                                        <p>Premier League</p>
+                            <li  className='mobile-nav-submenu-item home'>
+                                <div className='mobile-nav-item sports' onClick={() => this.clickedAngleIcon('clickedMobileSports')} >Sports</div>
+                                {clickedMobileSports ?  <FaAngleDown  className='mobile-nav-icon'/> : <FaAngleUp  className='mobile-nav-icon'/>}
+                                <ul className='mobile-submenu-nav' style={{display: clickedMobileSports ? 'inline-block' : 'none'}}>
+                                    <li className='mobile-nav-item mlb' onClick={() => this.linkFunc('/sports/mlb')}>MLB</li>
+                                    <li className='mobile-nav-item nba' onClick={() => this.linkFunc('/sports/nba')}>NBA</li>
+                                    <li className='mobile-nav-item nfl' onClick={() => this.linkFunc('/sports/nfl')}>NFL</li>
+                                    <li className='mobile-nav-item nhl' onClick={() => this.linkFunc('/sports/nhl')}>NHL</li>
+                                    <li  onClick={() => this.clickedAngleIcon('clickedFutbol')}
+                                        className='mobile-nav-submenu-item futbol'>
+                                        <div className='mobile-nav-item futbol'>Futbol</div>{clickedFutbol ?
+                                            <FaAngleDown className='mobile-nav-icon'/> : <FaAngleUp className='mobile-nav-icon'/>}<br/>
+                                        <ul className='mobile-submenu-nav' style={{display: clickedFutbol ? 'inline-block' : 'none'}}>
+                                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc('/sports/premier-league')}>
+                                                <p>Premier League</p>
+                                            </li>
+                                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/fifa`)}>
+                                                <p>FIFA</p>
+                                            </li>                            
+                                            <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/la-liga`)}>
+                                                <p>La Liga</p>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/fifa`)}>
-                                        <p>FIFA</p>
-                                    </li>                            
-                                    <li className='mobile-submenu-nav-item' onClick={() => this.linkFunc(`/sports/la-liga`)}>
-                                        <p>La Liga</p>
+                                    <li onClick={() => this.clickedAngleIcon('clickedOther')}
+                                    className='mobile-nav-submenu-item other'>
+                                        <div className='mobile-nav-item other'>Other</div>{clickedOther ? <FaAngleDown className='mobile-nav-icon' /> 
+                                        : <FaAngleUp  className='mobile-nav-icon' />}
+                                        <ul className='mobile-submenu-nav' style={{display: clickedOther ? 'inline-block' : 'none'}}>
+                                            <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}><img src={bmxLogo} alt={'BMX'} style={{height: '2em', width: '2em'}}/></li>
+                                            <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}><img src={skateBoardLogo} alt={'Skateboarding'} style={{height: '2em', width: '2em'}}/></li>     
+                                            <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}><img src={snowBoardLogo} alt={'Snowboarding'} style={{height: '2em', width: '2em'}}/></li>
+                                            <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skiing`)}><img src={skiingLogo} alt={'Skiing'} style={{height: '2em', width: '2em'}}/></li>              
+                                        </ul>
                                     </li>
-                                </ul>
-                            </li>
-                            <li onClick={() => this.clickedAngleIcon('clickedOther')}
-                            className='mobile-nav-submenu-item other'>
-                                <div className='mobile-nav-item other'>Other</div>{clickedOther ? <FaAngleDown className='mobile-nav-icon' /> 
-                                : <FaAngleUp  className='mobile-nav-icon' />}
-                                <ul className='mobile-submenu-nav' style={{display: clickedOther ? 'inline-block' : 'none'}}>
-                                    <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/bmx`)}><img src={bmxLogo} alt={'BMX'} style={{height: '2em', width: '2em'}}/></li>
-                                    <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skateboarding`)}><img src={skateBoardLogo} alt={'Skateboarding'} style={{height: '2em', width: '2em'}}/></li>     
-                                    <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/snowboarding`)}><img src={snowBoardLogo} alt={'Snowboarding'} style={{height: '2em', width: '2em'}}/></li>
-                                    <li className='submenu-nav-item' onClick={() => this.linkFunc(`/sports/skiing`)}><img src={skiingLogo} alt={'Skiing'} style={{height: '2em', width: '2em'}}/></li>              
                                 </ul>
                             </li>
                         </div>

@@ -1,5 +1,5 @@
 .post-page-container {
-    width: 80vw;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     grid-template-columns: 25% 25% 25% 25%;
@@ -93,7 +93,7 @@
 }
 @media(min-width: 1200px) {
     .post-page-container {
-        width: 80vw;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         display: grid;

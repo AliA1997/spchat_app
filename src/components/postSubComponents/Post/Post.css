@@ -36,7 +36,7 @@
 }
 .post-container-div {
     display: flex;
-    width: 80vw;
+    width: 100%;
     justify-content: space-around;
 }
 .post-container-div:hover {
@@ -96,7 +96,7 @@
     font-weight: 700;
 }
 .post-main-div-link {
-    width: 80vw;
+    width: 100%;
 }
 .post-title {
     margin: 10px;
@@ -139,7 +139,7 @@
     .post-main-div {
         display: flex;
         height: 30vh; 
-        width: 60vw;
+        width: 80%;
         margin-left: auto;
         margin-right: auto;    
         color: #fff;

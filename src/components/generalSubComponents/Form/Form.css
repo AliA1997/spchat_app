@@ -11,8 +11,11 @@
     margin-left: auto;
     margin-right: auto;    
     text-align: center;
+    padding: 0;
 }
-
+.form.register > * {
+    width: 100%;
+}
 .data-list-div {
     margin-left:auto;
     margin-right: auto;

@@ -64,7 +64,8 @@ class Home extends Component {
                     <div className='home-slideshow-div'>
                         <Slideshow slides={displayPosts} linkFunc={this.linkFunc} isHome={true}/>
                     </div>
-                    <h3 style={{fontSize: '2.25em', marginLeft: 'auto', marginRight: 'auto', marginTop: '50px'}}>Recent Posts</h3>
+                    <div style={{fontSize: '2.25em', marginRight: 'auto', marginLeft: 'auto', textAlign: 'center', 
+                     marginTop: '50px', width: '100%'}}>Recent Posts</div>
                     <div className='home-recent-posts-div'>
                             <Posts posts={posts}/>
                     </div>
