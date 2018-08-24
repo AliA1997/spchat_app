@@ -1,9 +1,12 @@
 .error-not-found-container-div {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    padding-top: 50%;
+    z-index: -1;
     padding: 2.5%;
 }
 .error-not-found-subtext {
+    padding: 25%;
     font-size: 1.25em;
     transform: scale(1.5);
     text-transform: uppercase;
@@ -16,10 +19,6 @@
     font-size: 5em;
 }
 .error-not-found-page-div {
-    grid-row-start: 3;
-    grid-row-end: 4;
-    grid-column-start: 2;
-    grid-column-end: 4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,6 +28,7 @@
 }
 @media(min-width: 760px){
     .error-not-found-subtext {
+        padding-top: 20%;
         font-size: 3em;
     }
     .error-not-found-text {
@@ -36,5 +36,11 @@
     }
     .not-found-img {
         font-size: 15em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .error-not-found-subtext {
+        padding-top: 10%;
     }
 }

@@ -44,7 +44,7 @@
   /* height: 50vh; */
   width: 100%;
   margin-left: 5%;
-  opacity: 0.75;
+  opacity: 150;
   position: fixed;
   top: 0;
   list-style: none;
@@ -69,6 +69,9 @@
 .mobile-nav-submenu-item {
   width: 100%;
   color: none;
+}
+.mobile-submenu-nav-item  > * {
+  display: block;
 }
 .mobile-nav-submenu-item > ul {
   margin-left: -5%;

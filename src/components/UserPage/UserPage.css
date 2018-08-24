@@ -1,92 +1,130 @@
-.user-page-container-div {
+.user-page.container-div {
+    margin-top: 20%;
+    padding: 0;
     width: 100%;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
     font-size: 1em;
 }
-.user-page-div {
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
+
+.user-page.container-div > * {
+    padding-top: 20% !important;
     border-bottom: solid 1px #fff;
-    height: 40vh;
-    /* width: 100%; */
+    min-height: 100% !important;
+    display: grid !important;
+    grid-template-rows: 50% 5% 12.5% 5% 12.5% 17.5% 10% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
 }
-.user-page-img-div {
-    width: 100%;
+
+.user-page.container-div > * > * {
+    grid-row: auto;
+    width: 100% !important;
+    grid-row: auto !important;
+    margin-bottom: 10% !important;
+
+}
+
+.user-page.container-div > * > *:first-child {
+    margin-top: 10%;
+    display: grid !important;
+    grid-template-columns: 40% 60% !important;
+    grid-template-rows: 10% 80% 10% !important;
+    height: 100% !important; 
+    width: 100% !important; 
+    margin-bottom: 20% !important;
+}
+
+.user-page.container-div > * > *:first-child > * {
+    width: 100% !important;
+    grid-column: auto !important;
+    grid-row: 2/2 !important;
+}
+.user-page.container-div > * > *:first-child > *:first-child {
+    width: 100% !important;
+}
+.user-page.container-div > * > *:first-child > *:nth-child(2) {
     text-align: center;
 }
-.user-page-img {
-    margin: 25px;
-    border: 2px solid transparent;
-    border-radius: 100%;
-    height: 70%;
-    width: 60%;
-}
 
-.user-page-info-div {
-    margin: 50px;
-    text-align: left;
-    display: grid;
-    grid-template-rows: 20% 60% 20%;
-    grid-template-columns: 10% 80% 10%;
+.user-page.container-div > * > *:first-child > img {
+    width: 33% !important;
+    height: 80% !important;
+    border-radius: 50% !important;
+}
+.user-page.container-div > * > *:nth-child(2) {
+    height: 100% !important;
+}
+.user-page.container-div > * > *:nth-child(2) > * {
+    height: 5em !important;
+    width: 100% !important;
+}
+.user-page.container-div > * > *:nth-child(3) {
+    height: 100% !important;
+}
+.user-page.container-div > * > *:nth-child(3) > * {
+    height: 5em !important;
+    width: 100% !important;
+}
+.user-page.container-div > * > *:nth-child(5) {
+    height: 100% !important;
     width: 100%;
 }
-.user-page-wrapper {
-    display: grid;
-    grid-template-rows: 20% 60% 20%;
-    grid-template-columns: 10% 80% 10%;
-    grid-row: 2/3;
-    grid-column: 2/3;
+.user-page.container-div > * > *:nth-child(5) > * {
+    height: 5em !important;
+    width: 100% !important;
 }
-.user-page-info-text {
-    padding: 1%;
-    margin: 1%;
-    border-bottom: 1px solid #fff;
-    box-sizing: border-box;
+@media (min-width: 760px) {
+    .team-card-img-div {
+        width: 80% !important;
+        height: 100% !important;
+    }
+    .team-card-img-div > img {
+        width: 60% !important;
+    }
+    .player-card-div {
+        width: 100% !important;
+    }
+    img {
+        height: 100%;
+        width: 100%;
+    }
+    .user-page.container-div > * > *:nth-child(3) > * {
+        height:10em !important;
+        width: 100% !important;
+    }
+    .user-page.container-div > * > *:nth-child(5) > * {
+        height: 10em !important;
+        width: 100% !important;
+    }
 }
-
 @media (min-width: 1200px) {
-    .user-page-container-div {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 1em;
+    .user-page.container-div > * > *:first-child {
+        font-size: 2em !important;
+        font-weight: 700 !important;
+        margin-top: 10%;
+        display: flex !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        height: 50% !important; 
     }
-    .user-page-div {
-        grid-template-columns: 30% 40% 30%;
-        display: flex;
-        border-bottom: solid 1px #fff;
-        height: 40vh;
+    .user-page.container-div > * > *:first-child > *:first-child {
+        width: 40% !important;
     }
-    .user-page-img-div {
-        width: 40%;
-        text-align: center;
-    }
-    .user-page-img {
-        margin: 25px;
-        border: 2px solid transparent;
-        border-radius: 100%;
-        height: 70%;
-        width: 60%;
-    }
-
-    .user-page-info-div {
-        margin: 50px;
-        text-align: left;
+    .user-page.container-div > * > *:nth-child(3) {
         display: grid;
-        grid-template-rows: 20% 60% 20%;
-        grid-template-columns: 10% 80% 10%;
-        width: 100%;
+        grid-template-columns: 33% 33% 33%;
     }
-    .user-page-wrapper {
-        grid-row: 2/3;
-        grid-column: 2/3;
+    .user-page.container-div > * > *:nth-child(3) > * {
+        grid-column: auto;
     }
-    .user-page-info-text {
-        padding: 1%;
-        margin: 1%;
-        border-bottom: 1px solid #fff;
-        box-sizing: border-box;
+    .user-page.container-div > * > *:nth-child(5) {
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
     }
-
+    .user-page.container-div > * > *:nth-child(5)  > *{
+        grid-column: auto;
+    }
 }

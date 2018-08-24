@@ -37,33 +37,27 @@ class UserPage extends Component {
         // console.log("user-----------------", user);
         if(!loading) {
             return (
-                <div className='user-page-container-div'>
-                    <div className='user-page-div'>
-                        <div className='user-page-img-div'>
-                            <img className='user-page-img' 
+                <div className='user-page container-div'>
+                    <div>
+                        <div>
+                            <img style={{height: '100%', width: '100%'}}
                             src={user.image || defaultPicture} alt={user.username} />
-                            <p className='user-page-username-div'>{user.username}</p>
-                        </div>
-                        <div className='user-page-social-icons'>
-                        </div>
-                        <div className='user-page-info-div'>
-                            <div className='user-page-wrapper'>
-                                <p className='user-page-info-text'>{user.email}</p>
-                                <p className='user-page-info-text'>{user.age}</p>
-                                <p className='user-page-info-text'>{user.favorite_sport}</p>
-                                <div className='user-page-info-text'>
-                                    {user && user.favorite_teams.map((team, i) => <TeamCard key={i} {...team} />)}
-                                </div>
-                                <div className='user-page-favorite-players'>
-                                    {user && user.favorite_players.map((player, i) => <PlayerCard key={i} {...player} />)}
-                                </div>    
-                                <p className='user-page-info-text'>{JSON.stringify(user.verified)}</p>
+                            <div>
+                                <p>{user.username}</p>
+                                <p>{user.email}</p>
+                                <p>{user.age}</p>
+                                <p>{user.favorite_sport}</p>
+                                <p>{JSON.stringify(user.verified)}</p>
                             </div>
                         </div>
-                        <div className='recent-posts-div'>
-                            <h1>Recent Posts</h1>
-                            {posts.map((post, i) => <Post key={i} {...post} />)}
+                        <p style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Favorite Teams</p>
+                        <div>
+                            {user && user.favorite_teams.map((team, i) => <TeamCard key={i} {...team} />)}
                         </div>
+                        <p style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Favorite Players</p>
+                        <div>
+                            {user && user.favorite_players.map((player, i) => <PlayerCard key={i} {...player} />)}
+                        </div>    
                     </div>
                 </div>
             );
