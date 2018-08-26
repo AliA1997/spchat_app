@@ -22,5 +22,5 @@
   ![PostPage](/markdown-images/PostPage.png)
   #### User Dashboard Page
   ![Dashboard](/markdown-images/DashboardPage.png)
-  #### Users Search Page Page
+  #### Users Search Page
   ![UsersPage](/markdown-images/UsersPage.png)
