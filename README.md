@@ -15,12 +15,12 @@
   - NewsAPI 
   ### Pictures (All Mobile)
   #### HomePage Not Logged In.
-  ![HomePage](/markdown-images/Homepage.png)
+  ![Homepage](/markdown-images/Homepage.png)
   #### SportPage Not Logged In 
   ![SportPage](/markdown-images/SportPage.png)
   #### PostPage Not Logged In
   ![PostPage](/markdown-images/PostPage.png)
   #### User Dashboard Page
-  ![UserDashboard](/markdown-images/Dashboard.png)
+  ![Dashboard](/markdown-images/Dashboard.png)
   #### Users Dashboard Page
   ![UsersPage](/markdown-images/UsersPage.png)
