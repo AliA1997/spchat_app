@@ -1,0 +1,126 @@
+.comments-container-div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    height: 100%;
+    /* border: 2px solid #fff; */
+}
+.comments-container-div > * {
+    grid-column: 2/2;
+}
+.comments-container-div > .create-comment-textarea {
+    background: transparent;
+    color: #fff;
+    margin-bottom: 10%;
+    margin-top: 10%;
+    height: 5em;
+}
+.comments-container-div > .create-comment-button {
+    background: transparent;
+    color: #fff;
+    font-weight: 800;
+    height: 3em;
+    border: 2px solid #fff;
+    font-size: 1.25em;
+}
+.comment-div {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.comment-div > .comment-text-area {
+    background: transparent;
+    color: #fff;
+    margin: 5%;
+    height: 5em;
+    font-size: 1.25em;
+    width: 90%;
+}
+.comment-username {
+    padding: 2%;
+    font-size: 1.5em;
+    font-weight: 800;
+    border-bottom: 1px solid #fff;
+}
+.comment-text {
+    padding: 2%;
+    font-size: 1.25em;
+    font-weight: 800;
+}
+.comment-button-div {
+    display: flex;
+    justify-content: space-around;
+    border: solid 2px #fff;
+}
+.comment-button-div > button {
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 800;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.comment-button-div > button:first-child:hover {
+    color: #000;
+    background: #fff; 
+}
+.comment-button-div > button:nth-child(2):hover {
+    background: darkred;
+}
+@media (min-width: 760px) {
+    .comments-container-div > .create-comment-textarea {
+        height: 10em;
+    }
+}
+@media (min-width: 1200px) {
+    .comments-container-div {
+        display: grid;
+        grid-row-start: 9;
+        grid-row-end: 10;
+        background: transparent;
+        color: white;
+        grid-template-columns: 10% 80% 10%;
+        grid-template-rows: 25% 25% 25% 25%;
+    }
+
+    .comments-container-div > h1 {
+        text-align: center;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+    .comments-container-div > .create-comment-textarea {
+        background: transparent;
+        color: #fff;
+        margin: 25px;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+    .comments-container-div > .create-comment-button {
+        background: transparent;
+        color: #fff;
+        margin: 10%;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 3;
+    }
+    .comments-div {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 4;
+    }
+
+    .comment-button-div > button {
+        background: transparent;
+        color: #fff;
+    }
+}

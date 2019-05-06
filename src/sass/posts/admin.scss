@@ -1,0 +1,99 @@
+.admin-page-administrator-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.admin-page-title {
+    font-size: 2em;
+    font-weight: 800;
+}
+.admin-page-info-div > p {
+    font-size: 1.5em;
+}
+.admin-page-info-div > button {
+    height: 5em;
+    /* width: 10em; */
+    background: black;
+    color: #fff;
+}
+.admin-page-info-div > button:hover {
+    background: #fff;
+    color: black;
+}
+.admin-page-info-div > button:active {
+    background: #fff;
+    color: black;
+}
+.admin-page-img-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.admin-page-img {
+    border-radius: 100%;
+    height: 50%;
+    width: 50%;
+}
+.admin-page-user-title {
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    font-weight: 800;
+}
+.admin-page-post-title {
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    font-weight: 800;
+}
+
+.admin-post-container-div {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    border: 3px solid #fff;
+    width: 80%;
+    margin-top: 40px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.admin-post-img-div {
+    grid-column: 1/1;
+    height: 60%;
+    margin-top: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.admin-post-wrapper {
+    grid-column: 2/2;
+    /* border: solid 1px blue; */
+}
+.admin-post-button-div {
+    grid-column: 2/3;
+    /* border: solid 1px green; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.admin-post-button-div > select {
+    height: 4em;
+}
+.admin-post-img {
+    height: 100%;
+    width: 75%;
+}
+.admin-post-delete-button {
+    height: 4em;
+    background: darkred;
+    color: #fff;
+}
+.admin-post-delete-button:hover {
+    color: darkred;
+    background: #fff;
+}
+.admin-post-delete-button:active {
+    color: darkred;
+    background: #fff;
+}

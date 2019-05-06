@@ -1,0 +1,334 @@
+.news-container {
+    margin-top: 10%;
+}
+.search-div {
+    height: 2em;
+    width: 100%;
+    margin-left: -10px;
+    display: flex;
+}
+
+.search-input {
+    height: 75%;
+    width: 70%;
+}
+.search-input > input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    color: #fff;
+}
+.search-icon {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon-search {
+    /* padding-left: 10px;
+    padding-right: 10px;
+    pad */
+    height: 100%;
+    width: 100%;
+}
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  z-index: inherit;
+  position: relative;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50vh;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+  z-index: inherit;
+  opacity: 0.5;
+}
+.mySlides > img {
+  height: 100%;
+  width: 100%;
+  z-index: inherit;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+  z-index: inherit;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+  z-index: inherit;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  z-index: inherit;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+  z-index: inherit;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.5;
+}
+
+.active,
+.demo:hover {
+  z-index: inherit;
+  opacity: 1;
+}
+
+.social-media-form {
+    padding-top: 5%;
+    border: 2px solid #fff;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+}
+.social-icon-div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 3em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.social-icon-div > input {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+.social-icon {
+    font-size: 2em;
+}
+.social-media-form-button {
+    width: 50%;
+    height: 20%;
+    font-size: 1.25em;
+    font-weight: 800;
+    /* padding: 10px; */
+    margin: 30px;
+    background: transparent;
+    color: #fff;
+}
+.social-media-form-button:hover {
+    background: #fff;
+    color: black;
+}
+.social-media-form-button:active {
+    background: #fff;
+    color: black;
+}
+
+.dashboard-social-icons {
+    font-size: 2em;
+    margin: 20px;
+}
+.dashboard-social-icons.twitter-icon:hover {
+    background: #fff;
+    border-radius: 10%;
+    color: lightskyblue;
+}
+.dashboard-social-icons.facebook-icon:hover {
+    background: #fff;
+    border-radius: 10%;
+    color: darkblue;
+}
+.dashboard-social-icons.instagram-icon:hover {
+    border-radius: 10%;
+    background: linear-gradient(#4c68d7, #cd486b, #fbad50)
+}
+.dashboard-social-icons.snapchat-icon:hover {
+    border-radius: 10%;
+    background: #FFFC00;
+}
+.dashboard-social-icons.twitchtv-icon:hover {
+    border-radius: 10%;
+    background: purple;
+}
+.dashboard-social-icons.reddit-icon:hover {
+    border-radius: 10%;
+    background: #ff4301;
+}
+
+.dashboard-social-icons.playstation-icon:hover {
+    border-radius: 10%;
+    background: linear-gradient(#DF0024, #F3C300, #00AC9F, #2E6DB4);
+}
+
+.dashboard-social-icons.xbox-icon:hover {
+    background: lightgreen;
+    border-radius: 10%;
+}
+
+.sports-page-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sports-page-wrapper {
+    width: 100%;
+    /* display: grid;
+    grid-template-rows: 25% 25% 25% 25%; */
+}
+.sports-logo {
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+    /* grid-row: 1/1; */
+}
+.sports-page-posts {
+}
+.sports-page-last-div {
+    /* border: 2px solid #fff; */
+}
+.sports-subdiv {
+    border: 2px solid #fff;
+    margin: 20px;
+}
+
+
+
+@media (min-width: 760px) {
+    .social-icon-div {
+        height: 2.5em;
+    }
+    .sports-page-container {
+        padding-top: 5%;
+    }
+    .sports-page-wrapper {
+        display: grid;
+        grid-template-rows: 25% 25% 25% 25%;
+    }
+    .sports-logo {
+        height: 15em;
+        width: 50%;
+        margin-top: 40px;
+    }
+    .sports-page-posts {
+        width: 100%;
+        height: 100%;
+    }
+    .sports-page-last-div {
+        display: flex;
+    }
+    .sports-subdiv {
+        margin: 40px;
+        width: 100%;
+    }
+}
+
+@media(min-width: 1200px) {
+    .search-div {
+        display: grid;
+        /* justify-content: center;
+        align-items: center; */
+        grid-template-columns: 20% 50% 15% 15%;
+        grid-template-rows: 10% 20% 20% 20% 20% 10%;
+        height: 100%;
+    }
+    .search-icon {
+        cursor: grab;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        height: 100%;
+        width: 3em;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 4;
+        grid-row-end: 5;
+    }
+    .icon-search {
+        height: 100%;
+        width: 100%;
+    }
+    .search-input {
+        height: 100%;
+        grid-column-start: 1;
+        grid-column-end: 5;
+        grid-row-start: 4;
+        grid-row-end: 5;
+    }
+    .search-input > input {
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+    }
+    .mySlides:hover {
+        opacity: 1;
+        z-index: inherit;
+      }
+    .mySlides > img:hover {
+        z-index: inherit;
+    }
+    .social-icon-div { 
+        height: 2em;
+    }
+    .sports-page-container {
+        padding-top: 10%;
+    }
+
+    .sports-logo {
+        width: 30%;
+        margin-top: 75px;
+    }
+}

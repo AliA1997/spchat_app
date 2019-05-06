@@ -1,0 +1,443 @@
+.container-div.register {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 30% 20% 30% 10%;
+    grid-template-rows: 5% 5% 90%;
+    padding-top: 20%;
+}
+
+.title.register {
+    width: 100% !important;
+    grid-column: 1/6 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 10vh;
+    text-align: center;
+    grid-row: 2/2;
+}
+.container-div.register > *:nth-child(2) {
+    grid-row: 3/3;
+    grid-column: 1/6 !important;
+}
+
+.title.login {
+    margin-left: auto;
+    margin-right: auto;
+    margin: 50px;
+}
+.form.login {
+    color: #fff;
+    width: 100%;
+    grid-template-columns: 10% 80% 10%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form.login > * {
+    width: 100%;
+    grid-column: 2/2;
+}
+.login-div {
+    margin-top: 50%;
+    width: 100%;
+    text-align: center;
+}
+.login-label {
+    font-size: 1.1em;
+}
+.btn.login {
+    background: transparent;
+    border: solid 3px #fff;
+    color: #fff;
+    font-weight: 700;
+    width: 60%;
+    height: 3.5em;
+    font-size: 1.15em;
+    margin: 10px;
+}
+.login-div > input {
+    position: relative;
+    height: 3em;
+    width: 80%;
+    margin: 5%;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.form.register {
+    font-weight: 700;
+    grid-column-start: 2;
+    grid-column-end: 5;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 20% 15% 15% 20% 10% 10%;
+    grid-template-rows: 10% 20% 60% 10%;
+    color: #fff;   
+    margin-top: 15vh;
+    margin-left: auto;
+    margin-right: auto;    
+    text-align: center;
+    padding: 0;
+}
+.form.register > * {
+    width: 100%;
+}
+.data-list-div {
+    margin-left:auto;
+    margin-right: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+.data-list-div > .input.register {
+    color: #fff;
+    width: 100%;
+}
+
+datalist {
+    color: #fff;
+}
+.data-list-div > button {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+.input.register.file {
+    border: 2px solid #fff;
+}
+.first-div.register {
+    grid-column: 2/7;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.img-div.register {
+    padding: 10px;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 7;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.second-div.register {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column: 2/7;
+}
+.second-div.register > select {
+    width: 80%;
+    margin: 10px;
+    color: #fff;
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+.btn-div.register {
+    grid-column: 2/7;
+    grid-row-start: 4;
+    grid-row-end: 4;
+}
+.form.register > .img-div.register > .img.register {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    width: 100%;
+    border-radius: 50%;
+}
+ .input.register {
+    color: #fff;
+    width: 80%;
+    height: 3em;
+    font-size: 1.15em;
+    background: transparent;
+}
+.form.register .first-div.register > p {
+    grid-column: 2/7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.label.select.register {
+    display: flex;
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
+}
+.label-input {
+    display: flex;
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
+}
+.select.register {
+    color: #fff;
+    background: transparent;
+    display: inline-block;
+    grid-column: 2/7;
+    height: 3em;
+    font-size: 1.15em;
+}
+
+.register-form-favorite-teams-div {
+    margin: 10px;
+    border: 2px solid #fff; 
+    grid-column: 2/7;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+.register-form-favorite-teams-div > .team-card-wrapper  {
+    display: flex;
+    grid-column: 1/4;
+}
+.register-form-favorite-players-div {
+    margin: 10px;
+    border: 2px solid #fff;
+    grid-column: 2/7;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+.register-form-favorite-players-div > .player-card-wrapper {
+    display: flex;
+    grid-column: 1/3;
+}
+
+.btn.register {
+    margin: 20px;
+    height: 10%;
+    padding: 20px;
+    grid-column-start: 2;
+    grid-column-end: 7;
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25em;
+}
+.btn.register:active {
+    background: #fff;
+    color:  black;
+}
+.btn.register:hover {
+    background: #fff;
+    color: black;
+}
+
+.page-container-div.login {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
+    grid-template-columns: 15% 15% 15% 15% 25% 15%;
+    padding-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.login-page-wrapper{
+    width: 100%;
+    grid-template-columns: 20% 30% 30% 20%;
+    grid-template-rows: 20% 20% 10% 20% 10% 20%;
+    border: solid 3px #fff;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 6;
+}
+
+.login-page-register-link {
+    text-align: center;
+    grid-column: 2/4;
+    margin-bottom: 30%;
+}
+.login-page-register-link > button {
+    border: solid 3px #fff;
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    width: 30%;
+    padding: 10px;
+    margin: 10px;
+}
+
+/* .login-container-div {
+    height: 50%;
+} */
+.login-popup-container-div {
+    margin: 0;
+}
+
+.login-popup-container-div > .form.login > .login-div {
+    margin-top: 0;
+}
+.register-popup-link-div {
+    margin: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    border: 2px solid #fff;
+    font-size: 0.75em;
+    font-weight: 800;
+    text-align: center;
+}
+
+.popup-header {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 800;
+    margin-left: auto;
+    margin-right: auto;
+}
+.popup-container-div {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-open-modal {
+    background: transparent;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 800;
+    height: 10%;
+    width: 5em;
+}
+
+
+
+@media (min-width: 760px) {
+    .title.register {
+        /* margin: -25px; */
+    }
+    form.login {
+        width: 100%;
+    }
+    .login-div > input  {
+        height: 2.5em;
+    }
+    .login-label {
+        font-size: 1.4em;
+        margin-bottom: -5px;
+    }
+    .login-label:first-child {
+        margin-top: 50px;
+    }
+    .login-div {
+        margin-top: 33%;
+    }
+    .login-div > input {
+        font-size: 1.2em;
+    }
+    .btn.login {
+        padding: 15px;
+        font-size: 1.25em;
+        margin: 10px;
+    }
+    .data-list-div {
+        margin-left:auto;
+        margin-right: auto;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    .data-list-div > .input.register {
+        width: 100%;
+    }
+    .input.register {
+        height: 2.25em;
+    }
+    .label-input {
+        font-size: 1.5em;
+    }
+    .select.register {
+        height: 2.25em;
+    }
+    .label.select.register {
+        font-size: 1.5em;
+    }
+    .register-form-favorite-teams-div {
+        margin: 20px;
+    }
+    .register-form-favorite-teams-div > .team-card-wrapper {
+        grid-column: auto;
+    }
+    .register-form-favorite-players-div {
+        margin: 20px;
+    }
+    .register-form-favorite-players-div > .player-card-wrapper {
+        grid-column: auto;
+    }
+    .popup-open-modal {
+        width: 7.5em;
+    } 
+}
+@media (min-width: 1200px) {
+    .title.register {
+        margin-top: 10%;
+    }
+    
+    .title.login {
+        /* margin-bottom: -50px; */
+    }
+    .page-container-div.login {
+        vertical-align: middle;
+    }
+    .page-div.login {
+        margin-top: 0;
+    }
+
+    .form.login {
+        width: 100%;
+        min-height: 100%;
+        display: grid;
+        grid-template-rows: 10% 80% 10%;
+    }
+    .login-label {
+        font-size: 1.60em;
+    }
+    .login-div > input {
+        height: 6%;
+        margin: 10px;
+        font-size: 1.4em;
+    }
+    .login-div {
+        grid-row: 2/3
+    }
+    .btn.login {
+        width: 60%;
+        height: 7.5%;
+        font-size: 1.5em;
+        padding: 20px;
+    }
+    .data-list-div {
+        margin-left:auto;
+        margin-right: auto;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    .data-list-div > .input.register {
+        width: 100%;
+    }
+    .input.register {
+        height: 1.75em;
+    }
+    .label-input {
+        font-size: 1.15em;
+        margin: 10px;
+    }
+    .select.register {
+        height: 1.75em;
+    }
+    .label.select.register {
+        font-size: 1.15em;
+    }
+    .register-form-favorite-teams-div {
+        margin: 50px;
+    }
+    .register-form-favorite-players-div {
+        margin: 50px;
+    }
+    .popup-open-modal {
+        width: 10em;
+    } 
+}

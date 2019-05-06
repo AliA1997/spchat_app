@@ -1,0 +1,42 @@
+@mixin box-sizing($boxSizing) {
+    -moz-box-sizing: $boxSizing;
+    -webkit-box-sizing: $boxSizing;
+    box-sizing: $boxSizing;
+}
+
+@mixin transition($transition) {
+    -ms-transition: $transition;
+    -o-transition: $transition;
+    -webkit-transition: $transition;
+    transition: $transition;
+}
+
+@mixin gridColumn($column) {
+    -ms-grid-column: $column;
+    grid-column: $column;
+}
+
+@mixin gridRow($row) {
+    -ms-grid-row: $row;
+    grid-row: $row;
+}
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+    transform: $transform;
+}
+
+@mixin borderRadius($bradius) {
+    -webkit-border-radius: $bradius;
+    -ms-border-radius: $bradius;
+    border-radius: $bradius;
+}
+
+
+@mixin alignItems($aItems) {
+    -webkit-align-items: $aItems;
+    align-items: $aItems;
+}
